@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>therapder</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta property="og:image" content="{{rootURL}}assets/images/peaceful-water.jpg"/>
+
+    {{content-for "head"}}
+
+    <link rel="stylesheet" href="https://www.herokucdn.com/purple3/latest/purple3.min.css">
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css">
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/therapder.css">
+
+    {{content-for "head-footer"}}
+  </head>
+  <body>
+    {{content-for "body"}}
+
+    <div id="initial-loading-indicator">
+      <img class="w-100" src="https://media3.giphy.com/media/WTBS1h3lI82Aw/giphy.gif" alt="">
+      <h1 class="tc">...loading...</h1>
+    </div>
+
+    <script src="{{rootURL}}assets/vendor.js"></script>
+    <script src="{{rootURL}}assets/therapder.js"></script>
+
+    {{content-for "body-footer"}}
+  </body>
+</html>

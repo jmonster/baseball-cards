@@ -1,0 +1,52 @@
+.gradient-purple3 {
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(254,217,15,1)), to(rgba(209,178,113,1)));
+  background-image: linear-gradient(to right, rgba(254,217,15,1) 0%, rgba(209,178,113,1) 100%);
+}
+
+.navigation {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  font-size: 14px;
+}
+
+.navigation .logo {
+  background: transparent;
+  backdrop-filter: saturate(130%) brightness(90%);
+  -webkit-backdrop-filter: saturate(130%) brightness(90%);
+  width: 75px;
+  min-height: 60px;
+  background: rgba(0, 0, 0, 0.075);
+}
+
+.navigation .navigation-links {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  min-height: 40px;
+  z-index: 1;
+}
+
+.navigation .nav-link {
+  position: relative;
+}
+
+.navigation .nav-link:before {
+  content: '';
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+  position: absolute;
+  bottom: 3px;
+  border-radius: 3px;
+  left: 0;
+  height: 3px;
+  // width: 100%;
+}
+
+.navigation .nav-link.active:before {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.navigation .nav-link:hover:before {
+  background: rgba(255, 255, 255, 0.3);
+}

@@ -1,0 +1,17 @@
+.gravatar-header {
+  margin-bottom: 0.6rem;
+}
+
+.gravatar-header-placeholder, .gravatar-header-placeholder md-icon {
+  font-size: 100px !important;
+  height: 100px;
+}
+
+.gravatar-image-circle-100 {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+}

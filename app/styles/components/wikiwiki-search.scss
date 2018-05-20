@@ -1,0 +1,22 @@
+.wikiwiki-search {
+  max-width: 420px;
+}
+
+.wikiwiki-search-results li:not(:first-child) {
+  margin-top: 2px;
+}
+
+.wikiwiki-search-results li:not(:last) {
+  margin-bottom: 2px;
+}
+
+.wikiwiki-search-results ul > li:last-child {
+  border-radius: 4px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.wikiwiki-search.has-focus .search-input {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}

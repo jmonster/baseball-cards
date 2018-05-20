@@ -1,0 +1,74 @@
+{{input
+  class="br1 bn pa3 z-1 search-input"
+  classNameBindings="showSearchResults:br--top"
+  type="text"
+  value=query
+  key-up='didPressKey'
+  id="search-field"
+  autocomplete="off"
+  autocorrect="off"
+  autocapitalize="off"
+  spellcheck="false"
+  placeholder="How can we help?"
+  focus-out="didLoseFocus"
+  focus-in="didFocusIn"
+}}
+
+{{#if componentIsActive}}
+<div class="wikiwiki-search-results br1 br--bottom z-0 bg-white">
+  <ul class="ph0 mv0 list">
+    {{#each (await filteredResults) as |result|}}
+      <li class="f3 flex" {{action 'didClickResult' result}}>
+        {{#link-to 'home' class="no-underline dark-gray pv2 w-100 truncate ph2"}}
+          {{result.icon}} {{result.name}}
+        {{/link-to}}
+      </li>
+    {{else}}
+      {{#if (and hasSearchQuery (not showNotFoundMessage))}}
+      <li class="bg-lightest-silver bt bb b--silver f3 flex">
+        <a href="#" class="no-underline dark-gray pv2 w-100 truncate ph2">
+          <div class="hk-stencil w-40 pv2"></div>
+        </a>
+      </li>
+      <li class="bg-lightest-silver bt bb b--silver f3 flex">
+        <a href="#" class="no-underline dark-gray pv2 w-100 truncate ph2">
+          <div class="hk-stencil w-60 pv2"></div>
+        </a>
+      </li>
+      <li class="bg-lightest-silver bt bb b--silver f3 flex">
+        <a href="#" class="no-underline dark-gray pv2 w-100 truncate ph2">
+          <div class="hk-stencil w-50 pv2"></div>
+        </a>
+      </li>
+      {{/if}}
+    {{/each}}
+
+    {{#if showNotFoundMessage}}
+      <li class="bg-lightest-silver bt bb b--silver f3 pv2">
+        <div class="mv3 flex flex-column items-center justify-center">
+          <span class="pv1 f1">🤷‍♀️</span>
+          <span class="dark-gray">we ain't found shit</span>
+        </div>
+      </li>
+    {{/if}}
+
+    {{#unless hasSearchQuery}}
+      <li class="truncate f3 flex ph3">
+        {{#link-to "home" class="no-underline dark-gray pv2 w-100 truncate"}}
+          find a doctor
+        {{/link-to}}
+      </li>
+      <li class="truncate f3 flex ph3">
+        {{#link-to "home" class="no-underline dark-gray pv2 w-100 truncate"}}
+          join a support group
+        {{/link-to}}
+      </li>
+      <li class="truncate f3 flex ph3">
+        {{#link-to "home" class="no-underline dark-gray pv2 w-100 truncate"}}
+          choose an insurance policy
+        {{/link-to}}
+      </li>
+    {{/unless}}
+  </ul>
+</div>
+{{/if}}
