@@ -1,17 +1,8 @@
-{{input
-  class="br1 bn pa3 z-1 search-input"
-  classNameBindings="showSearchResults:br--top"
-  type="text"
-  value=query
-  key-up='didPressKey'
-  id="search-field"
-  autocomplete="off"
-  autocorrect="off"
-  autocapitalize="off"
-  spellcheck="false"
-  placeholder="How can we help?"
-  focus-out="didLoseFocus"
-  focus-in="didFocusIn"
+{{search-input
+  query=query
+  didPressKey=(action 'didPressKey')
+  didLoseFocus=(action "didLoseFocus")
+  didFocusIn=(action "didFocusIn")
 }}
 
 {{#if componentIsActive}}
@@ -55,17 +46,22 @@
     {{#unless hasSearchQuery}}
       <li class="truncate f3 flex ph3">
         {{#link-to "home" class="no-underline dark-gray pv2 w-100 truncate"}}
-          find a doctor
+          <span class="icon-tab mr2"></span>swipe right for therapy <span class="hk-badge--beta">beta</span>
         {{/link-to}}
       </li>
       <li class="truncate f3 flex ph3">
         {{#link-to "home" class="no-underline dark-gray pv2 w-100 truncate"}}
-          join a support group
+          <span class="icon-filter mr2"></span>find a therapist
         {{/link-to}}
       </li>
       <li class="truncate f3 flex ph3">
         {{#link-to "home" class="no-underline dark-gray pv2 w-100 truncate"}}
-          choose an insurance policy
+          <span class="icon-bubbles3 mr2"></span>join a support group
+        {{/link-to}}
+      </li>
+      <li class="truncate f3 flex ph3">
+        {{#link-to "home" class="no-underline dark-gray pv2 w-100 truncate"}}
+          <span class="icon-umbrella mr2"></span>shop for insurance
         {{/link-to}}
       </li>
     {{/unless}}

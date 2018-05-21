@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { and, empty, gt } from '@ember/object/computed';
+import { alias, empty, gt } from '@ember/object/computed';
 import { run } from '@ember/runloop';
 
 // const DEBOUNCE_WAIT = 100; // ms
@@ -13,7 +13,7 @@ export default Component.extend({
   queryIsEmpty: empty('query'),
 
   hasFocus: false,
-  componentIsActive: and('hasFocus'),
+  componentIsActive: alias('hasFocus'),
 
   // a collection of objects with a `name` key
   // from which we will filter/search on

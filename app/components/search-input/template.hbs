@@ -1,0 +1,17 @@
+<span class="icon-search bg-white dark-gray pa2"></span>
+
+{{input
+  class="flex-1 br1 bn pv2 ma0 z-1 search-input"
+  classNameBindings="showSearchResults:br--top"
+  type="text"
+  value=query
+  key-up=didPressKey
+  id="search-field"
+  autocomplete="off"
+  autocorrect="off"
+  autocapitalize="off"
+  spellcheck="false"
+  placeholder="How can we help?"
+  focus-out=didLoseFocus
+  focus-in=didFocusIn
+}}
