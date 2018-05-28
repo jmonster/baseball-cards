@@ -1,0 +1,8 @@
+.tinder-card-wrapper {
+  transform: scale(1);
+  transition: transform .15s ease-in-out;
+}
+
+.is-disappearing .tinder-card-wrapper {
+  transform: scale(0);
+}

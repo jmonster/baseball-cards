@@ -1,0 +1,8 @@
+  {{#each paginatedTherapists as |therapist|}}
+    {{#tinder-card cardDidDisappear=(action "removeCard")}}
+      <h1 class="tinder-card-content tc">{{therapist}}</h1>
+    {{/tinder-card}}
+  {{else}}
+    <h2 class="tc">🙏 goodluck</h2>
+    <h3 class="tc mt4 pa2 dark-gray" onclick={{action "reset"}}>tap to refresh</h3>
+  {{/each}}
