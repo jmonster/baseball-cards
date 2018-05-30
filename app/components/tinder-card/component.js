@@ -1,8 +1,10 @@
 import Component from '@ember/component';
 import { later } from '@ember/runloop';
 
+const mathematicalMikesMagicMalgorithm = (x) => (15/230) * x + 0.4347826087;
+
 export default Component.extend({
-  classNames: ["tinder-card"],
+  classNames: ["tinder-card", "overflow-hidden"],
 
   setTranslate(xPos, yPos, el) {
     el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
@@ -49,17 +51,25 @@ export default Component.extend({
 
       this.setTranslate(updatedX, updatedY, this.element);
 
-      const windowCenterX = window.innerWidth / 2;
       const thisRect = event.currentTarget.getBoundingClientRect();
+      const windowCenterX = window.innerWidth / 2;
       const rectCenterX = thisRect.x + (thisRect.width / 2);
+      const diff = rectCenterX - windowCenterX;
+      const angle = mathematicalMikesMagicMalgorithm(diff);
 
-      if ((rectCenterX - windowCenterX) > 100) {
-        this.element.style.transform += "rotate(20deg)"
-      }
-
-      if ((rectCenterX - windowCenterX) < -100) {
-        this.element.style.transform += "rotate(-20deg)"
-      }
+      this.element.style.transform += `rotate(${angle}deg)`;
     });
+  },
+
+  actions: {
+    didLeftTap() {
+      const fn = this.get('onLeftTap');
+      fn && fn(this);
+    },
+
+    didRightTap() {
+      const fn = this.get('onLeftTap');
+      fn && fn(this);
+    }
   }
 });
