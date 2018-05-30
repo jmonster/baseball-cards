@@ -1,0 +1,33 @@
+.tinder-card-inner {
+  height: calc(100vh - 94px - 114px);
+}
+
+.tinder-card-info {
+  background-color: #9c5b01;
+  border-top: 2px solid white;
+}
+
+.tinder-card-badge-outer {
+  background-color: #ff81c1;
+  width: 110px;
+  height: 110px;
+  margin-top: -55px;
+}
+
+.tinder-card-badge {
+  background-color: #ff81c1;
+  width: 110px;
+  height: 110px;
+  margin-top: -55px;
+  background: url('/assets/images/rick.png') no-repeat center center;
+  border: 2px solid white;
+}
+
+.tinder-card-wrapper {
+  transform: scale(1);
+  transition: transform .2s ease-in-out;
+}
+
+.is-disappearing .tinder-card-wrapper {
+  transform: scale(0);
+}

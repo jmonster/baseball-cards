@@ -1,8 +1,32 @@
-  {{#each paginatedTherapists as |therapist|}}
-    {{#tinder-card cardDidDisappear=(action "removeCard")}}
-      <h1 class="tinder-card-content tc">{{therapist}}</h1>
-    {{/tinder-card}}
-  {{else}}
-    <h2 class="tc">🙏 goodluck</h2>
-    <h3 class="tc mt4 pa2 dark-gray" onclick={{action "reset"}}>tap to refresh</h3>
-  {{/each}}
+{{#each paginatedTherapists as |therapist|}}
+  {{#tinder-card cardDidDisappear=(action "removeCard")}}
+    <style media="screen">
+      #tinder-card-image {
+        height: 100%;
+        width: 100%;
+
+        background: url({{therapist}}) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+    </style>
+
+    <div id="tinder-card-image" class="br2"></div>
+
+    <div class="tinder-card-info absolute bottom-0 right-0 left-0 bt b--white flex">
+      <div class="left-half w-50 flex flex-column justify-around ma2 white">
+        <span class="f4">Johnny</span>
+        <span class="f1 b mt1">Domino</span>
+        <span class="f5 mt1 yellow">Software Engineer</span>
+      </div>
+      <div class="right-half w-50 flex justify-center">
+        <div class="tinder-card-badge br-100"></div>
+      </div>
+    </div>
+  {{/tinder-card}}
+{{else}}
+  <h2 class="tc">🙏 goodluck</h2>
+  <h3 class="tc mt4 pa2 dark-gray" onclick={{action "reset"}}>tap to refresh</h3>
+{{/each}}
