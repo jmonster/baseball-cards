@@ -1,21 +1,13 @@
 .tinder-card-inner {
-  height: calc(100vh - 94px - 114px);
+  height: calc(100vh - 94px - 200px);
 }
 
 .tinder-card-info {
-  background-color: #9c5b01;
+  // background-color: lightgray;
   border-top: 2px solid white;
 }
 
-.tinder-card-badge-outer {
-  background-color: #ff81c1;
-  width: 110px;
-  height: 110px;
-  margin-top: -55px;
-}
-
 .tinder-card-badge {
-  background-color: #ff81c1;
   width: 110px;
   height: 110px;
   margin-top: -55px;

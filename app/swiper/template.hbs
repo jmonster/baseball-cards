@@ -2,8 +2,9 @@
   {{#tinder-card cardDidDisappear=(action "removeCard")}}
     <style media="screen">
       #tinder-card-image {
-        height: 100%;
         width: 100%;
+        height: calc(100% - 88px);
+        margin-bottom: 88px;
 
         background: url({{therapist}}) no-repeat center center fixed;
         -webkit-background-size: cover;
@@ -13,13 +14,13 @@
       }
     </style>
 
-    <div id="tinder-card-image" class="br2"></div>
+    <div id="tinder-card-image"></div>
 
-    <div class="tinder-card-info absolute bottom-0 right-0 left-0 bt b--white flex">
-      <div class="left-half w-50 flex flex-column justify-around ma2 white">
+    <div class="tinder-card-info absolute bottom-0 right-0 left-0 bt b--white bg-near-black flex">
+      <div class="left-half w-50 flex flex-column justify-around ma2 white ttu">
         <span class="f4">Johnny</span>
-        <span class="f1 b mt1">Domino</span>
-        <span class="f5 mt1 yellow">Software Engineer</span>
+        <span class="f1 fw6 mt1">Domino</span>
+        <span class="f5 fw5 mt2 moon-gray">Software Engineer</span>
       </div>
       <div class="right-half w-50 flex justify-center">
         <div class="tinder-card-badge br-100"></div>
