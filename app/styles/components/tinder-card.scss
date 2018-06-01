@@ -1,17 +1,22 @@
 .tinder-card-inner {
-  height: calc(100vh - 94px - 200px);
+  height: calc(100vh - 94px - 140px);
 }
 
 .tinder-card-info {
-  // background-color: lightgray;
   border-top: 2px solid white;
 }
 
+#tinder-card-image {
+  width: 100%;
+  height: calc(100% - 88px);
+}
+
 .tinder-card-badge {
-  width: 110px;
-  height: 110px;
-  margin-top: -55px;
-  background: url('/assets/images/rick.png') no-repeat center center;
+  width: 80px;
+  height: 80px;
+  margin-top: -40px;
+  background: url('http://www.dirtyandthirty.com/wp-content/uploads/2014/10/stamp-of-approval.jpg') no-repeat center center;
+  background-size: cover;
   border: 2px solid white;
 }
 
@@ -22,4 +27,9 @@
 
 .is-disappearing .tinder-card-wrapper {
   transform: scale(0);
+}
+
+.tinder-card-toggler {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-backface-visibility: hidden;
 }

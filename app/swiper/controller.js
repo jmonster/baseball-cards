@@ -1,14 +1,54 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 
+const defaultCards = [
+  {
+    imageUrl: '/assets/images/jialee.jpg',
+    firstName: 'jialee',
+    lastName: 'chau',
+    title: 'growth hacker'
+  },
+  {
+    imageUrl: '/assets/images/dohnny.jpg',
+    firstName: 'my name is',
+    lastName: 'dohhny',
+    title: 'lead thinkerer'
+  },
+  {
+    imageUrl: '/assets/images/johnny.jpg',
+    firstName: 'johnny',
+    lastName: 'domino',
+    title: 'bit flipper'
+  },
+  {
+    imageUrl: '/assets/images/jayleisure.jpg',
+    firstName: 'jay',
+    lastName: 'leisure',
+    title: 'hubber'
+  },
+  {
+    imageUrl: '/assets/images/colorfuljohnny.jpg',
+    firstName: 'j',
+    lastName: 'monster',
+    title: 'nomnomnomnomnom'
+  },
+  {
+    imageUrl: '/assets/images/mrsparkle.jpg',
+    firstName: 'mr',
+    lastName: 'sparkle',
+    title: 'I\'m disrespectful to dirt !!'
+  },
+  {
+    imageUrl: '/assets/images/babyjohnny.jpg',
+    firstName: 'baby',
+    lastName: 'johnny',
+    title: 'looks cute'
+  }
+];
+
 export default Controller.extend({
   allTherapists: computed(function() {
-    return [
-      'https://vignette.wikia.nocookie.net/simpsons/images/b/bc/Dr._Monroe%27s_Family_Therapy_Center_%28There%27s_No_Disgrace_Like_Home%29.png/revision/latest?cb=20130512023251', //monroe
-      'https://vignette.wikia.nocookie.net/en.futurama/images/4/45/Dr._John_A._Zoidberg.png/revision/latest?cb=20101014052403', // zoidberg
-      'https://pbs.twimg.com/profile_images/618151052664303616/kemCYDyX_400x400.png', // nick
-      'http://i0.kym-cdn.com/entries/icons/original/000/021/264/yS2EwcX.jpg' // hibbert
-    ]
+    return JSON.parse(JSON.stringify(defaultCards));
   }),
 
   paginatedTherapists: computed('allTherapists.[]', function() {
@@ -16,17 +56,22 @@ export default Controller.extend({
   }),
 
   actions: {
+    onLeftTap() {
+      this.set('showCardDetails', false);
+    },
+
+    onRightTap() {
+      this.set('showCardDetails', true);
+    },
+
     removeCard(/*component*/) {
       this.get('allTherapists').shiftObject();
+      this.set('showCardDetails', false);
     },
 
     reset() {
-      this.set('allTherapists', [
-        'https://vignette.wikia.nocookie.net/simpsons/images/b/bc/Dr._Monroe%27s_Family_Therapy_Center_%28There%27s_No_Disgrace_Like_Home%29.png/revision/latest?cb=20130512023251', //monroe
-        'https://vignette.wikia.nocookie.net/en.futurama/images/4/45/Dr._John_A._Zoidberg.png/revision/latest?cb=20101014052403', // zoidberg
-        'https://pbs.twimg.com/profile_images/618151052664303616/kemCYDyX_400x400.png', // nick
-        'http://i0.kym-cdn.com/entries/icons/original/000/021/264/yS2EwcX.jpg' // hibbert
-      ]);
+      const copy = JSON.parse(JSON.stringify(defaultCards));
+      this.set('allTherapists', copy);
     }
   }
 });

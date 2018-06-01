@@ -64,12 +64,12 @@ export default Component.extend({
   actions: {
     didLeftTap() {
       const fn = this.get('onLeftTap');
-      fn && fn(this);
+      fn && fn();
     },
 
     didRightTap() {
-      const fn = this.get('onLeftTap');
-      fn && fn(this);
+      const fn = this.get('onRightTap');
+      fn && fn();
     }
   }
 });
