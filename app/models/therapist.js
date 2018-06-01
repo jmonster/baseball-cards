@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import { computed } from '@ember/object';
 
 const inverse = null;
 
@@ -10,5 +11,10 @@ export default DS.Model.extend({
 
   firstName: DS.attr('string'),
   lastName: DS.attr('string'),
-  birthday: DS.attr('string')
+  birthday: DS.attr('string'),
+  title: DS.attr('string'),
+
+  primaryPhoto: computed(function() {
+    return this.get('photos').firstObject;
+  })
 });

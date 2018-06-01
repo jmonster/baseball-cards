@@ -9,13 +9,43 @@ export default function(server) {
     email: 'monster@cook.ies'
   });
 
-  server.create('therapist', 'withLocations', 'withPhotos');
+  const imagePaths = [
+    '/assets/images/jialee.jpg',
+    '/assets/images/dohnny.jpg',
+    '/assets/images/johnny.jpg',
+    '/assets/images/jayleisure.jpg',
+    '/assets/images/colorfuljohnny.jpg',
+    '/assets/images/mrsparkle.jpg',
+    '/assets/images/babyjohnny.jpg'
+  ];
 
-  server.create('tag', 'withTherapyStyle');
-  server.create('tag', 'withLocation');
-  server.create('tag', 'withAcceptedInsuranceProvider');
-  server.create('tag', 'withSpecialty');
-  server.create('tag', 'withTherapists');
+  const people = [
+    { firstName: 'jialee', lastName: 'chau', title: 'growth hacker' },
+    { firstName: 'my name is', lastName: 'dohhny', title: 'lead thinkerer' },
+    { firstName: 'johnny', lastName: 'domino', title: 'bit flipper' },
+    { firstName: 'jay', lastName: 'leisure', title: 'hubber' },
+    { firstName: 'j', lastName: 'monster', title: 'nomnomnomnomnom' },
+    { firstName: 'mr', lastName: 'sparkle', title: 'I\'m disrespectful to dirt !!' },
+    { firstName: 'baby', lastName: 'johnny', title: 'looks cute' }
+  ];
 
-  server.create('review', 'withTherapist');
+  const images = imagePaths.map((url) => {
+    return server.create('image', { url })
+  });
+
+  people.forEach((p, idx) => {
+    p.photos = [images[idx]];
+    server.create('therapist', p);
+  });
+
+
+  // server.create('therapist', 'withLocations', 'withPhotos');
+  //
+  // server.create('tag', 'withTherapyStyle');
+  // server.create('tag', 'withLocation');
+  // server.create('tag', 'withAcceptedInsuranceProvider');
+  // server.create('tag', 'withSpecialty');
+  // server.create('tag', 'withTherapists');
+  //
+  // server.create('review', 'withTherapist');
 }

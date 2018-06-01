@@ -4,6 +4,7 @@ export default Factory.extend({
   firstName: () => faker.name.firstName(),
   lastName: () => faker.name.lastName(),
   birthday: () => faker.date.between('1997-01-01', '1938-01-01'), // 21 years old
+  title: () => `${faker.company.bsNoun()} ${faker.hacker.verb()}`,
 
   withLocation: trait({
     afterCreate(therapist, server) {
