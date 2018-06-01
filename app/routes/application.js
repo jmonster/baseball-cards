@@ -1,6 +1,7 @@
 import { on } from '@ember/object/evented';
 import { inject } from '@ember/service';
 import Route from '@ember/routing/route'
+import RSVP from 'rsvp';
 
 export default Route.extend({
   session: inject(),
@@ -23,6 +24,13 @@ export default Route.extend({
         });
       });
     }
+  },
+
+  model() {
+    return RSVP.hash({
+      therapists: this.store.findAll('therapist'),
+      tags: this.store.findAll('tag'),
+    });
   },
 
   beforeModel() {

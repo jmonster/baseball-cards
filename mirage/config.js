@@ -40,6 +40,14 @@ export default function() {
   this.post('/locations');
   this.delete('/locations');
 
+  this.get('/therapists');
+  this.post('/therapists');
+  this.delete('/therapists');
+
+  this.get('/tags');
+  this.post('/tags');
+  this.delete('/tags');
+
   // Firebase Auth ////
   this.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo', {
     "kind": "identitytoolkit#GetAccountInfoResponse",
