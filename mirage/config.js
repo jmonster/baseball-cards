@@ -48,6 +48,10 @@ export default function() {
   this.post('/tags');
   this.delete('/tags');
 
+  this.get('/images');
+  this.post('/images');
+  this.delete('/images');
+
   // Firebase Auth ////
   this.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo', {
     "kind": "identitytoolkit#GetAccountInfoResponse",

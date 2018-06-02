@@ -2,7 +2,7 @@
   {{#tinder-card cardDidDisappear=(action "removeCard") onLeftTap=(action 'onLeftTap') onRightTap=(action 'onRightTap')}}
     <style media="screen">
       #tinder-card-image {
-        background: url({{therapist.primaryPhoto.url}}) 50% 50% no-repeat;
+        background: url({{therapist.primaryPhoto.path}}) 50% 50% no-repeat;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -26,7 +26,7 @@
       </div>
     {{else}}
       <div class="tinder-card-details near-black w-100 h-100 pa2 bg-light-yellow ba b--yellow">
-        <h2 class="f1 mb0 mt0">issues</h2>
+        <!-- <h2 class="f1 mb0 mt0">issues</h2>
         <ul class="">
           <li class="ma0 pa0 dark-gray f3">anxiety</li>
         </ul>
@@ -41,7 +41,9 @@
         <ul class="">
           <li class="ma0 pa0 dark-gray f3">skype</li>
           <li class="ma0 pa0 dark-gray f3">hangouts</li>
-        </ul>
+        </ul> -->
+        <h2>about me</h2>
+        <p>{{therapist.bio}}</p>
       </div>
     {{/unless}}
   {{/tinder-card}}

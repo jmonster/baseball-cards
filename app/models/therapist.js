@@ -13,6 +13,7 @@ export default DS.Model.extend({
   lastName: DS.attr('string'),
   birthday: DS.attr('string'),
   title: DS.attr('string'),
+  bio: DS.attr('string'),
 
   primaryPhoto: computed(function() {
     return this.get('photos').firstObject;
