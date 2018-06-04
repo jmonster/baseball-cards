@@ -1,0 +1,11 @@
+{
+  "name": "psychology-tomorrow",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "unlicensed",
+  "dependencies": {
+    "async": "^2.6.1",
+    "jsdom": "^11.11.0",
+    "superagent": "^3.8.3"
+  }
+}

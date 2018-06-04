@@ -2368,7 +2368,7 @@ const therapists = [
 
 export default function(server) {
   therapists.forEach((t) => {
-    let image, therapist, nameParts, location;
+    let image, nameParts, location;
 
     if (!t.image) {
       return; /* skip for now */
@@ -2391,7 +2391,8 @@ export default function(server) {
     });
 
     nameParts = t.name.split(' ');
-    therapist = server.create('therapist', {
+
+    server.create('therapist', {
       firstName: nameParts.slice(0,nameParts.length - 1).join(' '),
       lastName: nameParts[nameParts.length - 1],
       title: t.title,
