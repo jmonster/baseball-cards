@@ -1,0 +1,232 @@
+[
+  {
+    "value": "Hi, my name is:"
+  },
+  {
+    "value": "Contact me at:"
+  },
+  {
+    "value": "I am...",
+    "choices": [
+      "18-21 years old",
+      "22-25 years old",
+      "26-35 years old",
+      "36-45 years old",
+      "46-55 years old",
+      "56-65 years old",
+      "66-75 years old"
+    ]
+  },
+  {
+    "value": "My insurance provider is",
+    "choices": [
+      "Aetna",
+      "Affinity",
+      "Allcare",
+      "Americhoice",
+      "Amida Care",
+      "BCBS",
+      "Beacon",
+      "CenterCare",
+      "CHP",
+      "Cigna",
+      "Emblem Health",
+      "Empire BCBS",
+      "Fidelis",
+      "GHI",
+      "Healthfirst",
+      "HealthPlus",
+      "HIP",
+      "Medicaid",
+      "Medicare",
+      "MetroPlus",
+      "MVP",
+      "Neighborhood Health Plan",
+      "Oscar",
+      "Oxford",
+      "The Empire Plan",
+      "Union Labor Life (Local 813)",
+      "United",
+      "Value Options",
+      "Wellcare"
+    ]
+  },
+  {
+    "value": "Do you know what kind of therapy you are looking for",
+    "subvalue": "Under the broad umbrella of therapy, different therapists practice with different techniques. One example of a technique is Cognitive Behavioral Therapy (CBT). Another type of technique is psychoanalysis.",
+    "choices": [
+      { "value": "yes", "enables": ["therapist-trained-in"] },
+      "No"
+    ]
+  },
+  {
+    "identifier": "therapist-trained-in",
+    "value": "I want my therapist to be trained in",
+    "choices": [
+      "Acceptance Commitment Therapy (ACT)",
+      "Art Therapy",
+      "Body-Focused Therapy (ex: Tapping)",
+      "Coaching",
+      "Cognitive Behavioral Therapy (CBT)",
+      "Dialectical Behavioral Therapy (DBT)",
+      "Drama Therapy",
+      "Emotionally Focused Therapy (For Couples)",
+      "Eye-Movement Desensitization and Reprocessing (EMDR)",
+      "Gestalt Therapy",
+      "Hypnosis or Hypnotherapy",
+      "Meditation or Mindfulness",
+      "Motivational Interviewing (MI)",
+      "Neuroscience",
+      "Psychodynamic Therapy",
+      "Psychoanalysis",
+      "Rational Emotive Behavior Therapy (REBT)",
+      "Safety Planning",
+      "Social Justice",
+      "Solution-Focused Therapy",
+      "Somatic Experience",
+      "Yoga"
+    ]
+  },
+  {
+    "value": "I would prefer my therapist to be",
+    "choices": [
+      "24-30 years old",
+      "31-45 years old",
+      "46-65 years old",
+      "66-85 years old",
+      "I have no age preference"
+    ]
+  },
+  {
+    "value": "I would prefer my therapist to be",
+    "choices": [
+      "Female",
+      "Male",
+      "Non-binary",
+      "I have no gender preference"
+    ]
+  },
+  {
+    "value": "Would you like to select issue areas you prefer your therapist to have experience working with? Therapists have diverse experience helping individuals through a variety of obstacles. Three examples of issue areas are anxiety, addiction, and career stress.",
+    "choices": [
+      { "value": "yes", "enables": ["therapist-experience"] },
+      "no"
+    ]
+  },
+  {
+    "identifier": "therapist-experience",
+    "multipleChoice": true,
+    "value": "I would like my therapist to have experience working with",
+    "choices": [
+      "Addiction and Substance Use",
+      "Adoption",
+      "Anger",
+      "Anxiety",
+      "Bipolar Disorder",
+      "Borderline Personality Disorder",
+      "Commitment Obstacles",
+      "Career Stress",
+      "Cultural Competence",
+      "Dating",
+      "Depression",
+      "Divorce",
+      "Domestic Violence",
+      "Dreams",
+      "Eating Patterns or Eating Disorders",
+      "Existential Crisis or Transition",
+      "Family Dynamics",
+      "Family Planning",
+      "Fear of Failure",
+      "Fear of Flying",
+      "Fertility",
+      "Gender Identity",
+      "Grief and Bereavement",
+      "Health-related Concerns or Chronic Illness",
+      "Immigration",
+      "Indecision",
+      "Infidelity",
+      "Insomnia",
+      "LBGTQ-Related Stress",
+      "Life Transitions",
+      "Loneliness",
+      "Mid-Life Crisis",
+      "Migraines or Chronic Headaches",
+      "Mood",
+      "New to New York",
+      "Obsessive-Compulsive Disorder",
+      "Parenting",
+      "Perfectionism",
+      "Personality Disorders",
+      "Post-Partum Depression",
+      "Post-Traumatic Stress Disorder (PTSD)",
+      "Procrastination",
+      "Quarter-Life Crisis",
+      "Race-Related Stress",
+      "Romantic Life",
+      "Self-Esteem",
+      "Self-Reflection",
+      "Sexual Abuse",
+      "Sexual Fear or Addiction",
+      "Sexual Identity",
+      "Social Life",
+      "Social Justice",
+      "Special Needs",
+      "Spiritual Crisis or Transition",
+      "Suicidal Feelings",
+      "Trauma",
+      "Trichotillomania/Body-Focused Repetitive Disease",
+      "Veterans",
+      "Young Adulthood"
+    ]
+  },
+  {
+    "value": "How else might you describe your ideal therapist",
+    "subvalue": "It’s okay if you aren’t entirely sure. Try to choose 5 descriptors below that most resonate with you.",
+    "choices": [
+      "Accepting",
+      "Active",
+      "The therapist asks you a lot of questions",
+      "Directive",
+      "The therapist breaks down your defenses",
+      "Challenging",
+      "Creative",
+      "Experiential",
+      "Firm",
+      "Gentle",
+      "Goal-Oriented",
+      "Grounding",
+      "Humorous",
+      "Informal",
+      "The therapists encourages you to lead the session",
+      "The therapist mostly listens",
+      "Motivating",
+      "The therapist does not share much about themself",
+      "Nurturing",
+      "Participatory",
+      "The therapist shares patterns they're seeing",
+      "Professional",
+      "Promoting Safety",
+      "Reflective",
+      "Relational",
+      "Warm"
+    ]
+  },
+  {
+    "multipleChoice": true,
+    "value": "I am most available",
+    "choices": [
+      "Weekday early mornings (before 9a)",
+      "Weekday mornings and afternoons",
+      "Weekday evenings (5p or later)",
+      "Weekend mornings or afternoons"
+    ]
+  },
+  {
+    "value": "I am hoping to go to therapy",
+    "subvalue": "Therapy is most effective when you meet with your therapist at least weekly. Especially in the beginning, you and your therapist will be building a foundation of trust. Your therapist will want to familiarize with you and your story, which works best with as little time in between sessions as possible. The more you put in, the more you get out -- if you're interested in getting a head start, commit to going to therapy more than once per week, and determine with your therapist as you go whether you'd like to stay at that frequency.",
+    "choices": [
+      "weekly",
+      "multiple times per week"
+    ]
+  }
+]

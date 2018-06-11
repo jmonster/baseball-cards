@@ -52,6 +52,8 @@ export default function() {
   this.post('/images');
   this.delete('/images');
 
+  this.get('/questions');
+
   // Firebase Auth ////
   this.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo', {
     "kind": "identitytoolkit#GetAccountInfoResponse",

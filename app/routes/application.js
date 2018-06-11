@@ -30,6 +30,7 @@ export default Route.extend({
     return RSVP.hash({
       therapists: this.store.findAll('therapist'),
       tags: this.store.findAll('tag'),
+      questions: this.store.findAll('question')
     });
   },
 

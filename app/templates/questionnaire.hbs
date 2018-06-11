@@ -1,0 +1,18 @@
+{{#each questions as |question| }}
+  <h3>{{question.value}}</h3>
+  {{!-- <h2>{{question.subvalue}}</h2> --}}
+
+  {{#if question.choices}}
+    {{#x-select value=question.answer multiple=question.multipleChoice action=(action "didSelect" question) as |xs|}}
+      {{#unless question.multipleChoice}}
+        <option value="unselected"></option>
+      {{/unless}}
+
+      {{#each question.choices as |choice|}}
+        {{#xs.option value=choice}}{{choice.value}}{{/xs.option}}
+      {{/each}}
+    {{/x-select}}
+  {{else}}
+    {{input value=question.answer}}
+  {{/if}}
+{{/each}}
