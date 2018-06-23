@@ -2368,13 +2368,16 @@ const therapists = [
 
 const questions = [
   {
-    "value": "Hi, my name is:"
+    "value": "Hi, my name is:",
+    "subvalue": ""
   },
   {
-    "value": "Contact me at:"
+    "value": "Contact me at:",
+    "subvalue": ""
   },
   {
     "value": "I am...",
+    "subvalue": "",
     "choices": [
       { "value": "18-21 years old" },
       { "value": "22-25 years old" },
@@ -2387,6 +2390,7 @@ const questions = [
   },
   {
     "value": "My insurance provider is",
+    "subvalue": "",
     "choices": [
       { "value": "Aetna" },
       { "value": "Affinity" },
@@ -2431,6 +2435,7 @@ const questions = [
     "enabled": false,
     "identifier": "therapist-trained-in",
     "value": "I want my therapist to be trained in",
+    "subvalue": "",
     "choices": [
       { "value": "Acceptance Commitment Therapy (ACT)" },
       { "value": "Art Therapy" },
@@ -2458,6 +2463,7 @@ const questions = [
   },
   {
     "value": "I would prefer my therapist to be",
+    "subvalue": "",
     "choices": [
       { "value": "24-30 years old" },
       { "value": "31-45 years old" },
@@ -2468,6 +2474,7 @@ const questions = [
   },
   {
     "value": "I would prefer my therapist to be",
+    "subvalue": "",
     "choices": [
       { "value": "Female" },
       { "value": "Male" },
@@ -2477,6 +2484,7 @@ const questions = [
   },
   {
     "value": "Would you like to select issue areas you prefer your therapist to have experience working with? Therapists have diverse experience helping individuals through a variety of obstacles. Three examples of issue areas are anxiety, addiction, and career stress.",
+    "subvalue": "",
     "choices": [
       { "value": "yes", "enables": ["therapist-experience"] },
       { "value": "no", "disables": ["therapist-experience"] }
@@ -2487,6 +2495,7 @@ const questions = [
     "enabled": false,
     "multipleChoice": true,
     "value": "I would like my therapist to have experience working with",
+    "subvalue": "",
     "choices": [
       { "value":  "Addiction and Substance Use" },
       { "value":  "Adoption" },
@@ -2585,6 +2594,7 @@ const questions = [
   {
     "multipleChoice": true,
     "value": "I am most available",
+    "subvalue": "",
     "choices": [
       { "value": "Weekday early mornings (before 9a)" },
       { "value": "Weekday mornings and afternoons" },
