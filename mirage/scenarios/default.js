@@ -2368,12 +2368,10 @@ const therapists = [
 
 const questions = [
   {
-    "value": "Hi, my name is:",
-    // "type": "fill-in-the-blank"
+    "value": "Hi, my name is:"
   },
   {
-    "value": "Contact me at:",
-    // "type": "fill-in-the-blank"
+    "value": "Contact me at:"
   },
   {
     "value": "I am...",
@@ -2554,6 +2552,7 @@ const questions = [
   {
     "value": "How else might you describe your ideal therapist",
     "subvalue": "It’s okay if you aren’t entirely sure. Try to choose 5 descriptors below that most resonate with you.",
+    "multipleChoice": true,
     "choices": [
       { "value": "Accepting" },
       { "value": "Active" },

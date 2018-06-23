@@ -3,8 +3,12 @@ import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 
 export default Controller.extend({
-  answers: computed(function() {
-    return {};
+  queryParams: ['questionIdx'],
+  questionIdx: 0,
+  
+  question: computed('questionIdx', function() {
+    const idx = this.get('questionIdx');
+    return this.get('questions').objectAt(idx);
   }),
 
   allQuestions: alias('model'),
@@ -13,6 +17,16 @@ export default Controller.extend({
   }),
 
   actions: {
+    next() {
+      const idx = +this.get('questionIdx');
+      this.set('questionIdx', idx + 1);
+    },
+
+    previous() {
+      const idx = +this.get('questionIdx');
+      this.set('questionIdx', idx - 1);
+    },
+
     didSelect(question, choice) {
       if (!choice) { return; }
 

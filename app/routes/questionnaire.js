@@ -4,6 +4,12 @@ import { inject } from '@ember/service';
 export default Route.extend({
     store: inject(),
 
+    queryParams: {
+        questionIdx: {
+            replace: true
+        }
+    },
+
     model() {
         return this.store.findAll('question');
     }
