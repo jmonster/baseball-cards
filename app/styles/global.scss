@@ -1,0 +1,11 @@
+body > .ember-view {
+  height: 100vh;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.bg--darkest-turqoise {
+  background-color: #3bd6c6;
+}

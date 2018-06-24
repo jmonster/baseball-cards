@@ -38,6 +38,7 @@
     "ember-cli-uglify": "^2.0.2",
     "ember-cli-update": "^0.21.4",
     "ember-composability": "^0.3.8",
+    "ember-css-transitions": "^0.1.15",
     "ember-data": "~3.1.0",
     "ember-export-application-global": "^2.0.0",
     "ember-fetch": "^3.4.4",

@@ -3,11 +3,12 @@
 @import "gravatar";
 @import "animate";
 
+@import "global";
 @import "application";
+@import "home";
 
 @import "components/x-header";
 @import "components/x-input";
 @import "components/wikiwiki-search";
 @import "components/tinder-card";
-
-@import "home";
+@import "components/question-card";

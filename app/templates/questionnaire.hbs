@@ -1,33 +1,15 @@
-{{#unless question}}
-  {{#each questions as |q|}}
-    <div>{{q.value}} -- {{q.answer}}</div>
-  {{/each}}
-{{/unless}}
+<div class="bg--darkest-turqoise flex flex-column flex-auto ma2 pa2 br2 overflow-hidden relative">
+  {{#unless question}}
+    {{#each questions as |q|}}
+      <div>{{q.value}} -- {{q.answer}}</div>
+    {{/each}}
+  {{/unless}}
 
-{{#each questions as |question index| }}
-  {{#if (eq index questionIdx)}}
-    <h2>{{question.value}}</h2>
-    {{#if question.subvalue}}<h3>{{question.subvalue}}</h3>{{/if}}
-
-    {{#if question.choices}}
-      {{#if question.multipleChoice}}
-        {{#x-select value=question.answer multiple=question.multipleChoice action=(action "didSelect" question) as |xs|}}
-          {{#each question.choices as |choice|}}
-            {{#xs.option value=choice}}{{choice.value}}{{/xs.option}}
-          {{/each}}
-        {{/x-select}}
-      {{else}}
-        {{#x-select class="hk-select" value=question.answer multiple=question.multipleChoice action=(action "didSelect" question) as |xs|}}
-          <option value="unselected"></option>
-          {{#each question.choices as |choice|}}
-            {{#xs.option value=choice}}{{choice.value}}{{/xs.option}}
-          {{/each}}
-        {{/x-select}}
-      {{/if}}
-    {{else}}
-      {{input value=question.answer class="hk-input"}}
+  {{#each questions as |question index| }}
+    {{#if (eq index questionIdx)}}
+      {{question-card question=question didSelect=(action 'didSelect') next=(action 'next')}}
     {{/if}}
+  {{/each}}
 
-    <span class="hk-button--primary pa2" onclick={{action (action "next")}}>Next</span>
-  {{/if}}
-{{/each}}
+  <div class="hk-button--primary pa2 absolute left-0 right-0 bottom-0 mh2 mb2" {{action "next"}}>Next</div>
+</div>

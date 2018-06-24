@@ -6,6 +6,7 @@ export default DS.Model.extend({
   enables: DS.attr(),
   value: DS.attr(),
   subvalue: DS.attr(),
+  placeholder: DS.attr(),
   choices: DS.attr(),
   multipleChoice: DS.attr()
 });

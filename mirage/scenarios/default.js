@@ -2368,12 +2368,14 @@ const therapists = [
 
 const questions = [
   {
-    "value": "Hi, my name is:",
-    "subvalue": ""
+    "value": "Hi, my name is...",
+    "subvalue": "",
+    "placeholder": "Johnny Domino"
   },
   {
-    "value": "Contact me at:",
-    "subvalue": ""
+    "value": "Contact me at...",
+    "subvalue": "",
+    "placeholder": "(808-)867-5309"
   },
   {
     "value": "I am...",
@@ -2389,7 +2391,7 @@ const questions = [
     ]
   },
   {
-    "value": "My insurance provider is",
+    "value": "My insurance provider is...",
     "subvalue": "",
     "choices": [
       { "value": "Aetna" },
@@ -2424,7 +2426,7 @@ const questions = [
     ]
   },
   {
-    "value": "Do you know what kind of therapy you are looking for",
+    "value": "Do you know what kind of therapy you are looking for?",
     "subvalue": "Under the broad umbrella of therapy, different therapists practice with different techniques. One example of a technique is Cognitive Behavioral Therapy (CBT). Another type of technique is psychoanalysis.",
     "choices": [
       { "value": "yes", "enables": ["therapist-trained-in"] },
@@ -2462,7 +2464,7 @@ const questions = [
     ]
   },
   {
-    "value": "I would prefer my therapist to be",
+    "value": "I would prefer my therapist to be...",
     "subvalue": "",
     "choices": [
       { "value": "24-30 years old" },
@@ -2473,7 +2475,7 @@ const questions = [
     ]
   },
   {
-    "value": "I would prefer my therapist to be",
+    "value": "I would prefer my therapist to be...",
     "subvalue": "",
     "choices": [
       { "value": "Female" },
@@ -2483,8 +2485,8 @@ const questions = [
     ]
   },
   {
-    "value": "Would you like to select issue areas you prefer your therapist to have experience working with? Therapists have diverse experience helping individuals through a variety of obstacles. Three examples of issue areas are anxiety, addiction, and career stress.",
-    "subvalue": "",
+    "value": "Would you like to select issue areas you prefer your therapist to have experience working with?",
+    "subvalue": "Therapists have diverse experience helping individuals through a variety of obstacles. Three examples of issue areas are anxiety, addiction, and career stress.",
     "choices": [
       { "value": "yes", "enables": ["therapist-experience"] },
       { "value": "no", "disables": ["therapist-experience"] }
@@ -2494,7 +2496,7 @@ const questions = [
     "identifier": "therapist-experience",
     "enabled": false,
     "multipleChoice": true,
-    "value": "I would like my therapist to have experience working with",
+    "value": "I would like my therapist to have experience working with...",
     "subvalue": "",
     "choices": [
       { "value":  "Addiction and Substance Use" },
@@ -2559,7 +2561,7 @@ const questions = [
     ]
   },
   {
-    "value": "How else might you describe your ideal therapist",
+    "value": "How else might you describe your ideal therapist?",
     "subvalue": "It’s okay if you aren’t entirely sure. Try to choose 5 descriptors below that most resonate with you.",
     "multipleChoice": true,
     "choices": [
@@ -2593,7 +2595,7 @@ const questions = [
   },
   {
     "multipleChoice": true,
-    "value": "I am most available",
+    "value": "I am most available...",
     "subvalue": "",
     "choices": [
       { "value": "Weekday early mornings (before 9a)" },
@@ -2603,7 +2605,7 @@ const questions = [
     ]
   },
   {
-    "value": "I am hoping to go to therapy",
+    "value": "I am hoping to go to therapy...",
     "subvalue": "Therapy is most effective when you meet with your therapist at least weekly. Especially in the beginning, you and your therapist will be building a foundation of trust. Your therapist will want to familiarize with you and your story, which works best with as little time in between sessions as possible. The more you put in, the more you get out -- if you're interested in getting a head start, commit to going to therapy more than once per week, and determine with your therapist as you go whether you'd like to stay at that frequency.",
     "choices": [
       { "value": "weekly" },
