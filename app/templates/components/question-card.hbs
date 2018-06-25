@@ -1,17 +1,17 @@
 <h2>{{question.value}}</h2>
 {{#if question.subvalue}}
-  <div class="f4 dark-gray">{{question.subvalue}}</div>
+  <div class="f4 near-black">{{question.subvalue}}</div>
 {{/if}}
 
 {{#if question.choices}}
   {{#if question.multipleChoice}}
-    {{#x-select class="mv3 flex-auto" value=question.answer multiple=question.multipleChoice action=(action didSelect question) as |xs|}}
+    {{#x-select class="mv3" size=question.choices.length value=question.answer multiple=true action=(action didSelect question) as |xs|}}
       {{#each question.choices as |choice|}}
         {{#xs.option value=choice}}{{choice.value}}{{/xs.option}}
       {{/each}}
     {{/x-select}}
   {{else}}
-    {{#x-select class="hk-select mv3" value=question.answer multiple=question.multipleChoice action=(action didSelect question) as |xs|}}
+    {{#x-select class="hk-select mv3" value=question.answer multiple=false action=(action didSelect question) as |xs|}}
       <option value="unselected"></option>
       {{#each question.choices as |choice|}}
         {{#xs.option value=choice}}{{choice.value}}{{/xs.option}}

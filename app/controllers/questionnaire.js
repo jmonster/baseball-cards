@@ -5,7 +5,7 @@ import { alias } from '@ember/object/computed';
 export default Controller.extend({
   queryParams: ['questionIdx'],
   questionIdx: 0,
-  
+
   question: computed('questionIdx', function() {
     const idx = this.get('questionIdx');
     return this.get('questions').objectAt(idx);
@@ -16,10 +16,32 @@ export default Controller.extend({
     return this.get('model').filter((q) => q.get('enabled'));
   }),
 
+  answers: computed('questions.@each.answer', function() {
+    return this.get('questions').map((q) => {
+      if (typeof q.answer === "string") {
+        return { question: q, value: q.answer };
+      }
+
+      else if (q.answer instanceof Array) {
+        return { question: q, value: q.answer.map((a) => a.value).join(', ') };
+      }
+
+      else {
+        return { question: q, value: q.answer && q.answer.value };
+      }
+    })
+  }),
+
   actions: {
     next() {
+      const questionCount = this.get('questions.length');
       const idx = +this.get('questionIdx');
-      this.set('questionIdx', idx + 1);
+      if (idx + 1 >= questionCount) {
+        this.set('isDone', true);
+        this.set('questionIdx', null);
+      } else {
+        this.set('questionIdx', idx + 1);
+      }
     },
 
     previous() {

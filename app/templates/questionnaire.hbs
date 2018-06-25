@@ -1,15 +1,19 @@
-<div class="bg--darkest-turqoise flex flex-column flex-auto ma2 pa2 br2 overflow-hidden relative">
-  {{#unless question}}
-    {{#each questions as |q|}}
-      <div>{{q.value}} -- {{q.answer}}</div>
-    {{/each}}
-  {{/unless}}
-
-  {{#each questions as |question index| }}
-    {{#if (eq index questionIdx)}}
-      {{question-card question=question didSelect=(action 'didSelect') next=(action 'next')}}
+<div class="bg-yellow flex flex-column flex-auto">
+  <div class="questionnaire shadow-outer-3 flex flex-column flex-auto ma2 pa2 br2 overflow-hidden relative">
+    {{#if isDone}}
+      {{#each answers as |a|}}
+        <div>{{a.question.value}} -- {{a.value}}</div>
+      {{/each}}
     {{/if}}
-  {{/each}}
 
-  <div class="hk-button--primary pa2 absolute left-0 right-0 bottom-0 mh2 mb2" {{action "next"}}>Next</div>
+    {{#unless isDone}}
+      {{#each questions as |question index| }}
+        {{#if (eq index questionIdx)}}
+          {{question-card question=question enableTransition=(not-eq index 0) didSelect=(action 'didSelect') next=(action 'next')}}
+        {{/if}}
+      {{/each}}
+
+    <div class="hk-button--primary f3 absolute left-0 right-0 bottom-0 mh2 mb2" {{action "next"}}>Next</div>
+    {{/unless}}
+  </div>
 </div>

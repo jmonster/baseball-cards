@@ -1,5 +1,5 @@
 body > .ember-view {
-  height: 100vh;
+  height: calc(100vh - 112px);
   -ms-flex-direction: column;
   flex-direction: column;
   display: -ms-flexbox;
