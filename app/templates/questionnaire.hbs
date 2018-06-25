@@ -1,5 +1,5 @@
-<div class="bg-yellow flex flex-column flex-auto">
-  <div class="questionnaire shadow-outer-3 flex flex-column flex-auto ma2 pa2 br2 overflow-hidden relative">
+<div class="questionnaire-wrapper bg-yellow flex flex-column absolute top-0 bottom-0 right-0 left-0">
+  <div class="questionnaire shadow-outer-3 flex flex-column flex-auto ma2 pa2 br2 overflow-hidden relative force-height">
     {{#if isDone}}
       {{#each answers as |a|}}
         <div>{{a.question.value}} -- {{a.value}}</div>
@@ -13,7 +13,7 @@
         {{/if}}
       {{/each}}
 
-    <div class="hk-button--primary f3 absolute left-0 right-0 bottom-0 mh2 mb2" {{action "next"}}>Next</div>
+    <div class="hk-button--primary f3 mh2 mb2 absolute bottom-0 left-0 right-0" {{action "next"}}>Next</div>
     {{/unless}}
   </div>
 </div>

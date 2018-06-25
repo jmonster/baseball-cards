@@ -1,5 +1,4 @@
 body > .ember-view {
-  height: calc(100vh - 112px);
   -ms-flex-direction: column;
   flex-direction: column;
   display: -ms-flexbox;
@@ -8,4 +7,8 @@ body > .ember-view {
 
 .bg--darkest-turqoise {
   background-color: #3bd6c6;
+}
+
+.force-height {
+  height: calc(100vh - 200px);
 }

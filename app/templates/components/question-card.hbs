@@ -5,13 +5,13 @@
 
 {{#if question.choices}}
   {{#if question.multipleChoice}}
-    {{#x-select class="mv3" size=question.choices.length value=question.answer multiple=true action=(action didSelect question) as |xs|}}
+    {{#x-select class="mv3 w-100" size=question.choices.length value=question.answer multiple=true action=(action didSelect question) as |xs|}}
       {{#each question.choices as |choice|}}
         {{#xs.option value=choice}}{{choice.value}}{{/xs.option}}
       {{/each}}
     {{/x-select}}
   {{else}}
-    {{#x-select class="hk-select mv3" value=question.answer multiple=false action=(action didSelect question) as |xs|}}
+    {{#x-select class="hk-select mv3 w-100" value=question.answer multiple=false action=(action didSelect question) as |xs|}}
       <option value="unselected"></option>
       {{#each question.choices as |choice|}}
         {{#xs.option value=choice}}{{choice.value}}{{/xs.option}}
@@ -19,5 +19,5 @@
     {{/x-select}}
   {{/if}}
 {{else}}
-  {{input value=question.answer class="hk-input mv3" placeholder=question.placeholder enter=(action next)}}
+  {{input value=question.answer class="hk-input mv3 w-100 f3" placeholder=question.placeholder enter=(action next)}}
 {{/if}}
