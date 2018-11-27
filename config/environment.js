@@ -3,12 +3,12 @@
 module.exports = function(environment) {
   let ENV = {
     firebase: {
-      apiKey: "AIzaSyACHn_ax-5PufhqSeYRdX76jI3tm4y8YJQ",
-      authDomain: "therapder.firebaseapp.com",
-      databaseURL: "https://therapder.firebaseio.com",
-      projectId: "therapder",
-      storageBucket: "gs://therapder.appspot.com",
-      messagingSenderId: "201337740646"
+      apiKey: "AIzaSyB1zuup7KDVsTVyUEqQ4sly6LwSmCJQxu0",
+      authDomain: "thedealzillaprojectid.firebaseapp.com",
+      databaseURL: "https://thedealzillaprojectid.firebaseio.com/",
+      projectId: "thedealzillaprojectid",
+      storageBucket: "gs://thedealzillaprojectid.appspot.com",
+      messagingSenderId: "520741038114"
     },
     torii: {
       sessionServiceName: 'session'
@@ -17,7 +17,7 @@ module.exports = function(environment) {
       defaultLocale: 'en'
     },
 
-    modulePrefix: 'therapder',
+    modulePrefix: 'dealzilla',
     environment,
     rootURL: '/',
     locationType: 'auto',
