@@ -31,8 +31,14 @@ You will need the following things properly installed on your computer.
 
 ### Linting
 
+* `yarn lint:hbs`
 * `yarn lint:js`
 * `yarn lint:js --fix`
+
+### Building
+
+* `ember build` (development)
+* `ember build --environment production` (production)
 
 ### Deploying
 
