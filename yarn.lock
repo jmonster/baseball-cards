@@ -44,6 +44,16 @@
     ember-cli-babel "^6.12.0"
     ember-cli-htmlbars-inline-precompile "^1.0.0"
 
+"@glimmer/compiler@^0.35.5":
+  version "0.35.10"
+  resolved "https://registry.yarnpkg.com/@glimmer/compiler/-/compiler-0.35.10.tgz#ea830a984ced7fe68dd5e96f21127f76ad22c35c"
+  integrity sha512-/nwanZgQsXVp0vFSm27CPNuRH6NnSzXU+j8WcKYRx9Dd40Jf8RAmGGgOKkfqGLcDbNVsaxg2zL+WIn9aIU+85Q==
+  dependencies:
+    "@glimmer/interfaces" "^0.35.10"
+    "@glimmer/syntax" "^0.35.10"
+    "@glimmer/util" "^0.35.10"
+    "@glimmer/wire-format" "^0.35.10"
+
 "@glimmer/compiler@^0.36.2":
   version "0.36.5"
   resolved "https://registry.yarnpkg.com/@glimmer/compiler/-/compiler-0.36.5.tgz#ea2ac9aa1a5c3ada7f8d93cd295fdc14f1c1ccc4"
@@ -58,6 +68,13 @@
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@glimmer/di/-/di-0.2.0.tgz#73bfd4a6ee4148a80bf092e8a5d29bcac9d4ce7e"
 
+"@glimmer/interfaces@^0.35.10":
+  version "0.35.10"
+  resolved "https://registry.yarnpkg.com/@glimmer/interfaces/-/interfaces-0.35.10.tgz#1ec18cf7bbcbe42547dd2e131b565a2f71234e3c"
+  integrity sha512-fegpWTjDd8DAcjvgP4N+5BOnBLpulBvRjUNqvw6raY3OVw5O/Hon+iYqX1bPBbGP16RFj+6BPkc+GnZspQRazQ==
+  dependencies:
+    "@glimmer/wire-format" "^0.35.10"
+
 "@glimmer/interfaces@^0.36.5":
   version "0.36.5"
   resolved "https://registry.yarnpkg.com/@glimmer/interfaces/-/interfaces-0.36.5.tgz#b9ef4a6756745dc41927ab01d6c23cdf7ece4158"
@@ -71,6 +88,16 @@
   dependencies:
     "@glimmer/di" "^0.2.0"
 
+"@glimmer/syntax@^0.35.10":
+  version "0.35.10"
+  resolved "https://registry.yarnpkg.com/@glimmer/syntax/-/syntax-0.35.10.tgz#8f50dfd841487c469ad5d94cd01b425a51a9ab32"
+  integrity sha512-rAm0yC3KOEMNiE5260wjmMGMw/+y4HcyhQE/GgAy/CxnJuWE4fenRczucK1aaEcJyFdwF73bkSn1iF1b8fFiGQ==
+  dependencies:
+    "@glimmer/interfaces" "^0.35.10"
+    "@glimmer/util" "^0.35.10"
+    handlebars "^4.0.6"
+    simple-html-tokenizer "^0.5.5"
+
 "@glimmer/syntax@^0.36.5":
   version "0.36.5"
   resolved "https://registry.yarnpkg.com/@glimmer/syntax/-/syntax-0.36.5.tgz#603099a0bf2019dc497e3b858eb6fc84abda805a"
@@ -81,10 +108,22 @@
     handlebars "^4.0.6"
     simple-html-tokenizer "^0.5.6"
 
+"@glimmer/util@^0.35.10":
+  version "0.35.10"
+  resolved "https://registry.yarnpkg.com/@glimmer/util/-/util-0.35.10.tgz#2a25fa5c3d2b6114bbb07fd57c6e52abd9d088c3"
+  integrity sha512-DfO425GLVG9tuEixghIsjYwiJAhtJ0bZVAQYgBvkBk0O1oAaWDJ9eOj5xhuCWiUm8OFulSjqt9kcU0ShxFl4ZQ==
+
 "@glimmer/util@^0.36.5":
   version "0.36.5"
   resolved "https://registry.yarnpkg.com/@glimmer/util/-/util-0.36.5.tgz#829f393ef0bf791df5b287f104f0fd76e456182c"
   integrity sha512-RcDsxxuKGnIc6Ro6wZGFMUZ/E8L3Rbcd5E5F2WOSa59RYHel146fhQtctGrpGxQUZwfxMEMs91GJIaKeukd84g==
+
+"@glimmer/wire-format@^0.35.10":
+  version "0.35.10"
+  resolved "https://registry.yarnpkg.com/@glimmer/wire-format/-/wire-format-0.35.10.tgz#8445d51923ccbc6a923d2a911f37c82cc390c2e6"
+  integrity sha512-HteYOO04QTnjAW7g7RDGDpdVzUTOuF3UUDJLgf6Oi5pYwzSxV3EetErgZfAPjY0L113si3L7eVZmZ62lkfm2vA==
+  dependencies:
+    "@glimmer/util" "^0.35.10"
 
 "@glimmer/wire-format@^0.36.5":
   version "0.36.5"
@@ -3751,6 +3790,17 @@ ember-cli-sass@^7.0.0:
     broccoli-sass-source-maps "^2.1.0"
     ember-cli-version-checker "^2.1.0"
 
+ember-cli-shims@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-shims/-/ember-cli-shims-1.2.0.tgz#0f53aff0aab80b5f29da3a9731bac56169dd941f"
+  integrity sha1-D1Ov8Kq4C18p2jqXMbrFYWndlB8=
+  dependencies:
+    broccoli-file-creator "^1.1.1"
+    broccoli-merge-trees "^2.0.0"
+    ember-cli-version-checker "^2.0.0"
+    ember-rfc176-data "^0.3.1"
+    silent-error "^1.0.1"
+
 ember-cli-sri@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ember-cli-sri/-/ember-cli-sri-2.1.1.tgz#971620934a4b9183cf7923cc03e178b83aa907fd"
@@ -4107,7 +4157,7 @@ ember-rfc176-data@^0.3.0:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/ember-rfc176-data/-/ember-rfc176-data-0.3.2.tgz#bde5538939529b263c142b53a47402f8127f8dce"
 
-ember-rfc176-data@^0.3.5:
+ember-rfc176-data@^0.3.1, ember-rfc176-data@^0.3.5:
   version "0.3.5"
   resolved "https://registry.yarnpkg.com/ember-rfc176-data/-/ember-rfc176-data-0.3.5.tgz#f630e550572c81a5e5c7220f864c0f06eee9e977"
   integrity sha512-5NfL1iTkIQDYs16/IZ7/jWCEglNsUrigLelBkBMsNcib9T3XzQwmhhVTjoSsk66s57LmWJ1bQu+2c1CAyYCV7A==
@@ -4144,6 +4194,18 @@ ember-source@~3.5.1:
     inflection "^1.12.0"
     jquery "^3.3.1"
     resolve "^1.6.0"
+
+ember-template-lint@^0.8.7:
+  version "0.8.23"
+  resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-0.8.23.tgz#45170d6f2fe6336635df1d1067cabab6b5eb02d0"
+  integrity sha512-8XogixWMyjccLjROoML8bzAxI98BYVQsfe+EFj7Vqp/VwtYhdE4HqoDTu4x5Jq6m2Zs936QdsIGsX209FomFhA==
+  dependencies:
+    "@glimmer/compiler" "^0.35.5"
+    chalk "^2.0.0"
+    glob "^7.0.0"
+    minimatch "^3.0.4"
+    resolve "^1.1.3"
+    strip-bom "^3.0.0"
 
 ember-template-lint@^1.0.0-beta.5:
   version "1.0.0-beta.6"
@@ -4358,6 +4420,14 @@ eslint-plugin-ember@^5.2.0:
   dependencies:
     ember-rfc176-data "^0.3.5"
     snake-case "^2.1.0"
+
+eslint-plugin-hbs@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-hbs/-/eslint-plugin-hbs-0.1.1.tgz#bda6fbcb637b7a53a5365093fb246da4aa794b5b"
+  integrity sha512-3jn6od186KDTQ2JzeXaFOU0K8svRQOI5wdiZU5zStrX2fEFbWbj+p9qsWC+r+DkUm6sYMPoW8t3nU31zMIvPOQ==
+  dependencies:
+    ember-template-lint "^0.8.7"
+    requireindex "~1.1.0"
 
 eslint-scope@^3.7.1:
   version "3.7.1"
@@ -9566,6 +9636,11 @@ require-uncached@^1.0.3:
     caller-path "^0.1.0"
     resolve-from "^1.0.0"
 
+requireindex@~1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/requireindex/-/requireindex-1.1.0.tgz#e5404b81557ef75db6e49c5a72004893fe03e162"
+  integrity sha1-5UBLgVV+91225JxacgBIk/4D4WI=
+
 requires-port@1.x.x, requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
@@ -10028,7 +10103,7 @@ simple-git@^1.57.0:
   dependencies:
     debug "^3.1.0"
 
-simple-html-tokenizer@^0.5.6:
+simple-html-tokenizer@^0.5.5, simple-html-tokenizer@^0.5.6:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/simple-html-tokenizer/-/simple-html-tokenizer-0.5.7.tgz#8eca336ecfbe2b3c6166cbb31b2682088de79f40"
   integrity sha512-APW9iYbkJ5cijjX4Ljhf3VG8SwYPUJT5gZrwci/wieMabQxWFiV5VwsrP5c6GMRvXKEQMGkAB1d9dvW66dTqpg==

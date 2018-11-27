@@ -5,7 +5,7 @@ export default Component.extend({
   classNames: ['rating-bar', 'd-inline'],
   progress: 0,
   firstStarIcon: computed('progress', function() {
-    const progress = this.get('progress');
+    const progress = this.progress;
 
     if (progress >= 20) {
       return 'star';
@@ -16,7 +16,7 @@ export default Component.extend({
     return 'star-o';
   }),
   secondStarIcon: computed('progress', function() {
-    const progress = this.get('progress');
+    const progress = this.progress;
 
     if (progress >= 40) {
       return 'star';
@@ -27,7 +27,7 @@ export default Component.extend({
     return 'star-o';
   }),
   thirdStarIcon: computed('progress', function() {
-    const progress = this.get('progress');
+    const progress = this.progress;
 
     if (progress >= 60) {
       return 'star';
@@ -38,7 +38,7 @@ export default Component.extend({
     return 'star-o';
   }),
   fourthStarIcon: computed('progress', function() {
-    const progress = this.get('progress');
+    const progress = this.progress;
 
     if (progress >= 80) {
       return 'star';
@@ -49,7 +49,7 @@ export default Component.extend({
     return 'star-o';
   }),
   fifthStarIcon: computed('progress', function() {
-    const progress = this.get('progress');
+    const progress = this.progress;
 
     if (progress >= 100) {
       return 'star';

@@ -14,7 +14,7 @@ export default Route.extend({
   }),
 
   configureAnonymousUser() {
-    const session = this.get('session');
+    const session = this.session;
 
     if (!session.get('isAuthenticated')) {
       return session.open('firebase', { provider: 'anonymous' }).then(({ currentUser }) => {
@@ -35,9 +35,9 @@ export default Route.extend({
   },
 
   beforeModel() {
-    const session = this.get('session');
+    const session = this.session;
     const fetchSession = session.fetch().catch(function() {});
-    const configureAnonymousUser = this.get('configureAnonymousUser').bind(this);
+    const configureAnonymousUser = this.configureAnonymousUser.bind(this);
 
     // initial loading
     const initalLoadingIndicator = document.getElementById('initial-loading-indicator');
@@ -55,11 +55,11 @@ export default Route.extend({
 
   actions: {
     signIn(provider) {
-      this.get('session').open('firebase', { provider }).then(() => { this.transitionTo('/'); });
+      this.session.open('firebase', { provider }).then(() => { this.transitionTo('/'); });
     },
 
     signOut() {
-      this.get('session').close()
+      this.session.close()
         .then(() => { this.transitionTo('/'); })
         .catch((/*err*/) => { window.location.assign('/'); });
     }

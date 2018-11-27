@@ -16,6 +16,6 @@ export default DS.Model.extend({
   bio: DS.attr('string'),
 
   primaryPhoto: computed(function() {
-    return this.get('photos').firstObject;
+    return this.photos.firstObject;
   })
 });

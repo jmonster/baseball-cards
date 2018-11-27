@@ -8,7 +8,7 @@ export default ToriiFirebaseAdapter.extend({
     const id = authorization.uid;
     const name = authorization.displayName;
     const email = authorization.email;
-    const store = this.get('store');
+    const store = this.store;
 
     return store
       .find('user', id)
@@ -21,7 +21,7 @@ export default ToriiFirebaseAdapter.extend({
   },
 
   close() {
-    this.get('store').unloadAll('user');
+    this.store.unloadAll('user');
 
     return this._super(...arguments);
   }

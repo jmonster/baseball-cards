@@ -28,7 +28,7 @@ export default Component.extend({
   },
 
   recomputeResults() {
-    const query = this.get('query');
+    const query = this.query;
     this.set('searchIsPending', true);
     this.set('showNotFoundMessage', false);
 
@@ -39,8 +39,8 @@ export default Component.extend({
     } else {
 
       // filter items
-      const matcher = this.get('matcher')(query);
-      this.get('items').then((items) => {
+      const matcher = this.matcher(query);
+      this.items.then((items) => {
         const fuzzyResults = items.filter((result) => matcher.test(result.get('name')));
 
         let exactResultIndex = -1;

@@ -1,5 +1,9 @@
-<div class="questionnaire-wrapper bg-yellow flex flex-column absolute top-0 bottom-0 right-0 left-0">
-  <div class="questionnaire shadow-outer-3 flex flex-column flex-auto ma2 pa2 br2 overflow-hidden relative force-height">
+<div
+  class="questionnaire-wrapper bg-yellow flex flex-column absolute top-0 bottom-0 right-0 left-0"
+>
+  <div
+    class="questionnaire shadow-outer-3 flex flex-column flex-auto ma2 pa2 br2 overflow-hidden relative force-height"
+  >
     {{#if isDone}}
       {{#each answers as |a|}}
         <div>{{a.question.value}} -- {{a.value}}</div>
@@ -9,11 +13,21 @@
     {{#unless isDone}}
       {{#each questions as |question index| }}
         {{#if (eq index questionIdx)}}
-          {{question-card question=question enableTransition=(not-eq index 0) didSelect=(action 'didSelect') next=(action 'next')}}
+          {{question-card
+            question=question
+            enableTransition=(not-eq index 0)
+            didSelect=(action "didSelect")
+            next=(action "next")
+          }}
         {{/if}}
       {{/each}}
 
-    <div class="hk-button--primary f3 mh2 mb2 absolute bottom-0 left-0 right-0" {{action "next"}}>Next</div>
+      <div
+        class="hk-button--primary f3 mh2 mb2 absolute bottom-0 left-0 right-0"
+        {{action "next"}}
+      >
+        Next
+      </div>
     {{/unless}}
   </div>
 </div>

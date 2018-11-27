@@ -18,9 +18,9 @@ export default DS.Model.extend({
   email: DS.attr('string'),
 
   asString: computed('street1', 'city', 'state', function() {
-    const street = this.get('street1') || '';
-    const city = this.get('city1') || '';
-    const state = this.get('state1') || '';
+    const street = this.street1 || '';
+    const city = this.city1 || '';
+    const state = this.state1 || '';
 
     return [street, city, state].join(' ');
   })

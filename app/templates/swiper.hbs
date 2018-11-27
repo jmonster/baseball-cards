@@ -1,6 +1,12 @@
 {{#each paginatedTherapists as |therapist|}}
-  {{#tinder-card cardDidDisappear=(action "removeCard") onLeftTap=(action 'onLeftTap') onRightTap=(action 'onRightTap')}}
-    <style media="screen">
+  {{#tinder-card
+    cardDidDisappear=(action "removeCard")
+    onLeftTap=(action "onLeftTap")
+    onRightTap=(action "onRightTap")
+  }}
+    <style
+      media="screen"
+    >
       #tinder-card-image {
         background: url({{therapist.primaryPhoto.path}}) 50% 50% no-repeat;
         -webkit-background-size: cover;
@@ -11,43 +17,62 @@
     </style>
 
 
-    {{#unless showCardDetails}}
-      <div id="tinder-card-image"></div>
-
-      <div class="tinder-card-info absolute bottom-0 right-0 left-0 bt b--white bg-near-black flex">
-        <div class="left-half w-50 flex flex-column justify-around ma2 ttu">
-          <span class="f4">{{therapist.firstName}}</span>
-          <span class="f1 fw6 mt1">{{therapist.lastName}}</span>
-          <span class="f5 fw5 mt2 moon-gray">{{therapist.title}}</span>
-        </div>
-        <div class="right-half w-50 flex justify-center">
-          <div class="tinder-card-badge br-100"></div>
-        </div>
-      </div>
-    {{else}}
-      <div class="tinder-card-details near-black w-100 h-100 pa2 bg-light-yellow ba b--yellow">
-        <!-- <h2 class="f1 mb0 mt0">issues</h2>
-        <ul class="">
-          <li class="ma0 pa0 dark-gray f3">anxiety</li>
-        </ul>
-
-        <h2 class="f1 mb0">client focus</h2>
-        <ul class="">
-          <li class="ma0 pa0 dark-gray f3">age</li>
-          <li class="ma0 pa0 dark-gray f3">categories</li>
-        </ul>
-
-        <h2 class="f1 mb0">tele comms</h2>
-        <ul class="">
-          <li class="ma0 pa0 dark-gray f3">skype</li>
-          <li class="ma0 pa0 dark-gray f3">hangouts</li>
-        </ul> -->
+    {{#if showCardDetails}}
+      <div
+        class="tinder-card-details near-black w-100 h-100 pa2 bg-light-yellow ba b--yellow"
+      >
         <h2>about me</h2>
         <p>{{therapist.bio}}</p>
       </div>
-    {{/unless}}
+    {{else}}
+      <div
+        id="tinder-card-image"
+      >
+      </div>
+
+      <div
+        class="tinder-card-info absolute bottom-0 right-0 left-0 bt b--white bg-near-black flex"
+      >
+        <div
+          class="left-half w-50 flex flex-column justify-around ma2 ttu"
+        >
+          <span
+            class="f4"
+          >
+            {{therapist.firstName}}
+          </span>
+          <span
+            class="f1 fw6 mt1"
+          >
+            {{therapist.lastName}}
+          </span>
+          <span
+            class="f5 fw5 mt2 moon-gray"
+          >
+            {{therapist.title}}
+          </span>
+        </div>
+        <div
+          class="right-half w-50 flex justify-center"
+        >
+          <div
+            class="tinder-card-badge br-100"
+          >
+          </div>
+        </div>
+      </div>
+    {{/if}}
   {{/tinder-card}}
 {{else}}
-  <h2 class="tc">🙏 goodluck</h2>
-  <h3 class="tc mt4 pa2 dark-gray" onclick={{action "reset"}}>tap to refresh</h3>
+  <h2
+    class="tc"
+  >
+    🙏 goodluck
+  </h2>
+  <h3
+    class="tc mt4 pa2 dark-gray"
+    onclick={{action "reset"}}
+  >
+    tap to refresh
+  </h3>
 {{/each}}

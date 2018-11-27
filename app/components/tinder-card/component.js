@@ -45,8 +45,8 @@ export default Component.extend({
 
       const touch = event.touches[0];
       const [updatedX, updatedY] = [
-        touch.clientX - this.get('initialX'),
-        touch.clientY - this.get('initialY')
+        touch.clientX - this.initialX,
+        touch.clientY - this.initialY
       ];
 
       this.setTranslate(updatedX, updatedY, this.element);
@@ -63,12 +63,12 @@ export default Component.extend({
 
   actions: {
     didLeftTap() {
-      const fn = this.get('onLeftTap');
+      const fn = this.onLeftTap;
       fn && fn();
     },
 
     didRightTap() {
-      const fn = this.get('onRightTap');
+      const fn = this.onRightTap;
       fn && fn();
     }
   }

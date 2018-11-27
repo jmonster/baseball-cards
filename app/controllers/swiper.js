@@ -15,15 +15,15 @@ function shuffle(a) {
 
 export default Controller.extend({
   allTherapists: computed(function() {
-    return this.get('model').therapists;
+    return this.model.therapists;
   }),
 
   mutableTherapists: computed('allTherapists.[]', function() {
-    return shuffle(this.get('allTherapists').toArray());
+    return shuffle(this.allTherapists.toArray());
   }),
 
   paginatedTherapists: computed('mutableTherapists.[]', function() {
-    return this.get('mutableTherapists').slice(0,1);
+    return this.mutableTherapists.slice(0,1);
   }),
 
   actions: {
@@ -36,12 +36,12 @@ export default Controller.extend({
     },
 
     removeCard(/*component*/) {
-      this.get('mutableTherapists').shiftObject();
+      this.mutableTherapists.shiftObject();
       this.set('showCardDetails', false);
     },
 
     reset() {
-      this.set('allTherapists', this.get('model').therapists);
+      this.set('allTherapists', this.model.therapists);
     }
   }
 });

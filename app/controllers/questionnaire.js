@@ -7,17 +7,17 @@ export default Controller.extend({
   questionIdx: 0,
 
   question: computed('questionIdx', function() {
-    const idx = this.get('questionIdx');
-    return this.get('questions').objectAt(idx);
+    const idx = this.questionIdx;
+    return this.questions.objectAt(idx);
   }),
 
   allQuestions: alias('model'),
   questions: computed('allQuestions.@each.enabled', function() {
-    return this.get('model').filter((q) => q.get('enabled'));
+    return this.model.filter((q) => q.get('enabled'));
   }),
 
   answers: computed('questions.@each.answer', function() {
-    return this.get('questions').map((q) => {
+    return this.questions.map((q) => {
       if (typeof q.answer === "string") {
         return { question: q, value: q.answer };
       }
@@ -29,13 +29,13 @@ export default Controller.extend({
       else {
         return { question: q, value: q.answer && q.answer.value };
       }
-    })
+    });
   }),
 
   actions: {
     next() {
       const questionCount = this.get('questions.length');
-      const idx = +this.get('questionIdx');
+      const idx = +this.questionIdx;
       if (idx + 1 >= questionCount) {
         this.set('isDone', true);
         this.set('questionIdx', null);
@@ -45,14 +45,14 @@ export default Controller.extend({
     },
 
     previous() {
-      const idx = +this.get('questionIdx');
+      const idx = +this.questionIdx;
       this.set('questionIdx', idx - 1);
     },
 
     didSelect(question, choice) {
       if (!choice) { return; }
 
-      const allQuestions = this.get('allQuestions');
+      const allQuestions = this.allQuestions;
       question.set('answer', choice);
 
       if (choice.enables) {

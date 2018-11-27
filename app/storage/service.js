@@ -7,7 +7,7 @@ export default Service.extend({
   session: inject(),
 
   upload(name, blobOrFile/*, path*/) {
-    const firebase = this.get('firebaseApp');
+    const firebase = this.firebaseApp;
     const storageRef = firebase.storage().ref(`${STORAGE_PATH_PREFIX}${name}`);
     return storageRef.put(blobOrFile);
   }

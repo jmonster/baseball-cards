@@ -32,6 +32,7 @@ You will need the following things properly installed on your computer.
 ### Linting
 
 * `yarn lint:hbs`
+* `yarn lint:hbs --fix`
 * `yarn lint:js`
 * `yarn lint:js --fix`
 
