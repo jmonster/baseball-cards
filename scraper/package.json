@@ -1,0 +1,10 @@
+{
+  "name": "dealzilla-scraper",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "jsdom": "^11.11.0",
+    "superagent": "^3.8.3"
+  }
+}
