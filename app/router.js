@@ -9,7 +9,6 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('home', { path: '/' });
   this.route('swiper');
-  this.route('questionnaire');
 });
 
 export default Router;

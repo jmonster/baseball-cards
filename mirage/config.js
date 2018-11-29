@@ -40,9 +40,9 @@ export default function() {
   this.post('/locations');
   this.delete('/locations');
 
-  this.get('/therapists');
-  this.post('/therapists');
-  this.delete('/therapists');
+  this.get('/deals');
+  this.post('/deals');
+  this.delete('/deals');
 
   this.get('/tags');
   this.post('/tags');
@@ -51,8 +51,6 @@ export default function() {
   this.get('/images');
   this.post('/images');
   this.delete('/images');
-
-  this.get('/questions');
 
   // Firebase Auth ////
   this.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo', {

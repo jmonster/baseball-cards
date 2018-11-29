@@ -13,9 +13,6 @@ module.exports = function(environment) {
     torii: {
       sessionServiceName: 'session'
     },
-    i18n: {
-      defaultLocale: 'en'
-    },
 
     modulePrefix: 'dealzilla',
     environment,

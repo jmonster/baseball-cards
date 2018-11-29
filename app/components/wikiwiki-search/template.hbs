@@ -9,7 +9,7 @@
   <div class="wikiwiki-search-results br1 br--bottom z-0 bg-white">
     <ul class="ph0 mv0 list">
       {{#each (await filteredResults) as |result|}}
-        <li class="f3 flex" {{action "didClickResult" result}}>
+        <li class="f3 flex" role="button" {{action "didClickResult" result}}>
           {{#link-to
             "home"
             class="no-underline dark-gray pv2 w-100 truncate ph2"
@@ -53,25 +53,6 @@
             class="no-underline dark-gray pv2 w-100 truncate"
           }}
             <span class="icon-tab mr2"></span>swipe right for therapy <span class="hk-badge--beta">beta</span>
-          {{/link-to}}
-        </li>
-        <li class="truncate f3 flex ph3">
-          {{#link-to
-            "questionnaire"
-            (query-params questionIdx=0)
-            class="no-underline dark-gray pv2 w-100 truncate"
-          }}
-            <span class="icon-filter mr2"></span>questionnaire
-          {{/link-to}}
-        </li>
-        <li class="truncate f3 flex ph3">
-          {{#link-to "home" class="no-underline dark-gray pv2 w-100 truncate"}}
-            <span class="icon-bubbles3 mr2"></span>join a support group
-          {{/link-to}}
-        </li>
-        <li class="truncate f3 flex ph3">
-          {{#link-to "home" class="no-underline dark-gray pv2 w-100 truncate"}}
-            <span class="icon-umbrella mr2"></span>shop for insurance
           {{/link-to}}
         </li>
       {{/unless}}

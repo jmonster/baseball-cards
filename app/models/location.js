@@ -4,8 +4,8 @@ import { computed } from '@ember/object';
 const inverse = null;
 
 export default DS.Model.extend({
-  // async:false => therapist record won't be loaded automatically
-  therapist: DS.belongsTo('therapist', { inverse, async: false }),
+  // async:false => deal record won't be loaded automatically
+  deal: DS.belongsTo('deal', { inverse, async: false }),
 
   street1: DS.attr('string'),
   street2: DS.attr('string'),

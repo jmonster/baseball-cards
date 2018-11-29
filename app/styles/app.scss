@@ -11,15 +11,3 @@
 @import "components/x-input";
 @import "components/wikiwiki-search";
 @import "components/tinder-card";
-@import "components/question-card";
-
-.questionnaire {
-  // margin-bottom: 10rem;
-  background-color: #fed90f;
-  background-image: url("https://www.transparenttextures.com/patterns/white-paperboard.png");
-  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
-}
-
-.questionnaire-wrapper {
-  margin-top: 67.5px;
-}

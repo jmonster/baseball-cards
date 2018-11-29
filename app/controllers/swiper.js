@@ -14,16 +14,16 @@ function shuffle(a) {
 }
 
 export default Controller.extend({
-  allTherapists: computed(function() {
-    return this.model.therapists;
+  allDeals: computed(function() {
+    return this.model.deals;
   }),
 
-  mutableTherapists: computed('allTherapists.[]', function() {
-    return shuffle(this.allTherapists.toArray());
+  mutableDeals: computed('allDeals.[]', function() {
+    return shuffle(this.allDeals.toArray());
   }),
 
-  paginatedTherapists: computed('mutableTherapists.[]', function() {
-    return this.mutableTherapists.slice(0,1);
+  paginatedDeals: computed('mutableDeals.[]', function() {
+    return this.mutableDeals.slice(0,1);
   }),
 
   actions: {
@@ -36,12 +36,12 @@ export default Controller.extend({
     },
 
     removeCard(/*component*/) {
-      this.mutableTherapists.shiftObject();
+      this.mutableDeals.shiftObject();
       this.set('showCardDetails', false);
     },
 
     reset() {
-      this.set('allTherapists', this.model.therapists);
+      this.set('allDeals', this.model.deals);
     }
   }
 });

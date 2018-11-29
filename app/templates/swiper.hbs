@@ -1,4 +1,4 @@
-{{#each paginatedTherapists as |therapist|}}
+{{#each paginatedDeals as |deal|}}
   {{#tinder-card
     cardDidDisappear=(action "removeCard")
     onLeftTap=(action "onLeftTap")
@@ -8,7 +8,7 @@
       media="screen"
     >
       #tinder-card-image {
-        background: url({{therapist.primaryPhoto.path}}) 50% 50% no-repeat;
+        background: url({{deal.primaryPhoto.path}}) 50% 50% no-repeat;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -22,7 +22,6 @@
         class="tinder-card-details near-black w-100 h-100 pa2 bg-light-yellow ba b--yellow"
       >
         <h2>about me</h2>
-        <p>{{therapist.bio}}</p>
       </div>
     {{else}}
       <div
@@ -39,17 +38,15 @@
           <span
             class="f4"
           >
-            {{therapist.firstName}}
           </span>
           <span
             class="f1 fw6 mt1"
           >
-            {{therapist.lastName}}
           </span>
           <span
             class="f5 fw5 mt2 moon-gray"
           >
-            {{therapist.title}}
+            {{deal.title}}
           </span>
         </div>
         <div
@@ -70,6 +67,7 @@
     🙏 goodluck
   </h2>
   <h3
+    role="button"
     class="tc mt4 pa2 dark-gray"
     onclick={{action "reset"}}
   >
