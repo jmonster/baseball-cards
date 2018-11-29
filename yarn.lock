@@ -4180,11 +4180,12 @@ ember-compatibility-helpers@^1.1.1:
     ember-cli-version-checker "^2.1.1"
     semver "^5.4.1"
 
-ember-composability@^0.3.8:
-  version "0.3.8"
-  resolved "https://registry.yarnpkg.com/ember-composability/-/ember-composability-0.3.8.tgz#a93dd792b1ea759619cbe2aa9f49552f7c1f2a4d"
+ember-composability@^0.0.0-development:
+  version "0.0.0-development"
+  resolved "https://registry.yarnpkg.com/ember-composability/-/ember-composability-0.0.0-development.tgz#cdbe2f7938119a8648499a1aa3239540b830da2d"
+  integrity sha512-wVCHmYyeNO7ARvTEqjW8jjssaUMgMvgBhPB38lylKlYHXFa8JZ0gHlFIlhucqCPtFLcpfS3TJFLBJsZHNOGzsA==
   dependencies:
-    ember-cli-babel "^6.0.0"
+    ember-cli-babel "^6.16.0"
 
 ember-css-transitions@^0.1.15:
   version "0.1.15"
