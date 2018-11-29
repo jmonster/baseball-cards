@@ -7,7 +7,7 @@ const deals = [
     "city": "San Francisco",
     "state": "California",
     "zip": "94110",
-    "image": "/assets/images/deals/francine-marie-sanfilippo.jpg"
+    // "image": "/assets/images/deals/francine-marie-sanfilippo.jpg"
   }
 ];
 

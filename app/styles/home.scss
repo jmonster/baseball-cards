@@ -4,7 +4,8 @@
 .bg-faded::after {
   content: "";
   opacity: 1;
-  background-image: url("/assets/images/simpsons-therapy.jpg");
+  // background-image: url("/assets/images/simpsons-therapy.jpg");
+  // background-color: red;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
