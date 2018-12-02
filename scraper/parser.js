@@ -1,36 +1,26 @@
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 
-const selectors = {
-  // row: '.result-row',
-  // name: 'span[itemprop="name"]',
-  // title: 'span[itemprop="jobTitle"]'
-};
-
-module.exports = function(html) {
+exports.parseLinks = function(html) {
   const dom = new JSDOM(html);
   const document = dom.window.document;
-  const rows = document.querySelectorAll(selectors.row);
+  const rows = document.querySelectorAll('.threadtitleline form+a');
   const deals = [];
 
   rows.forEach((r) => {
-    const T = {};
-
-    Object.keys(selectors).forEach((selectorKey) => {
-      const selector = selectors[selectorKey];
-      const thing = r.querySelector(selector);
-
-      // apparently there are some null entries
-      if (!thing) { return; }
-
-      const textContent = thing.textContent;
-      const src = thing.src;
-
-      T[selectorKey] = textContent || src;
-    });
-
-    deals.push(T);
+    const href = r.href;
+    const title = r.textContent;
+    deals.push({ title, href });
   });
 
   return deals;
+}
+
+exports.parseDeal = function(html) {
+  // console.log(html)
+  const dom = new JSDOM(html);
+  const document = dom.window.document;
+  const button = document.querySelector('#largeBuyNow');
+  // console.log(button);
+  return button.href;
 }

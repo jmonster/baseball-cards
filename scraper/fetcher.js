@@ -1,9 +1,9 @@
 const request = require('superagent');
 
 // TODO remove page from this base BASE_URL
-const BASE_URL = 'https://slickdeals.net/forums/forumdisplay.php';
+const BASE_URL = 'https://slickdeals.net';
 const LIMIT = 200;
-const LIMIT_PARAM = 'page';
+const LIMIT_PARAM = 'pp';
 const HEADERS = {
   // actual values taken from Google Chrome
   'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
@@ -17,13 +17,24 @@ const HEADERS = {
   'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36'
 }
 
-module.exports.deal = function(idx, callback) {
-  const param = LIMIT*idx;
-
+exports.fetchIndex = function(pageNumber, callback) {
   request
-    .get(BASE_URL)
-    .query({ [LIMIT_PARAM]: param })
+    .get(`${BASE_URL}/forums/forumdisplay.php`)
+    .query({ [LIMIT_PARAM]: LIMIT })
     .query({ f: 9 })
+    .query({ page: pageNumber })
     .set(HEADERS)
     .end(callback);
 };
+
+exports.fetchDeal = function(path) {
+  return request
+          .get(`${BASE_URL}${path}`)
+          .set(HEADERS);
+}
+
+exports.fetchMerchantProductPage = function(dealUrl) {
+  return request
+          .get(dealUrl)
+          .set(HEADERS);
+}
