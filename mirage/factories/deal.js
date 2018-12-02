@@ -1,48 +1,59 @@
 import { Factory, faker, trait } from 'ember-cli-mirage';
 
 export default Factory.extend({
-  title: () => `${faker.company.bsNoun()} ${faker.hacker.verb()}`,
+  title: () => faker.lorem.sentence(),
   description: () => faker.lorem.paragraph(),
+  wiki: () => faker.lorem.paragraph(),
 
-  // withLocation: trait({
-  //   afterCreate(deal, server) {
-  //     const locations = server.createList('location', 1);
-  //     deal.update('locations', locations);
-  //   }
-  // }),
-  //
-  // withLocations: trait({
-  //   afterCreate(deal, server) {
-  //     const locations = server.createList('location', 2);
-  //     deal.locations = locations;
-  //   }
-  // }),
-
-  withPhoto: trait({
-    afterCreate(deal, server) {
-      const images = server.createList('image', 1);
-      deal.photos = images;
+  afterCreate(deal, server) {
+    if (!deal.product) {
+      const product = server.create(
+        'product',
+        'withOffers',
+        'withReviews',
+        'withImages',
+        'withTags',
+        {
+          deals: [deal]
+        }
+      );
+      deal.product = product;
+      deal.save();
     }
-  }),
+  },
 
-  withPhotos: trait({
+  withImages: trait({
     afterCreate(deal, server) {
       const images = server.createList('image', 3);
-      deal.photos = images;
+      deal.images = images;
+      deal.save();
     }
   }),
 
   withTags: trait({
     afterCreate(deal, server) {
-      const tags = server.createList('tag', 3);
+      let tags;
+      const existingTags = server.db.tags;
+
+      // all deals will share the same tags with this code
+      // (which is less than optimal but lets keep it simple for now)
+      if (!existingTags.length) {
+        tags = server.createList('tag', 3);
+        tags.forEach((t) => t.save());
+      } else {
+        tags = existingTags.values();
+      }
+
       deal.tags = tags;
+      deal.save();
     }
   }),
 
   withReviews: trait({
     afterCreate(deal, server) {
-      const reviews = server.createList('review', 5, { deal });
+      const reviews = server.createList('review', 5);
       deal.reviews = reviews;
-    }
+      deal.save();
+     }
   })
 });

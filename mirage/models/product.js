@@ -1,7 +1,9 @@
 import { Model, hasMany } from 'ember-cli-mirage';
 
 export default Model.extend({
-  reviews: hasMany(),
+  offers: hasMany(),
+  images: hasMany(),
   tags: hasMany(),
-  photos: hasMany('image')
+  reviews: hasMany(),
+  deals: hasMany()
 });
