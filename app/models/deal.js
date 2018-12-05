@@ -11,6 +11,7 @@ export default DS.Model.extend({
 
   title: DS.attr('string'),
   description: DS.attr('string'),
+  price: DS.attr('string'),
   wiki: DS.attr('string'),
 
   primaryImage: computed(function() {
