@@ -5,7 +5,7 @@ export default Component.extend({
 
   actions: {
     tap(url) {
-      window.location = url;
+      window.open(url);
     }
   }
 });

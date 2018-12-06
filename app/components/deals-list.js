@@ -5,7 +5,11 @@ import { computed } from '@ember/object';
 export default Component.extend({
   dataService: inject(),
 
-  deals: computed(function(){
+  likedDeals: computed(function(){
     return this.get('dataService.likedDeals');
+  }),
+
+  dislikedDeals: computed(function(){
+    return this.get('dataService.dislikedDeals');
   }),
 });

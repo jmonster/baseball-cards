@@ -44,9 +44,7 @@ export default Controller.extend({
     },
 
     removeCard(delta) {
-      if (delta > 0) {
-        this.addToDealsList(this.paginatedDeals[0]);
-      }
+      this.addToDealsList(delta, this.paginatedDeals[0]);
       this.mutableDeals.shiftObject();
       this.set('showCardDetails', false);
     },
@@ -56,8 +54,11 @@ export default Controller.extend({
     }
   },
 
-  addToDealsList(deal) {
-    console.log('add deal')
-    this.get('dataService').addLikedDeal(deal);
+  addToDealsList(delta, deal) {
+    if(delta > 0) {
+      this.get('dataService').addLikedDeal(deal);
+    } else {
+      this.get('dataService').addDislikedDeal(deal);
+    }
   },
 });

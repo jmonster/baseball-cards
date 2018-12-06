@@ -2,12 +2,15 @@ import Service from '@ember/service';
 
 export default Service.extend({
   likedDeals: [],
+  dislikedDeals: [],
 
   addLikedDeal(deal){
-    const liked = this.get('likedDeals');
+    let liked = this.get('likedDeals');
     liked.push(deal);
-    this.set('likedDeals', liked);
-    console.log('deal added')
+  },
 
+  addDislikedDeal(deal){
+    let disliked = this.get('dislikedDeals');
+    disliked.push(deal);
   },
 });
