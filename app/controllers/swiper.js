@@ -1,5 +1,7 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
+import { inject } from '@ember/service';
+import { observer } from '@ember/object';
 
 /**
  * Shuffles array in place. ES6 version
@@ -14,6 +16,8 @@ function shuffle(a) {
 }
 
 export default Controller.extend({
+  dataService: inject(),
+
   allDeals: computed(function() {
     return this.model.deals;
   }),
@@ -26,6 +30,10 @@ export default Controller.extend({
     return this.mutableDeals.slice(0,1);
   }),
 
+  valueObserver: observer('mutableDeals.[]', function () {
+    if (this.mutableDeals.length === 0) this.transitionToRoute('deals-list')
+  }),
+
   actions: {
     onLeftTap() {
       this.set('showCardDetails', false);
@@ -35,7 +43,10 @@ export default Controller.extend({
       this.set('showCardDetails', true);
     },
 
-    removeCard(/*component*/) {
+    removeCard(delta) {
+      if (delta > 0) {
+        this.addToDealsList(this.paginatedDeals[0]);
+      }
       this.mutableDeals.shiftObject();
       this.set('showCardDetails', false);
     },
@@ -43,5 +54,10 @@ export default Controller.extend({
     reset() {
       this.set('allDeals', this.model.deals);
     }
-  }
+  },
+
+  addToDealsList(deal) {
+    console.log('add deal')
+    this.get('dataService').addLikedDeal(deal);
+  },
 });

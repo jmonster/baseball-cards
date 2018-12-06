@@ -23,11 +23,12 @@ export default Component.extend({
       const windowCenterX = window.innerWidth / 2;
       const rectCenterX = rect.x + (rect.width / 2);
 
-      if (Math.abs(rectCenterX - windowCenterX) > 100) {
+      const deltaMove = rectCenterX - windowCenterX;
+      if (Math.abs(deltaMove) > 100) {
         event.currentTarget.classList.add('is-disappearing');
 
         // wait for animation to complete
-        later(this, () => { this.cardDidDisappear(this) }, 200);
+        later(this, () => { this.cardDidDisappear(deltaMove, this.getPaginatedDeals); }, 200);
 
         return null;
       }
