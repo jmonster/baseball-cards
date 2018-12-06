@@ -7,9 +7,13 @@ export default Controller.extend({
   store: inject(),
 
   thingsToFilterOn: computed(function() {
-    return RSVP.all([
-
-    ])
-    .then((arrays) => [].concat(...arrays.map((arr) => arr.toArray())));
+    const deals = this.store.findAll('deal');
+    return deals;
+    
+    // the following is useful to combine multiple sources
+    // return RSVP.all([
+    //
+    // ])
+    // .then((arrays) => [].concat(...arrays.map((arr) => arr.toArray())));
   })
 });

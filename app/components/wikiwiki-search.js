@@ -41,7 +41,7 @@ export default Component.extend({
       // filter items
       const matcher = this.matcher(query);
       this.items.then((items) => {
-        const fuzzyResults = items.filter((result) => matcher.test(result.get('name')));
+        const fuzzyResults = items.filter((result) => matcher.test(result.get('title')));
 
         let exactResultIndex = -1;
         for (let i = 0; i < fuzzyResults.length; i++) {
