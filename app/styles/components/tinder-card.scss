@@ -1,23 +1,45 @@
 .tinder-card-inner {
   height: calc(100vh - 94px - 140px);
+  box-shadow: 2px 2px 4px 2px rgba(0,0,0,.2);
 }
 
 .tinder-card-info {
+  position: absolute;
+  bottom: 0; right: 0; left: 0;
+  display: flex;
+
   border-top: 2px solid white;
 }
 
-#tinder-card-image {
+
+#tinder-card-image, .tinder-card-details {
   width: 100%;
-  height: calc(100% - 88px);
+  height: 100%;
+  // height: calc(100% - 88px);
+  background-color: rgba(147,112,219, 1);
+}
+
+#tinder-card-image {
+
+}
+
+.tinder-card-details {
+  background-color: rgba(132,100,197,1);
 }
 
 .tinder-card-badge {
+  position: absolute;
+  right: 1rem;
+  border-radius: 100%;
   width: 80px;
   height: 80px;
   margin-top: -40px;
-  background: url('http://www.dirtyandthirty.com/wp-content/uploads/2014/10/stamp-of-approval.jpg') no-repeat center center;
-  background-size: cover;
-  border: 2px solid white;
+  background: url('https://cdn.emojidex.com/emoji/seal/shaka_sign.png?1477148378') no-repeat center center;
+  // background-size: cover;
+  background-size: 60px;
+  border: 3px solid white;
+  background-position-y: 12px;
+  background-color: darkseagreen;
 }
 
 .tinder-card-wrapper {

@@ -4,11 +4,9 @@
     onLeftTap=(action "onLeftTap")
     onRightTap=(action "onRightTap")
   }}
-    <style
-      media="screen"
-    >
+    <style media="screen">
       #tinder-card-image {
-        background: url({{deal.primaryPhoto.path}}) 50% 50% no-repeat;
+        background: url({{deal.primaryImage.path}}) 50% 50% no-repeat;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -18,52 +16,36 @@
 
 
     {{#if showCardDetails}}
-      <div
-        class="tinder-card-details near-black w-100 h-100 pa2 bg-light-yellow ba b--yellow"
-      >
-        <h2>about me</h2>
+      <div class="tinder-card-details">
+        <h2 class="ma2">{{deal.title}}</h2>
+        <p class="ma3">{{deal.description}}</p>
       </div>
     {{else}}
-      <div
-        id="tinder-card-image"
-      >
+      <div id="tinder-card-image">
       </div>
 
-      <div
-        class="tinder-card-info absolute bottom-0 right-0 left-0 bt b--white bg-near-black flex"
-      >
-        <div
-          class="left-half w-50 flex flex-column justify-around ma2 ttu"
-        >
-          <span
-            class="f4"
-          >
-          </span>
-          <span
-            class="f1 fw6 mt1"
-          >
-          </span>
-          <span
-            class="f5 fw5 mt2 moon-gray"
-          >
+      <div class="tinder-card-info b--white bg-near-black">
+        <div class="tinder-card-badge"></div>
+
+        <div class="flex flex-column justify-around ma2 ttu">
+          <div class="">
+            <span class="f1 fw6 mt1">
+              ${{deal.price}}
+            </span>
+            <span class="strike f3 fw6 mt1 gray">
+              ${{deal.product.msrp}}
+            </span>
+          </div>
+
+          <span class="f5 fw5 mt2 moon-gray">
             {{deal.title}}
           </span>
-        </div>
-        <div
-          class="right-half w-50 flex justify-center"
-        >
-          <div
-            class="tinder-card-badge br-100"
-          >
-          </div>
         </div>
       </div>
     {{/if}}
   {{/tinder-card}}
 {{else}}
-  <h2
-    class="tc"
-  >
+  <h2 class="tc">
     <img
       src="https://cdn.shopify.com/s/files/1/0739/9215/collections/image_08066673-21b9-4234-b38c-17c67a47600d_1024x1024.jpg?v=1483546240"
       alt=""

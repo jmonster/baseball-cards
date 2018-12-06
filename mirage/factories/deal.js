@@ -4,7 +4,7 @@ export default Factory.extend({
   title: () => faker.lorem.sentence(),
   description: () => faker.lorem.paragraph(),
   wiki: () => faker.lorem.paragraph(),
-  price: () => faker.random.number(100)*10,
+  price: () => faker.random.number(100)*100,
 
   afterCreate(deal, server) {
     if (!deal.product) {

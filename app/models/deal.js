@@ -11,10 +11,11 @@ export default DS.Model.extend({
 
   title: DS.attr('string'),
   description: DS.attr('string'),
-  price: DS.attr('string'),
+  price: DS.attr('dollars'),
   wiki: DS.attr('string'),
 
   primaryImage: computed(function() {
-    return this.images.firstObject;
+    return { path: 'https://images.unsplash.com/photo-1543363950-02704687ebed?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=30' }
+    // return this.images.firstObject;
   })
 });
