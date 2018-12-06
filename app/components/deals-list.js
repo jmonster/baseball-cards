@@ -16,6 +16,6 @@ export default Component.extend({
     const all = this.get('deals');
     const disliked = this.get('dataService.dislikedDeals')
     const set = new Set(disliked);
-    return all.filter(d => set.has(String(d.id)));;
+    return all.filter(d => set.has(String(d.id)));
   }),
 });
