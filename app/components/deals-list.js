@@ -6,10 +6,16 @@ export default Component.extend({
   dataService: inject(),
 
   likedDeals: computed(function(){
-    return this.get('dataService.likedDeals');
+    const all = this.get('deals');
+    const liked = this.get('dataService.likedDeals')
+    const set = new Set(liked);
+    return all.filter(d => set.has(String(d.id)));
   }),
 
   dislikedDeals: computed(function(){
-    return this.get('dataService.dislikedDeals');
+    const all = this.get('deals');
+    const disliked = this.get('dataService.dislikedDeals')
+    const set = new Set(disliked);
+    return all.filter(d => set.has(String(d.id)));;
   }),
 });

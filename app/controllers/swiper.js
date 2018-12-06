@@ -27,7 +27,18 @@ export default Controller.extend({
   }),
 
   paginatedDeals: computed('mutableDeals.[]', function() {
-    return this.mutableDeals.slice(0,1);
+    const seenDeals = new Set(this.get('dataService.seenDeals'));
+    let nextDeal = [this.mutableDeals[0]]
+    let tries = 100
+    while(tries) {
+      if (!nextDeal || !nextDeal[0]) return []
+      if (seenDeals.has(String(nextDeal[0].id))) {
+        nextDeal = [this.mutableDeals[(101-tries)]]
+      } else {
+        return nextDeal
+      }
+      tries--
+    }
   }),
 
   valueObserver: observer('mutableDeals.[]', function () {
