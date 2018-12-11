@@ -1,7 +1,9 @@
 {{#if likedDeals}}
+  <h3>Liked Deals</h3>
   {{#each likedDeals as |deal|}}
     {{deals-list-item deal=deal}}
   {{/each}}
+
   <h3>Disliked Deals</h3>
   {{#each dislikedDeals as |deal|}}
     {{deals-list-item deal=deal}}

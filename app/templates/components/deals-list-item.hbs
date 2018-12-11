@@ -1,6 +1,4 @@
-<div class="flex-auto">
-  <button style="text-align: left;" {{action "tap" deal.url}}>
-    <div class="b">{{deal.title}}</div>
-    <div>Additional text to give context</div>
-  </button>
-</div>
+<a class="no-underline" href={{deal.url}} target="_blank" rel="noopener">
+  <div class="b mb2">{{deal.title}}</div>
+  <div class="">Additional text to give context</div>
+</a>

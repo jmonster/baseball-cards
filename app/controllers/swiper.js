@@ -1,7 +1,8 @@
 import Controller from '@ember/controller';
-import { computed } from '@ember/object';
+import { computed, observer } from '@ember/object';
 import { inject } from '@ember/service';
-import { observer } from '@ember/object';
+import { alias } from '@ember/object/computed';
+import { isEmpty } from '@ember/utils';
 
 /**
  * Shuffles array in place. ES6 version
@@ -18,6 +19,8 @@ function shuffle(a) {
 export default Controller.extend({
   dataService: inject(),
 
+  seenDeals: alias('dataService.seenDeals'),
+
   allDeals: computed(function() {
     return this.model.deals;
   }),
@@ -26,23 +29,36 @@ export default Controller.extend({
     return shuffle(this.allDeals.toArray());
   }),
 
-  paginatedDeals: computed('mutableDeals.[]', function() {
-    const seenDeals = new Set(this.get('dataService.seenDeals'));
-    let nextDeal = [this.mutableDeals[0]]
-    let tries = 100
+  currentDeal: alias('paginatedDeals.firstObject'),
+
+  // what/how is being paginated?
+  paginatedDeals: computed('mutableDeals.[]', 'seenDeals.[]', function() {
+    const seenDeals = new Set(this.seenDeals);
+    // wtf?
+    let nextDeal = [this.mutableDeals[0]];
+    let tries = 100;
+
     while(tries) {
-      if (!nextDeal || !nextDeal[0]) return []
-      if (seenDeals.has(String(nextDeal[0].id))) {
-        nextDeal = [this.mutableDeals[(101-tries)]]
-      } else {
-        return nextDeal
+      if (!nextDeal || !nextDeal[0]) {
+        return [];
       }
-      tries--
+
+      const nextDealId = String(nextDeal[0].id);
+      if (seenDeals.has(nextDealId)) {
+        // wtf? explain what you're trying to do in this loop and?
+        nextDeal = [this.mutableDeals[(101-tries)]];
+      } else {
+        return nextDeal;
+      }
+
+      tries--;
     }
   }),
 
-  valueObserver: observer('mutableDeals.[]', function () {
-    if (this.mutableDeals.length === 0) this.transitionToRoute('deals-list')
+  mutableDealsObserver: observer('mutableDeals.[]', function () {
+    if (isEmpty(this.mutableDeals)) {
+      this.transitionToRoute('deals');
+    }
   }),
 
   actions: {
@@ -55,21 +71,28 @@ export default Controller.extend({
     },
 
     removeCard(delta) {
-      this.addToDealsList(delta, this.paginatedDeals[0]);
+      this.addToDealsList(delta, this.currentDeal);
+
+      // effectively increment the iterator onto the next deal
       this.mutableDeals.shiftObject();
+
+      // reset state
       this.set('showCardDetails', false);
     },
 
     reset() {
       this.set('allDeals', this.model.deals);
+      this.set('showCardDetails', false);
     }
   },
 
   addToDealsList(delta, deal) {
-    if(delta > 0) {
-      this.get('dataService').addLikedDeal(deal);
+    const didLikeDeal = delta > 0;
+
+    if (didLikeDeal) {
+      this.dataService.addLikedDeal(deal);
     } else {
-      this.get('dataService').addDislikedDeal(deal);
+      this.dataService.addDislikedDeal(deal);
     }
   },
 });

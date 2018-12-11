@@ -8,7 +8,7 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('home', { path: '/' });
-  this.route('deals-list');
+  this.route('deals');
   this.route('swiper');
 });
 

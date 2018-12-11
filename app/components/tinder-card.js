@@ -28,7 +28,7 @@ export default Component.extend({
         event.currentTarget.classList.add('is-disappearing');
 
         // wait for animation to complete
-        later(this, () => { this.cardDidDisappear(deltaMove, this.getPaginatedDeals); }, 200);
+        later(this, () => { this.cardDidDisappear(deltaMove, this.cardDidDisappear); }, 200);
 
         return null;
       }

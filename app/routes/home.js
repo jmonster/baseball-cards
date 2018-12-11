@@ -1,15 +1,19 @@
 import Route from '@ember/routing/route';
 import { inject } from '@ember/service';
+import { alias } from '@ember/object/computed';
+import { isPresent } from '@ember/utils';
 
 export default Route.extend({
   dataService: inject(),
+  likedDealsIds: alias('dataService.likedDeals'),
 
   beforeModel() {
-    const liked = this.get('dataService.likedDeals')
-    if (liked && liked.length) {
-      this.transitionTo('deals-list')
+    const likedDealsIds = this.likedDealsIds;
+
+    if (isPresent(likedDealsIds)) {
+      this.transitionTo('deals');
     } else {
-      this.transitionTo('swiper')
+      this.transitionTo('swiper');
     }
   }
 });

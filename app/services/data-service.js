@@ -2,33 +2,63 @@ import Service from '@ember/service';
 import { computed } from '@ember/object';
 
 export default Service.extend({
-  _fetch: function (resource) {
-    let fetch = localStorage.getItem(resource)
-    let deals = JSON.parse(fetch)
-    return deals || []
+  _fetch: function (resourceName) {
+    const resourceAsString = localStorage.getItem(resourceName);
+    if (!resourceAsString) { return []; }
+
+    try {
+      const parsedData = JSON.parse(resourceAsString);
+      return parsedData;
+    } catch (e) {
+      // remove what is apparently bad data and retry
+      localStorage.removeItem(resourceName);
+      return this._fetch(...arguments);
+    }
   },
 
-  likedDeals: computed(function () {
-    return this._fetch('likedDeals')
+  // TODO equivalent _put method?
+
+  likedDealsIds: computed(function () {
+    return this._fetch('likedDealsIds');
   }),
-  dislikedDeals: computed(function () {
-    return this._fetch('dislikedDeals')
+
+  dislikedDealsIds: computed(function () {
+    return this._fetch('dislikedDealsIds');
   }),
-  seenDeals: computed(function () {
-    return this._fetch('seenDeals')
+
+  seenDealsIds: computed(function () {
+    return this._fetch('seenDealsIds');
   }),
 
   addLikedDeal(deal){
-    this.get('likedDeals').push(String(deal.id));
-    this.get('seenDeals').push(String(deal.id));
-    localStorage.setItem('likedDeals', JSON.stringify(this.get('likedDeals')))
-    localStorage.setItem('seenDeals', JSON.stringify(this.get('seenDeals')))
+    this.likedDealsIds.pushObject(String(deal.id));
+    this.seenDealsIds.pushObject(String(deal.id));
+
+    localStorage.setItem(
+      'likedDealsIds',
+      JSON.stringify(this.likedDealsIds)
+    );
+
+    localStorage.setItem(
+      'seenDealsIds',
+      JSON.stringify(this.seenDealsIds)
+    );
   },
 
-  addDislikedDeal(deal){
-    this.get('dislikedDeals').push(String(deal.id));
-    this.get('seenDeals').push(String(deal.id));
-    localStorage.setItem('dislikedDeals', JSON.stringify(this.get('dislikedDeals')))
-    localStorage.setItem('seenDeals', JSON.stringify(this.get('seenDeals')))
+  addDislikedDeal({ id }){
+    const idAsString = String(id);
+
+    this.dislikedDealsIds.pushObject(idAsString);
+    this.seenDealsIds.pushObject(idAsString);
+
+    localStorage.setItem(
+      'dislikedDealsIds',
+      JSON.stringify(this.dislikedDeals)
+    );
+
+    localStorage.setItem(
+      'seenDealsIds',
+      JSON.stringify(this.seenDealsIds)
+    );
   },
 });
