@@ -22,8 +22,9 @@ export default Service.extend({
     return this._fetch('likedDealsIds');
   }),
 
-  dislikedDealsIds: computed(function () {
-    return this._fetch('dislikedDealsIds');
+  dislikedDealsIds: computed('likedDealsIds', 'seenDealsIds', function () {
+    const likedDealsIdsSet = new Set(this.likedDealsIds);
+    return this.seenDealsIds.filter(id => !likedDealsIdsSet.has(String(id)));
   }),
 
   seenDealsIds: computed(function () {
@@ -31,34 +32,27 @@ export default Service.extend({
   }),
 
   addLikedDeal(deal){
-    this.likedDealsIds.pushObject(String(deal.id));
-    this.seenDealsIds.pushObject(String(deal.id));
-
+    const idAsString = String(deal.id)
+    this.likedDealsIds.pushObject(idAsString);
     localStorage.setItem(
       'likedDealsIds',
       JSON.stringify(this.likedDealsIds)
     );
 
-    localStorage.setItem(
-      'seenDealsIds',
-      JSON.stringify(this.seenDealsIds)
-    );
-  },
-
-  addDislikedDeal({ id }){
-    const idAsString = String(id);
-
-    this.dislikedDealsIds.pushObject(idAsString);
     this.seenDealsIds.pushObject(idAsString);
+    this.saveSeenDeals()
+  },
 
-    localStorage.setItem(
-      'dislikedDealsIds',
-      JSON.stringify(this.dislikedDeals)
-    );
+  addDislikedDeal(deal){
+    const idAsString = String(deal.id);
+    this.seenDealsIds.pushObject(idAsString);
+    this.saveSeenDeals()
+  },
 
+  saveSeenDeals(){
     localStorage.setItem(
       'seenDealsIds',
       JSON.stringify(this.seenDealsIds)
     );
-  },
+  }
 });

@@ -19,7 +19,7 @@ function shuffle(a) {
 export default Controller.extend({
   dataService: inject(),
 
-  seenDeals: alias('dataService.seenDeals'),
+  seenDealsIds: alias('dataService.seenDealIds'),
 
   allDeals: computed(function() {
     return this.model.deals;
@@ -33,7 +33,7 @@ export default Controller.extend({
 
   // what/how is being paginated?
   paginatedDeals: computed('mutableDeals.[]', 'seenDeals.[]', function() {
-    const seenDeals = new Set(this.seenDeals);
+    const seenDealIds = new Set(this.seenDealsIds);
     // wtf?
     let nextDeal = [this.mutableDeals[0]];
     let tries = 100;
@@ -44,7 +44,7 @@ export default Controller.extend({
       }
 
       const nextDealId = String(nextDeal[0].id);
-      if (seenDeals.has(nextDealId)) {
+      if (seenDealIds.has(nextDealId)) {
         // wtf? explain what you're trying to do in this loop and?
         nextDeal = [this.mutableDeals[(101-tries)]];
       } else {
