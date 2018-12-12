@@ -3,9 +3,19 @@
     cardDidDisappear=(action "removeCard")
     onLeftTap=(action "onLeftTap")
     onRightTap=(action "onRightTap")
-    class="mh3"
+    class="ma5"
   }}
-    <img class="tinder-card-img flex-auto" src={{deal.primaryImage.path}} alt="">
+
+    <style media="screen">
+      .tinder-card-image {
+        background: url({{deal.primaryImage.path}}) 50% 50% no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+    </style>
+    <div class="tinder-card-image flex-auto flex-colum"></div>
 
     {{#if showCardDetails}}
       <div class="tinder-card-details bg-gradient-primary flex flex-column">
