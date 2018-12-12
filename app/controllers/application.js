@@ -7,7 +7,7 @@ export default Controller.extend({
 
   // dynamically change the layout of the main container
   justify: computed('currentRouteName', function() {
-    return this.currentRouteName === 'swiper' ? 'justify-end swiper-padding' : 'justify-start';
+    return this.currentRouteName === 'swiper' ? 'justify-center' : 'justify-start';
   }),
 
   thingsToFilterOn: computed(function() {
