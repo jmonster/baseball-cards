@@ -7,9 +7,11 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('home', { path: '/' });
-  this.route('deals');
-  this.route('swiper');
+  this.route('app', { path: '/' }, function(){
+    this.route('deals');
+    this.route('swiper');
+  });
+  this.route('desktop')
 });
 
 export default Router;

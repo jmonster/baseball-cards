@@ -2,6 +2,7 @@ import Route from '@ember/routing/route';
 import { inject } from '@ember/service';
 import { alias } from '@ember/object/computed';
 import { isPresent } from '@ember/utils';
+import RSVP from 'rsvp';
 
 export default Route.extend({
   dataService: inject(),
@@ -10,10 +11,19 @@ export default Route.extend({
   beforeModel() {
     const likedDealsIds = this.likedDealsIds;
 
-    if (isPresent(likedDealsIds)) {
-      this.transitionTo('deals');
+    if (!/Mobi/.test(navigator.userAgent)) {
+      this.transitionTo('desktop');
+    } else if (isPresent(likedDealsIds)) {
+      this.transitionTo('app.deals');
     } else {
-      this.transitionTo('swiper');
+      this.transitionTo('app.swiper');
     }
-  }
+  },
+
+  model() {
+    return RSVP.hash({
+      deals: this.store.findAll('deal'),
+      tags: this.store.findAll('tag')
+    });
+  },
 });

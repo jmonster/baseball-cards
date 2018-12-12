@@ -4,7 +4,7 @@ import RSVP from 'rsvp';
 export default Route.extend({
   model() {
     return RSVP.hash({
-      deals: this.modelFor('application').deals
+      deals: this.modelFor('app').deals
     })
   }
 });

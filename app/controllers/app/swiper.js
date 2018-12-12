@@ -57,7 +57,7 @@ export default Controller.extend({
 
   mutableDealsObserver: observer('mutableDeals.[]', function () {
     if (isEmpty(this.mutableDeals)) {
-      this.transitionToRoute('deals');
+      this.transitionToRoute('app.deals');
     }
   }),
 
