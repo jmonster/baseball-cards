@@ -49,21 +49,12 @@
       {{/if}}
 
       {{#unless hasSearchQuery}}
-      <li class="truncate f3 flex ph3 bt br1 b--silver">
-        {{#link-to
-          "deals"
-          class="no-underline dark-gray pv2 w-100 truncate"
-        }}
-          <span class="pr2">💸</span><span>share a deal</span>
-        {{/link-to}}
-      </li>
-
         <li class="truncate f3 flex ph3 bt br1 b--silver">
           {{#link-to
             "deals"
             class="no-underline dark-gray pv2 w-100 truncate"
           }}
-            <span class="pr2">🦍</span><span>see <span class="i">my</span> list of deals</span>
+            <span class="pr2">🛍</span><span>browse deals</span>
           {{/link-to}}
         </li>
 
@@ -72,7 +63,7 @@
             "deals"
             class="no-underline dark-gray pv2 w-100 truncate"
           }}
-            <span class="pr2">📥</span><span>messages</span>
+            <span class="pr2">🍻</span><span>share a deal</span>
           {{/link-to}}
         </li>
 
@@ -81,7 +72,25 @@
             "deals"
             class="no-underline dark-gray pv2 w-100 truncate"
           }}
-            <span class="pr2">🤵🏻</span><span>update profile details</span>
+            <span class="pr2">🔖</span><span>view history</span>
+          {{/link-to}}
+        </li>
+
+        <li class="truncate f3 flex ph3 bt br1 b--silver">
+          {{#link-to
+            "deals"
+            class="no-underline dark-gray pv2 w-100 truncate"
+          }}
+            <span class="pr2">📥</span><span>read messages</span>
+          {{/link-to}}
+        </li>
+
+        <li class="truncate f3 flex ph3 bt br1 b--silver">
+          {{#link-to
+            "deals"
+            class="no-underline dark-gray pv2 w-100 truncate"
+          }}
+            <span class="pr2">🤵🏻</span><span>update profile</span>
           {{/link-to}}
         </li>
       {{/unless}}
