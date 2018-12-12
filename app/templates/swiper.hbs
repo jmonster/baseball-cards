@@ -3,41 +3,39 @@
     cardDidDisappear=(action "removeCard")
     onLeftTap=(action "onLeftTap")
     onRightTap=(action "onRightTap")
+    class="mh3"
   }}
-    <style media="screen">
-      #tinder-card-image {
-        background: url({{deal.primaryImage.path}}) 50% 50% no-repeat;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-      }
-    </style>
-
+    <img class="tinder-card-img flex-auto" src="{{deal.primaryImage.path}}" alt="">
 
     {{#if showCardDetails}}
-      <div class="tinder-card-details">
-        <h2 class="ma2">{{deal.title}}</h2>
-        <p class="ma3">{{deal.description}}</p>
+      <div class="tinder-card-details bg-gradient-primary flex flex-column">
+        <div class="pa2 bg-white black ma4 br1 flex-auto ba b--purple">
+          <h2 class="ma2">{{deal.title}}</h2>
+          <p class="ma3">{{deal.description}}</p>
+        </div>
       </div>
     {{else}}
-      <div id="tinder-card-image">
-      </div>
+      <!-- TODO make this a component so that: -->
+      <!-- great deals are bg-gradient-green -->
+      <!-- neutral deals are bg-gradient-silver -->
+      <div class="tinder-card-info flex-none ph2 pb2">
+        <!-- <div class="tinder-card-badge-backdrop bg-gradient-silver"></div>
+        <div class="tinder-card-badge"></div> -->
 
-      <div class="tinder-card-info b--white bg-near-black">
-        <div class="tinder-card-badge"></div>
-
-        <div class="flex flex-column justify-around ma2 ttu">
-          <div class="">
-            <span class="f1 fw6 mt1">
+        <div class="flex flex-column ttu">
+          <div class="flex items-end mb2">
+            <span class="f1 fw6 mt1 near-black">
               ${{deal.price}}
             </span>
-            <span class="strike f3 fw6 mt1 gray">
-              ${{deal.product.msrp}}
+            <span class="f1 mt2 mh1 purple strikethrough">
+              <span class="light-gray">${{deal.product.msrp}}</span>
+            </span>
+            <span class="f5 fw6 mt1 mh1 white bg-purple pa1 br1">
+              24% savings
             </span>
           </div>
 
-          <span class="f5 fw5 mt2 moon-gray">
+          <span class="f5 fw5 near-black">
             {{deal.title}}
           </span>
         </div>

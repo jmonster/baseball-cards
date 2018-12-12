@@ -1,10 +1,37 @@
+// hax to get full height
 body > .ember-view {
   -ms-flex-direction: column;
   flex-direction: column;
   display: -ms-flexbox;
   display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
 }
 
-.force-height {
-  height: calc(100vh - 200px);
+.dealzilla-logo {
+  display: block;
+  width: 60px;
+  height: 60px;
+  background: url(/assets/images/branding/dinosaur.svg);
+  background-size: 60px 60px;
+}
+
+.strikethrough {
+  position: relative;
+}
+.strikethrough:before {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 50%;
+  right: 0;
+  border-top: 2px solid;
+  border-color: inherit;
+
+  -webkit-transform:rotate(-5deg);
+  -moz-transform:rotate(-5deg);
+  -ms-transform:rotate(-5deg);
+  -o-transform:rotate(-5deg);
+  transform:rotate(-5deg);
 }

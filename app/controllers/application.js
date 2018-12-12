@@ -5,6 +5,11 @@ import Controller from '@ember/controller';
 export default Controller.extend({
   store: inject(),
 
+  // dynamically change the layout of the main container
+  justify: computed('currentRouteName', function() {
+    return this.currentRouteName === 'swiper' ? 'justify-end swiper-padding' : 'justify-start';
+  }),
+
   thingsToFilterOn: computed(function() {
     const deals = this.store.findAll('deal');
     return deals;

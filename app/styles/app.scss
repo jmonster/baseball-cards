@@ -10,3 +10,26 @@
 @import "components/x-input";
 @import "components/wikiwiki-search";
 @import "components/tinder-card";
+
+.swiper-padding {
+  margin-bottom: 20px; // mb4
+  margin-top: 10px;    // mt2
+  justify-content: flex-end;
+}
+
+@media only screen and (max-height: 575px) {
+  .tinder-card {
+    margin: 0px;
+  }
+
+  .tinder-card-inner {
+    border-radius: 0px;
+    box-shadow: none;
+  }
+
+  .swiper-padding {
+    margin-bottom: 0px; // mb4
+    margin-top: 0px;    // mt2
+    justify-content: center;
+  }
+}

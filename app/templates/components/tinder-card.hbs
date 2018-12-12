@@ -1,11 +1,11 @@
 <div
-  class="tinder-card-wrapper flex h-100 items-start justify-center"
+  class="tinder-card-wrapper flex"
 >
   <div
-    class="tinder-card-inner relative overflow-hidden br3 ma5 w-100 white flex flex-column items-start justify-start"
+    class="tinder-card-inner br3 bg-gradient-silver"
   >
     {{yield}}
-    <div
+    <!-- <div
       role="button"
       class="tinder-card-toggler absolute top-0 bottom-0 left-0 w-50"
       onclick={{action "didLeftTap"}}
@@ -16,6 +16,6 @@
       class="tinder-card-toggler absolute top-0 bottom-0 right-0 w-50"
       onclick={{action "didRightTap"}}
     >
-    </div>
+    </div> -->
   </div>
 </div>

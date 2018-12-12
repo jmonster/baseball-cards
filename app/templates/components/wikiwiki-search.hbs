@@ -40,20 +40,50 @@
       {{#if showNotFoundMessage}}
         <li class="bg-lightest-silver bt br1 b--silver f3">
           <div class="flex flex-column items-center justify-center">
-            <img src="https://media1.tenor.com/images/99d772f27c3537355d4dc1e49bd22e4b/tenor.gif?itemid=3433537" alt="">
+            <img
+              src="https://media1.tenor.com/images/99d772f27c3537355d4dc1e49bd22e4b/tenor.gif?itemid=3433537"
+              class="w-100"
+            >
           </div>
         </li>
       {{/if}}
 
       {{#unless hasSearchQuery}}
-        {{!-- <li class="truncate f3 flex ph3">
+      <li class="truncate f3 flex ph3 bt br1 b--silver">
+        {{#link-to
+          "deals"
+          class="no-underline dark-gray pv2 w-100 truncate"
+        }}
+          <span class="pr2">💸</span><span>share a deal</span>
+        {{/link-to}}
+      </li>
+
+        <li class="truncate f3 flex ph3 bt br1 b--silver">
           {{#link-to
-            "swiper"
+            "deals"
             class="no-underline dark-gray pv2 w-100 truncate"
           }}
-            <span class="icon-tab mr2"></span>swipe right for therapy <span class="hk-badge--beta">beta</span>
+            <span class="pr2">🦍</span><span>see <span class="i">my</span> list of deals</span>
           {{/link-to}}
-        </li> --}}
+        </li>
+
+        <li class="truncate f3 flex ph3 bt br1 b--silver">
+          {{#link-to
+            "deals"
+            class="no-underline dark-gray pv2 w-100 truncate"
+          }}
+            <span class="pr2">📥</span><span>messages</span>
+          {{/link-to}}
+        </li>
+
+        <li class="truncate f3 flex ph3 bt br1 b--silver">
+          {{#link-to
+            "deals"
+            class="no-underline dark-gray pv2 w-100 truncate"
+          }}
+            <span class="pr2">🤵🏻</span><span>update profile details</span>
+          {{/link-to}}
+        </li>
       {{/unless}}
     </ul>
   </div>
