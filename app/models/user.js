@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import { computed } from '@ember/object';
 
 // !! IMPORTANT !!
 // https://github.com/firebase/emberfire/blob/master/docs/guide/relationships.md#relationships
@@ -12,6 +13,9 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   name: DS.attr('string'),
+  firstName: computed('name', function() {
+    return this.name.split(' ')[0];
+  }),
   email: DS.attr('string'),
   isAnonymous: DS.attr('boolean', { defaultValue: true })
 });

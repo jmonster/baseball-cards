@@ -52,19 +52,10 @@
       {{#unless hasSearchQuery}}
         <li class="truncate f3 flex ph3 bt br1 b--silver">
           {{#link-to
-            "deals"
+            "swiper"
             class="no-underline dark-gray pv2 w-100 truncate"
           }}
             <span class="pr2">🛍</span><span>browse deals</span>
-          {{/link-to}}
-        </li>
-
-        <li class="truncate f3 flex ph3 bt br1 b--silver">
-          {{#link-to
-            "deals"
-            class="no-underline dark-gray pv2 w-100 truncate"
-          }}
-            <span class="pr2">🍻</span><span>share a deal</span>
           {{/link-to}}
         </li>
 
@@ -77,23 +68,63 @@
           {{/link-to}}
         </li>
 
-        <li class="truncate f3 flex ph3 bt br1 b--silver">
-          {{#link-to
-            "deals"
-            class="no-underline dark-gray pv2 w-100 truncate"
-          }}
-            <span class="pr2">📥</span><span>read messages</span>
-          {{/link-to}}
-        </li>
+        {{#if session.isAuthenticated}}
+          {{!-- <li class="truncate f3 flex ph3 bt br1 b--silver">
+            {{#link-to
+              "deals"
+              class="no-underline dark-gray pv2 w-100 truncate"
+            }}
+              <span class="pr2">🍻</span><span>share a deal</span>
+            {{/link-to}}
+          </li> --}}
 
-        <li class="truncate f3 flex ph3 bt br1 b--silver">
-          {{#link-to
-            "deals"
-            class="no-underline dark-gray pv2 w-100 truncate"
-          }}
-            <span class="pr2">🤵🏻</span><span>update profile</span>
-          {{/link-to}}
-        </li>
+          {{!-- <li class="truncate f3 flex ph3 bt br1 b--silver">
+            {{#link-to
+              "deals"
+              class="no-underline dark-gray pv2 w-100 truncate"
+            }}
+              <span class="pr2">📥</span><span>read messages</span>
+            {{/link-to}}
+          </li> --}}
+
+          <li class="truncate f3 flex ph3 bt br1 b--silver">
+            {{#link-to
+              "deals"
+              class="no-underline dark-gray pv2 w-100 truncate"
+            }}
+              <span class="pr2">🔚</span>
+              {{!-- <span>update {{session.currentUser.firstName}}'s profile</span> --}}
+              <span
+                {{!-- class="f6" --}}
+                {{action signOut}}
+              >
+                {{!-- (not {{session.currentUser.firstName}}?) --}}
+                sign out
+              </span>
+            {{/link-to}}
+          </li>
+        {{/if}}
+
+        {{#unless session.isAuthenticated}}
+          <li
+            class="pv2 w-100 truncate f3 flex ph3 bt br1 b--silver items-center"
+            {{action signIn "google"}}
+          >
+            {{!-- <img
+              src="https://www.google.com/favicon.ico"
+              alt=""
+              class="pr2"
+              style="max-width: 32px; max-height: 20px;"
+            > --}}
+            <span class="google-emoji pr2"></span>
+            <a
+              href="#"
+              class="no-underline dark-gray"
+            >
+              sign in (via Google)
+            </a>
+          </li>
+        {{/unless}}
       {{/unless}}
     </ul>
   </div>

@@ -13,18 +13,18 @@ export default Route.extend({
     }
   }),
 
-  configureAnonymousUser() {
-    const session = this.session;
-
-    if (!session.get('isAuthenticated')) {
-      return session.open('firebase', { provider: 'anonymous' }).then(({ currentUser }) => {
-        currentUser.set('isAnonymous', true);
-        currentUser.save().then(() => {
-          this.refresh();
-        });
-      });
-    }
-  },
+  // configureAnonymousUser() {
+  //   const session = this.session;
+  //
+  //   if (!session.get('isAuthenticated')) {
+  //     return session.open('firebase', { provider: 'anonymous' }).then(({ currentUser }) => {
+  //       currentUser.set('isAnonymous', true);
+  //       currentUser.save().then(() => {
+  //         this.refresh();
+  //       });
+  //     });
+  //   }
+  // },
 
   model() {
     return RSVP.hash({
@@ -36,7 +36,7 @@ export default Route.extend({
   beforeModel() {
     const session = this.session;
     const fetchSession = session.fetch().catch(function() {});
-    const configureAnonymousUser = this.configureAnonymousUser.bind(this);
+    // const configureAnonymousUser = this.configureAnonymousUser.bind(this);
 
     // initial loading
     const initalLoadingIndicator = document.getElementById('initial-loading-indicator');
@@ -45,16 +45,17 @@ export default Route.extend({
       return; // abort
     }
 
-    return fetchSession.then(() => {
-      if (!session.get('isAuthenticated')) {
-        return configureAnonymousUser();
-      }
-    });
+    return fetchSession;
   },
 
   actions: {
     signIn(provider) {
-      this.session.open('firebase', { provider }).then(() => { this.transitionTo('/'); });
+      this.session.open('firebase', { provider }).then(() => {
+        // debugger;
+        this.transitionTo('/');
+      }).catch((err) => {
+        // debugger;
+      })
     },
 
     signOut() {
