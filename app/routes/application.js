@@ -43,10 +43,9 @@ export default Route.extend({
   actions: {
     signIn(provider) {
       this.session.open('firebase', { provider }).then(() => {
-        // debugger;
         this.transitionTo('/');
-      }).catch((err) => {
-        // debugger;
+      }).catch((/*err*/) => {
+        
       })
     },
 
