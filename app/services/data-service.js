@@ -22,7 +22,7 @@ export default Service.extend({
     return this._fetch('likedDealsIds');
   }),
 
-  dislikedDealsIds: computed('likedDealsIds', 'seenDealsIds', function () {
+  dislikedDealsIds: computed('likedDealsIds.[]', 'seenDealsIds.[]', function () {
     const likedDealsIdsSet = new Set(this.likedDealsIds);
     return this.seenDealsIds.filter(id => !likedDealsIdsSet.has(String(id)));
   }),
