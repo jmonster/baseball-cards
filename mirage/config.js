@@ -54,6 +54,7 @@ export default function() {
 
   // Firebase Auth ////
   this.passthrough('https://www.googleapis.com/**');
+  this.passthrough('https://securetoken.googleapis.com/**');
   // this.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo', {
   //   "kind": "identitytoolkit#GetAccountInfoResponse",
   //   "users": [
