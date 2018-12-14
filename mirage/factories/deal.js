@@ -5,7 +5,7 @@ export default Factory.extend({
   description: () => faker.lorem.paragraph(),
   wiki: () => faker.lorem.paragraph(),
   price: () => faker.random.number(100)*100,
-  url: () => 'https://google.com',
+  url: () => faker.internet.url(),
 
   afterCreate(deal, server) {
     if (!deal.product) {
