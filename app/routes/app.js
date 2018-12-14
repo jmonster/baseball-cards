@@ -5,12 +5,15 @@ import RSVP from 'rsvp';
 
 export default Route.extend({
   dataService: inject(),
+  browser: inject(),
+
   seenDealsIds: alias('dataService.seenDealsIds'),
+  isDesktop: alias('browser.isDesktop'),
 
   beforeModel() {
     const hasSeenDeals = this.seenDealsIds.length || false;
 
-    if (!/Mobi/.test(navigator.userAgent)) {
+    if (this.isDesktop) {
       this.transitionTo('desktop');
     } else if (hasSeenDeals) {
       this.transitionTo('app.deals');
