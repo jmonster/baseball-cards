@@ -53,9 +53,9 @@
         <li class="truncate f3 flex ph3 bt br1 b--silver">
           {{#link-to
             "app.swiper"
-            class="no-underline dark-gray pv2 w-100 truncate"
+            class="flex no-underline dark-gray pv2 w-100 truncate"
           }}
-            <span class="pr2">🛍</span>
+            <span class="pr2 emojay">🛍</span>
             <span>browse deals</span>
           {{/link-to}}
         </li>
@@ -63,9 +63,9 @@
         <li class="truncate f3 flex ph3 bt br1 b--silver">
           {{#link-to
             "app.deals"
-            class="no-underline dark-gray pv2 w-100 truncate"
+            class="flex no-underline dark-gray pv2 w-100 truncate"
           }}
-            <span class="pr2">🔖</span>
+            <span class="pr2 emojay">🔖</span>
             <span>view history</span>
           {{/link-to}}
         </li>
@@ -94,14 +94,14 @@
             role="button"
             {{action signOut}}
           >
-            <span class="pr2">🔚</span>
-            <span class="ml1">sign out</span>
+            <span class="emojay pr2">🔚</span>
+            <span>sign out</span>
           </li>
         {{/if}}
 
         {{#unless session.isAuthenticated}}
           <li
-            class="dark-gray pointer pv2 w-100 truncate f3 flex ph3 bt br1 b--silver items-center"
+            class="flex dark-gray pointer pv2 w-100 truncate f3 flex ph3 bt br1 b--silver items-center"
             role="button"
             {{action signIn "google"}}
           >
@@ -111,8 +111,8 @@
               class="pr2"
               style="max-width: 32px; max-height: 20px;"
             > --}}
-            <span class="google-emoji pr2"></span>
-            <span class="ml1">sign in (via Google)</span>
+            <span class="emojay google-emoji pr2"></span>
+            <span>sign in (via Google)</span>
           </li>
         {{/unless}}
       {{/unless}}

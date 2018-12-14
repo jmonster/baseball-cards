@@ -3,8 +3,11 @@ import { alias } from '@ember/object/computed';
 
 export default Component.extend({
   tagName: 'a',
-  attributeBindings: ['href'],
+  attributeBindings: ['href', 'target'],
   href: alias('deal.url'),
-  classNames: ['deal-list-item db mh2 b--silver bb link blue flex items-center'],
+  target: '_blank',
+  
+  classNames: ['deal-list-item', 'db', 'mh2', 'b--silver', 'bb', 'link', 'blue', 'flex', 'items-center'],
+
   thumbnail: alias('deal.primaryImage')
 });

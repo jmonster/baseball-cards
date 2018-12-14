@@ -1,10 +1,18 @@
 .deal-list-item-image {
-  width: 50px;
-  height: 50px;
+  width: 64px;
+  height: 64px;
   -webkit-box-flex: 0;
   flex: none;
 }
 
 .deal-list-item:visited {
-  color: #596981;
+  color: #4e535a;
+}
+
+.deal-list-item,
+.deal-list-item:hover,
+.deal-list-item:active,
+.deal-list-item:visited,
+.deal-list-item:focus {
+  outline: 0;
 }

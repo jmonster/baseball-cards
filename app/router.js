@@ -11,6 +11,7 @@ Router.map(function() {
     this.route('deals');
     this.route('swiper');
   });
+  
   this.route('desktop')
 });
 
