@@ -1,13 +1,30 @@
-{{#if (or likedDeals dislikedDeals)}}
-  <h3>Liked Deals</h3>
-  {{#each likedDeals as |deal|}}
-    {{deals-list-item deal=deal}}
-  {{/each}}
-
-  <h3>Disliked Deals</h3>
-  {{#each dislikedDeals as |deal|}}
-    {{deals-list-item deal=deal}}
-  {{/each}}
+{{#if likedDeals}}
+  <h1 class="purple pt2 pr2 ma0">👍 Likes</h1>
+  <div class="liked-deal-list hk-hide-bb-last-row">
+    {{#each likedDeals as |deal|}}
+      {{deals-list-item deal=deal class="pv2"}}
+    {{/each}}
+  </div>
 {{else}}
-  <h3>Go to the homepage and like your first deal!</h3>
+  <span>you haven't liked anything yet 👎</span>
 {{/if}}
+
+{{#if dislikedDeals}}
+  <h1 class="purple pt2 pr2 ma0">👎 Dislikes</h1>
+  <div class="liked-deal-list hk-hide-bb-last-row">
+    {{#each dislikedDeals as |deal|}}
+      {{deals-list-item deal=deal class="pv2"}}
+    {{/each}}
+  </div>
+{{else}}
+  <span>you haven't <span class="b">dis</span>liked anything yet 👍</span>
+{{/if}}
+
+<h1 class="purple pt2 pr2 ma0">⏲ Expired</h1>
+<div class="liked-deal-list hk-hide-bb-last-row">
+  {{#each expiredDeals as |deal|}}
+    {{deals-list-item deal=deal class="pv2"}}
+  {{else}}
+    <span>none of your deals have expired yet 🙃</span>
+  {{/each}}
+</div>

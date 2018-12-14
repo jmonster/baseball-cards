@@ -1,4 +1,20 @@
-<a class="no-underline" href={{deal.url}} target="_blank" rel="noopener">
-  <div class="b mb2">{{deal.product.title}}</div>
-  {{!-- <div class="">Additional text to give context</div> --}}
-</a>
+<style media="screen">
+  <style media="screen">
+    .deal-list-item-image {
+      background: url({{thumbnail.url}}) 50% 50% no-repeat;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+  </style>
+</style>
+
+<div class="deal-list-item-image mr2 flex-auto bg-transparent-squares"></div>
+
+<div class="flex-auto justify-between flex flex-column">
+  <span class="db f4 b">
+    <span class="underline">{{deal.product.name}}</span>
+  </span>
+  <span class="db f4 mv1">{{deal.title}}</span>
+  <span class="db f6 truncate">{{deal.description}}</span>
