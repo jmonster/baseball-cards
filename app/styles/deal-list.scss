@@ -1,18 +1,21 @@
-.deal-list-item-image {
-  width: 64px;
-  height: 64px;
-  -webkit-box-flex: 0;
-  flex: none;
-}
-
-.deal-list-item:visited {
-  color: #4e535a;
-}
-
 .deal-list-item,
 .deal-list-item:hover,
 .deal-list-item:active,
 .deal-list-item:visited,
 .deal-list-item:focus {
   outline: 0;
+}
+
+.deal-list-item-image {
+  width: 64px;
+  height: 64px;
+}
+
+.deal-list-item-details-product-name {
+  color: #034ca2;
+}
+
+.deal-list-item:visited,
+.deal-list-item:visited .deal-list-item-details-product-name {
+  color: #4e535a;
 }

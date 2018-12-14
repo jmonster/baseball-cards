@@ -6,7 +6,7 @@
   {{#if likedDeals}}
     <div class="liked-deal-list">
       {{#each likedDeals as |deal|}}
-        {{deals-list-item deal=deal class="pv2"}}
+        {{deal-list-item deal=deal class="pv2"}}
       {{/each}}
     </div>
   {{else}}
@@ -26,7 +26,7 @@
   {{#if dislikedDeals}}
     <div class="liked-deal-list">
       {{#each dislikedDeals as |deal|}}
-        {{deals-list-item deal=deal class="pv2"}}
+        {{deal-list-item deal=deal class="pv2"}}
       {{/each}}
     </div>
   {{else}}
@@ -43,7 +43,7 @@
   </h2>
   <div class="liked-deal-list">
     {{#each expiredDeals as |deal|}}
-      {{deals-list-item deal=deal class="pv2"}}
+      {{deal-list-item deal=deal class="pv2"}}
     {{else}}
       <div class="hk-well mh2 mv3">
         <div class="f4 mb2 lh-title">⏲</div>
