@@ -5,14 +5,16 @@ const inverse = null;
 
 export default DS.Model.extend({
   deals: hasMany('deal',  { inverse, async: true }),
-  offers: hasMany('offer', { inverse, async: true }), // array of diff merchants, diff sellers on amazon, etc
-  images: hasMany('image', { inverse, async: true }),
-  tags: hasMany('tag', { inverse, async: true }),
-  reviews: hasMany('review'),
+  // offers: hasMany('offer', { inverse, async: true }), // array of diff merchants, diff sellers on amazon, etc
+  // images: hasMany('image', { inverse, async: true }),
+  // tags: hasMany('tag', { inverse, async: true }),
+  // reviews: hasMany('review'),
 
-  name: DS.attr('string'),
-  manufacturer: DS.attr('string'), // TODO it's own model?
+  title: DS.attr('string'),
+  asin: DS.attr('string'),
   msrp: DS.attr('dollars'),
+
+  // manufacturer: DS.attr('string'), // TODO it's own model?
   // meta: {
   //   format, // bluray, dvd, vinyl, cassette, digital, ...
   //   numberOfDiscs,
@@ -23,10 +25,10 @@ export default DS.Model.extend({
   //   isbn,
   //   asin
   // },
-  originalReleaseDate: DS.attr('date'),
-  link: DS.attr('string'),
-  latestPrice: DS.attr('dollars'),
-  lowestPriceEver: DS.attr('dollars'),
-  lowestPriceDate: DS.attr('string'),
-  description: DS.attr('string')
+  // originalReleaseDate: DS.attr('date'),
+  // link: DS.attr('string'),
+  // latestPrice: DS.attr('dollars'),
+  // lowestPriceEver: DS.attr('dollars'),
+  // lowestPriceDate: DS.attr('string'),
+  // description: DS.attr('string')
 });

@@ -20,8 +20,8 @@
     {{#if showCardDetails}}
       <div class="tinder-card-details bg-gradient-primary flex flex-column">
         <div class="pa2 bg-white black ma4 br1 flex-auto ba b--purple">
-          <h2 class="ma2">{{deal.title}}</h2>
-          <p class="ma3">{{deal.description}}</p>
+          <h2 class="ma2">{{deal.product.title}}</h2>
+          {{!-- <p class="ma3">{{deal}}</p> --}}
         </div>
       </div>
     {{else}}
@@ -46,7 +46,7 @@
           </div>
 
           <span class="f5 fw5 near-black">
-            {{deal.title}}
+            {{deal.product.title}}
           </span>
         </div>
       </div>
