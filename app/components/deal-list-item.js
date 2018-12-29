@@ -6,8 +6,8 @@ export default Component.extend({
   attributeBindings: ['href', 'target'],
   href: alias('deal.url'),
   target: '_blank',
-  
-  classNames: ['deal-list-item', 'db', 'mh2', 'b--silver', 'bb', 'link', 'blue', 'flex', 'items-center'],
+
+  classNames: ['deal-list-item', 'db', 'mh2', 'b--silver', 'bb', 'link', 'blue', 'flex', 'items-start'],
 
   thumbnail: alias('deal.primaryImage')
 });

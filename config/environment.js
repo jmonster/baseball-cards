@@ -3,12 +3,12 @@
 module.exports = function(environment) {
   let ENV = {
     firebase: {
-      apiKey: "AIzaSyB1zuup7KDVsTVyUEqQ4sly6LwSmCJQxu0",
-      authDomain: "thedealzillaprojectid.firebaseapp.com",
-      databaseURL: "https://thedealzillaprojectid.firebaseio.com/",
-      projectId: "thedealzillaprojectid",
-      storageBucket: "gs://thedealzillaprojectid.appspot.com",
-      messagingSenderId: "520741038114"
+      apiKey: 'AIzaSyB1zuup7KDVsTVyUEqQ4sly6LwSmCJQxu0',
+      authDomain: 'thedealzillaprojectid.firebaseapp.com',
+      databaseURL: 'https://thedealzillaprojectid.firebaseio.com/',
+      projectId: 'thedealzillaprojectid',
+      storageBucket: 'gs://thedealzillaprojectid.appspot.com',
+      messagingSenderId: '520741038114'
     },
     torii: {
       sessionServiceName: 'session'
@@ -42,7 +42,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
 
-    const enabled = process.env.MIRAGE_ENABLED === "true" ? true : false;
+    const enabled = process.env.MIRAGE_ENABLED === 'true' ? true : false;
     ENV['ember-cli-mirage'] = { enabled };
   }
 
@@ -62,7 +62,7 @@ module.exports = function(environment) {
     ENV['ember-cli-mirage'] = { enabled: false };
   }
 
-  ENV['ember-cli-mirage'] = { enabled: false };
+  ENV['ember-cli-mirage'] = { enabled: true };
 
   return ENV;
 };

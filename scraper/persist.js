@@ -1,68 +1,58 @@
-var firebase = require("firebase");
-var crypto = require('crypto');
-
-var camel = require('./camel')
-
-var config = {
-  apiKey: "AIzaSyB1zuup7KDVsTVyUEqQ4sly6LwSmCJQxu0",
-  authDomain: "thedealzillaprojectid.firebaseapp.com",
-  databaseURL: "https://thedealzillaprojectid.firebaseio.com/",
-  projectId: "thedealzillaprojectid",
-  storageBucket: "gs://thedealzillaprojectid.appspot.com",
-};
-firebase.initializeApp(config);
-
-const db = firebase.database()
-
-var getSha = function (input) {
-  return crypto.createHash('sha1').update(input).digest('hex').slice(0,16)
-}
-
-var getProduct = async function (uid) {
-  return new Promise(resolve => {
-    db.ref().child('products/' + uid).once('value', function (snapshot) {
-      resolve(snapshot.val())
-    })
-  });
-}
+const firebase = require('firebase');
+const camel = require('./camelcamelcamel');
+const { firebase: firebaseConfig } = require('../config/environment')();
+const { getProductFromDB, shaZam } = require('./firefirefire');
 
 async function main () {
-  let scrapedDeals = await camel()
+  const app = firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+  const scrapedDeals = await camel();
 
- await Promise.all(scrapedDeals.forEach(async function (deal) {
-    console.log(deal.title, deal.asin, deal.msrp)
-    let uid = getSha(deal.title)
-    let product = await getProduct(uid)
+  Promise.all(scrapedDeals.map(async function (deal) {
+    // console.log(deal.title, deal.asin, deal.msrp);
 
+    const uid = shaZam(deal.title);
+    let product = await getProductFromDB(uid, db);
+
+    // create new product unless it exists
     if (!product) {
-      let p = {
+      const p = {
         created_at: firebase.database.ServerValue.TIMESTAMP,
         asin: deal.asin,
         title: deal.title,
         msrp: deal.msrp,
-      }
-      db.ref().child('products').child(uid).set(p)
+      };
+
+      await db.ref().child('products').child(uid).set(p);
     }
 
-    product = await getProduct(uid)
-
-    var dealData = {
+    const dealData = {
       product: uid, // product parent uniqueid
       price: deal.price,
       created_at: firebase.database.ServerValue.TIMESTAMP,
     };
 
-    var newDealKey = db.ref().child('deals').push().key;
-    var updates = {};
-    updates['/deals/' + newDealKey] = dealData;
-    db.ref('products/' + uid).child('deals').push(newDealKey)
-    db.ref().update(updates);
+    const newDealKey = db.ref().child('deals').push().key;
+    const updates = {
+      ['/deals/' + newDealKey]: dealData
+    };
 
-    console.log(product)
+    return Promise.all([
+      db.ref('products/' + uid).child('deals').push(newDealKey),
+      db.ref().update(updates)
+    ]);
   }))
-
-  db.goOffline()
+  .then(() => {
+    db.goOffline();
+  })
+  .catch((err) => {
+    // TypeError: Cannot read property 'Symbol(Symbol.iterator)' of undefined
+    // at Function.all (<anonymous>)
+    // at main (/Users/johnny/Documents/projects/dealzilla/scraper/persist.js:29:11)
+    // at process._tickCallback (internal/process/next_tick.js:68:7)
+    console.dir(err);
+    db.goOffline();
+  });
 }
 
-main()
-
+main();
