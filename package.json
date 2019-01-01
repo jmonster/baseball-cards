@@ -59,7 +59,7 @@
     "eslint-plugin-hbs": "^0.1.1",
     "loader.js": "^4.7.0",
     "qunit-dom": "^0.8.0",
-    "sass": "^1.15.1",
+    "sass": "^1.15.2",
     "torii": "^0.10.1"
   },
   "engines": {
