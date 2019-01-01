@@ -3939,7 +3939,7 @@ ember-cli-babel@5.1.6:
     ember-cli-version-checker "^1.0.2"
     resolve "^1.1.2"
 
-ember-cli-babel@^6.0.0-beta.4, ember-cli-babel@^6.0.0-beta.7, ember-cli-babel@^6.11.0, ember-cli-babel@^6.12.0, ember-cli-babel@^6.16.0, ember-cli-babel@^6.3.0, ember-cli-babel@^6.6.0, ember-cli-babel@^6.8.1, ember-cli-babel@^6.8.2:
+ember-cli-babel@^6.0.0-beta.4, ember-cli-babel@^6.11.0, ember-cli-babel@^6.12.0, ember-cli-babel@^6.16.0, ember-cli-babel@^6.3.0, ember-cli-babel@^6.6.0, ember-cli-babel@^6.8.1, ember-cli-babel@^6.8.2:
   version "6.18.0"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-6.18.0.tgz#3f6435fd275172edeff2b634ee7b29ce74318957"
   integrity sha512-7ceC8joNYxY2wES16iIBlbPSxwKDBhYwC8drU3ZEvuPDMwVv1KzxCNu1fvxyFEBWhwaRNTUxSCsEVoTd9nosGA==
@@ -4151,17 +4151,6 @@ ember-cli-preprocess-registry@^3.1.2:
     ember-cli-lodash-subset "^1.0.7"
     process-relative-require "^1.0.0"
     silent-error "^1.0.0"
-
-ember-cli-requestanimationframe-polyfill@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/ember-cli-requestanimationframe-polyfill/-/ember-cli-requestanimationframe-polyfill-0.0.1.tgz#d5531f50d8867b7243d9a85ab9441a0588cf705c"
-  integrity sha512-zm2rLTY8EWgg5eaQ1z/yehvaonrXiEl7R0V/BEUR9PxFUdXnd3dx6cc694LKXj7puH7XUyaWeYM4pLgkhEn+MQ==
-  dependencies:
-    broccoli-funnel "^2.0.1"
-    caniuse-api "^3.0.0"
-    ember-cli-babel "^6.16.0"
-    fastboot-transform "^0.1.3"
-    raf-polyfill "^1.0.0"
 
 ember-cli-sass@8.0.1:
   version "8.0.1"
@@ -4375,21 +4364,6 @@ ember-compatibility-helpers@^1.1.1:
     ember-cli-version-checker "^2.1.1"
     semver "^5.4.1"
 
-ember-composability@^0.0.0-development:
-  version "0.0.0-development"
-  resolved "https://registry.yarnpkg.com/ember-composability/-/ember-composability-0.0.0-development.tgz#cdbe2f7938119a8648499a1aa3239540b830da2d"
-  integrity sha512-wVCHmYyeNO7ARvTEqjW8jjssaUMgMvgBhPB38lylKlYHXFa8JZ0gHlFIlhucqCPtFLcpfS3TJFLBJsZHNOGzsA==
-  dependencies:
-    ember-cli-babel "^6.16.0"
-
-ember-css-transitions@^0.1.16:
-  version "0.1.16"
-  resolved "https://registry.yarnpkg.com/ember-css-transitions/-/ember-css-transitions-0.1.16.tgz#43e031e1d742d4df1a5accece7d762fa5c4834ef"
-  integrity sha512-L6nH1Z0gziy1kEiay/+gwCcnLhoqvmI3zmxt/e8IF5YQUpNk0vGo1CFDrRaxCYv3apP0/kz3yrhJEdYOEXu9jQ==
-  dependencies:
-    ember-cli-babel "^6.16.0"
-    ember-cli-requestanimationframe-polyfill "^0.0.1"
-
 ember-data@~3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/ember-data/-/ember-data-3.6.0.tgz#6853983d6ab21f578b62b41b14f45c7b6f502aff"
@@ -4420,13 +4394,6 @@ ember-data@~3.6.0:
     resolve "^1.8.1"
     semver "^5.6.0"
     silent-error "^1.1.1"
-
-ember-export-application-global@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/ember-export-application-global/-/ember-export-application-global-2.0.0.tgz#8d6d7619ac8a1a3f8c43003549eb21ebed685bd2"
-  integrity sha1-jW12GayKGj+MQwA1Sesh6+1oW9I=
-  dependencies:
-    ember-cli-babel "^6.0.0-beta.7"
 
 ember-factory-for-polyfill@^1.3.1:
   version "1.3.1"
@@ -5224,14 +5191,6 @@ fast-sourcemap-concat@^1.4.0:
     source-map "^0.4.2"
     source-map-url "^0.3.0"
     sourcemap-validator "^1.1.0"
-
-fastboot-transform@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/fastboot-transform/-/fastboot-transform-0.1.3.tgz#7dea0b117594afd8772baa6c9b0919644e7f7dcd"
-  integrity sha512-6otygPIJw1ARp1jJb+6KVO56iKBjhO+5x59RSC9qiZTbZRrv+HZAuP00KD3s+nWMvcFDemtdkugki9DNFTTwCQ==
-  dependencies:
-    broccoli-stew "^1.5.0"
-    convert-source-map "^1.5.1"
 
 faye-websocket@0.9.3:
   version "0.9.3"
@@ -9228,11 +9187,6 @@ qunit@^2.8.0:
     resolve "1.5.0"
     sane "^4.0.0"
     walk-sync "0.3.2"
-
-raf-polyfill@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/raf-polyfill/-/raf-polyfill-1.0.0.tgz#cc6019be5bbb7112b8eeaae0ea8b5077100802e2"
-  integrity sha512-WwyjuX5kZFOslF+8mGjVrMvDYmOwlN50Eqoc876td1abMaesf1sK4uiOZor3bvJfBRCwCHuJNR3TN4KztC/IhA==
 
 randomatic@^3.0.0:
   version "3.1.1"
