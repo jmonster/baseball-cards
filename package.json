@@ -41,7 +41,7 @@
     "ember-cli-update": "^0.27.3",
     "ember-composability": "^0.0.0-development",
     "ember-css-transitions": "^0.1.16",
-    "ember-data": "~3.5.0",
+    "ember-data": "~3.6.0",
     "ember-export-application-global": "^2.0.0",
     "ember-fetch": "^6.2.0",
     "ember-load-initializers": "^1.1.0",
