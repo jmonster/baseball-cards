@@ -11,6 +11,7 @@ module.exports = async function () {
   const promise = new Promise(async (resolve) => {
 
     const { body } = await request.get(CAMEL_RSS);
+
     parseString(body, (err, { rss: { channel: [{item}] } }) => {
       const modifiedItems = item.map((it) => {
         return {
@@ -24,7 +25,6 @@ module.exports = async function () {
 
       resolve(modifiedItems);
     });
-
   });
 
   return promise;

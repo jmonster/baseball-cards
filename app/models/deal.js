@@ -20,6 +20,9 @@ export default DS.Model.extend({
 
   primaryImage: computed(function() {
     // return this.product.images.firstObject;
-    return { url: '/assets/images/branding/block.png' }
+    return {
+      url: '/assets/images/branding/block.png',
+      path: 'https://images.unsplash.com/photo-1545971119-07ba368108bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=50'
+    }
   })
 });
