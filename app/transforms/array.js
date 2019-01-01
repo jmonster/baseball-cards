@@ -1,5 +1,4 @@
 import { typeOf } from '@ember/utils';
-import $ from 'jquery';
 import DS from 'ember-data';
 
 export default DS.Transform.extend({
@@ -14,7 +13,8 @@ export default DS.Transform.extend({
       return deserialized
     } else if (type == 'string') {
       return deserialized.split(',').map(function(item) {
-        return $.trim(item);
+        // https://stackoverflow.com/questions/40329177/jquery-trim-compared-to-string-trim
+        return item.trim();
       });
     } else {
       return [];

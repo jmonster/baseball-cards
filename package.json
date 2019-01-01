@@ -19,7 +19,6 @@
     "open": "firebase open hosting:site"
   },
   "devDependencies": {
-    "@ember/jquery": "^0.5.2",
     "@ember/optional-features": "^0.6.3",
     "broccoli-asset-rev": "^2.7.0",
     "ember-cli": "~3.5.1",
