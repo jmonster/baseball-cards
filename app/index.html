@@ -16,15 +16,29 @@
     {{content-for "head-footer"}}
   </head>
   <body class="h-100 flex flex-column">
-    {{content-for "body"}}
 
-    <div id="initial-loading-indicator" class="flex items-center justify-center" style="height: 100vh;">
-      <h1 class="rotating icon-spinner5 dib" style="font-size: 6rem;"></h1>
+    {{content-for "body"}}
+    <div id="initial-loading-indicator" class="o-50 flex">
+      <div class="navigation z-1 flex flex-none bg-gradient-primary shadow-outer-1 w-100">
+          <div class="logo flex-none flex items-center">
+              <div class="dealzilla-logo mh1"></div>
+          </div>
+
+          <div class="ph2 justify-center pv2 f4 wikiwiki-search flex flex-auto flex-column overflow-container">
+              <div class="br1 pa1 search-input bg-white flex"><span class="flex justify-center items-center mh1 f2">🔍</span>
+                  <input disabled class="flex-1 br1 bn pv2 ma0 z-1 search-input bg-white" type="text" placeholder="Almost there...">
+              </div>
+          </div>
+      </div>
+
+      <div class="justify-start flex flex-column flex-auto">
+      </div>
     </div>
 
     <script src="{{rootURL}}assets/vendor.js"></script>
     <script src="{{rootURL}}assets/dealzilla.js"></script>
 
     {{content-for "body-footer"}}
+
   </body>
 </html>
