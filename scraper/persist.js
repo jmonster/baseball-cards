@@ -1,45 +1,45 @@
 const firebase = require('firebase');
 const camel = require('./camelcamelcamel');
 const { firebase: firebaseConfig } = require('../config/environment')();
-const { getProductFromDB, shaZam } = require('./firefirefire');
+const { getProductFromDB, getDealFromDB } = require('./firefirefire');
 
 async function main () {
   const app = firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
   const scrapedDeals = await camel();
 
-  Promise.all(scrapedDeals.map(async function (deal) {
-    // console.log(deal.title, deal.asin, deal.msrp);
+  // deals have unique cuid's; a cuid is the camelcamelcamel id
+  //    in the future a deal may not have a cuid
+  //    i.e. if the deal doens't originate from CCC
+  // products _currently_ use the asin as their id;
+  //    this is fine as we only support amazon at the moment
+  Promise.all(scrapedDeals.map(async function ({ asin, cuid, title, price, msrp, avgPrice }) {
+    // TODO fetch all deals and products in one query
+    const productId = asin; // TODO support more than just Amazon
+    const product = await getProductFromDB(productId, db);
+    const deal = await getDealFromDB(cuid, db);
+    const created_at = firebase.database.ServerValue.TIMESTAMP;
 
-    const uid = shaZam(deal.title);
-    let product = await getProductFromDB(uid, db);
+    // skip duplicate deals
+    if (deal) { return Promise.resolve(); }
 
-    // create new product unless it exists
+    // don't duplicate product records
     if (!product) {
-      const p = {
-        created_at: firebase.database.ServerValue.TIMESTAMP,
-        asin: deal.asin,
-        title: deal.title,
-        msrp: deal.msrp,
-      };
-
-      await db.ref().child('products').child(uid).set(p);
+      // create product record to compliment the deal
+      const _product = { created_at, asin, title, msrp };
+      await db.ref().child('products').child(productId).set(_product);
     }
 
-    const dealData = {
-      product: uid, // product parent uniqueid
-      price: deal.price,
-      created_at: firebase.database.ServerValue.TIMESTAMP,
+    const _deal = {
+      product: productId, // product's parent's uuid
+      created_at, price, avgPrice
     };
 
-    const newDealKey = db.ref().child('deals').push().key;
-    const updates = {
-      ['/deals/' + newDealKey]: dealData
-    };
+    // const dealId = db.ref().child('deals').push().key;
 
     return Promise.all([
-      db.ref('products/' + uid).child('deals').push(newDealKey),
-      db.ref().update(updates)
+      db.ref(`products/${productId}`).child('deals').push(cuid),
+      db.ref().update({ [`/deals/${cuid}`]: _deal })
     ]);
   }))
   .then(() => {

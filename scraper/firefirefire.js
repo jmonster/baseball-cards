@@ -10,9 +10,19 @@ function shaZam(input) {
 }
 
 exports.getProductFromDB =
-async function getProductFromDB(uid, db) {
+async function getProductFromDB(productId, db) {
   return new Promise((resolve, reject) => {
-    const child = db.ref().child('products/' + uid);
+    const child = db.ref().child('products/' + productId);
+    child.once('value', (snapshot) => resolve(snapshot.val()));
+  }).catch((err) => {
+    console.error(err);
+  });
+}
+
+exports.getDealFromDB =
+async function getDealFromDB(dealId, db) {
+  return new Promise((resolve, reject) => {
+    const child = db.ref().child(`deals/${dealId}`);
     child.once('value', (snapshot) => resolve(snapshot.val()));
   }).catch((err) => {
     console.error(err);

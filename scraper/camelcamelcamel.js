@@ -14,8 +14,10 @@ module.exports = async function () {
 
     parseString(body, (err, { rss: { channel: [{item}] } }) => {
       const modifiedItems = item.map((it) => {
+
         return {
           asin:     it.link[0].match(/product\/([a-zA-Z\d]{10})/)[1],
+          cuid:     it.guid[0]._,
           title:    it.title[0],
           price:    sanitizePrice(it.description[0].match(/Current Price\: \$(.+\.\d{2})/)[1]),
           msrp:     sanitizePrice(it.description[0].match(/List Price\: \$(.+\.\d{2})/)[1]),

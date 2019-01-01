@@ -9,5 +9,5 @@ export default Component.extend({
 
   classNames: ['deal-list-item', 'db', 'mh2', 'b--silver', 'bb', 'link', 'blue', 'flex', 'items-start'],
 
-  thumbnail: alias('deal.primaryImage')
+  thumbnail: alias('deal.thumbnail')
 });

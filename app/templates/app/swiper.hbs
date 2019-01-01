@@ -8,11 +8,12 @@
 
     <style media="screen">
       .tinder-card-image {
-        background: url({{deal.primaryImage.path}}) 50% 50% no-repeat;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
+        background: no-repeat url({{deal.primaryImage}});
+        background-size: contain;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-position: center center;
       }
     </style>
     <div class="tinder-card-image flex-auto flex-colum"></div>
@@ -41,7 +42,7 @@
               <span class="light-gray">${{deal.product.msrp}}</span>
             </span>
             <span class="f5 fw6 mt1 mh1 white bg-purple pa1 br1">
-              24% savings
+              {{deal.savings}}% savings
             </span>
           </div>
 
