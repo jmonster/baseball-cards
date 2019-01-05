@@ -1,36 +1,38 @@
-const request = require('superagent');
-const parseString = require('xml2js').parseString;
-const CAMEL_RSS = 'https://camelcamelcamel.com/popular.xml';
+const request = require('superagent')
+const parseString = require('xml2js').parseString
+const CAMEL_RSS = 'https://camelcamelcamel.com/popular.xml'
 
-function sanitizePrice(input) {
-  return parseInt(input.replace(',','').replace(/[\.\,]/,''), 10);
+function sanitizePrice (input) {
+  // eslint-disable-next-line no-useless-escape
+  return parseInt(input.replace(',', '').replace(/[\.\,]/, ''), 10)
 }
 
 module.exports = async function () {
-
   const promise = new Promise(async (resolve) => {
+    const { body } = await request.get(CAMEL_RSS)
 
-    const { body } = await request.get(CAMEL_RSS);
-
-    parseString(body, (err, { rss: { channel: [{item}] } }) => {
+    parseString(body, (err, { rss: { channel: [{ item }] } }) => {
+      if (err) {
+        console.error(err)
+        return
+      }
       const modifiedItems = item.map((it) => {
-
         return {
-          asin:     it.link[0].match(/product\/([a-zA-Z\d]{10})/)[1],
-          cuid:     it.guid[0]._,
-          title:    it.title[0],
-          price:    sanitizePrice(it.description[0].match(/Current Price\: \$(.+\.\d{2})/)[1]),
-          msrp:     sanitizePrice(it.description[0].match(/List Price\: \$(.+\.\d{2})/)[1]),
-          avgPrice: sanitizePrice(it.description[0].match(/Avg\. Price\: \$(.+\.\d{2})/)[1])
-        };
-      });
+          asin: it.link[0].match(/product\/([a-zA-Z\d]{10})/)[1],
+          cuid: it.guid[0]._,
+          title: it.title[0],
+          price: sanitizePrice(it.description[0].match(/Current Price: \$(.+\.\d{2})/)[1]),
+          msrp: sanitizePrice(it.description[0].match(/List Price: \$(.+\.\d{2})/)[1]),
+          avgPrice: sanitizePrice(it.description[0].match(/Avg\. Price: \$(.+\.\d{2})/)[1])
+        }
+      })
 
-      resolve(modifiedItems);
-    });
-  });
+      resolve(modifiedItems)
+    })
+  })
 
-  return promise;
-};
+  return promise
+}
 
 // usage
 // (async () => {

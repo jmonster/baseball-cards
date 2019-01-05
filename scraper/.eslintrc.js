@@ -8,7 +8,7 @@ module.exports = {
     sourceType: 'module'
   },
   extends: [
-    'eslint:recommended'
+    'standard'
   ],
   env: {
     browser: false,
