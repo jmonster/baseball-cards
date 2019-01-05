@@ -13,7 +13,7 @@ module.exports = function(environment) {
     torii: {
       sessionServiceName: 'session'
     },
-
+    amazonAffliateTag: 'dealzilla0a-20',
     modulePrefix: 'dealzilla',
     environment,
     rootURL: '/',

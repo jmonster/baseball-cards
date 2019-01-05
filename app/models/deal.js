@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import { computed } from '@ember/object';
+import ENV from 'dealzilla/config/environment';
 
 const inverse = null;
 
@@ -24,7 +25,7 @@ export default DS.Model.extend({
   // url: DS.attr('string'),
 
   url: computed('product.asin', function() {
-    return `https://www.amazon.com/gp/product/${this.get('product.asin')}/?tag=dealzilla0a-20`
+    return `https://www.amazon.com/gp/product/${this.get('product.asin')}/?tag=${ENV.amazonAffliateTag}`
   }),
 
   thumbnail: computed('product.asin', function() {
