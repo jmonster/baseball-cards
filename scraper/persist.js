@@ -11,6 +11,7 @@ async function main () {
   // persisted analytics
   let addedDealsCount = 0
   let addedProductsCount = 0
+  let expiredDealsCount = 0
 
   // deals have unique cuid's; a cuid is the camelcamelcamel id
   //    in the future a deal may not have a cuid
@@ -25,7 +26,11 @@ async function main () {
     const createdAt = firebase.database.ServerValue.TIMESTAMP
 
     // skip duplicate deals
-    if (deal) { return Promise.resolve() }
+    if (deal) {
+      let u = { lastSeenAt: firebase.database.ServerValue.TIMESTAMP }
+      await deal.update(u)
+      return Promise.resolve()
+    }
 
     // don't duplicate product records
     if (!product) {
@@ -51,9 +56,6 @@ async function main () {
     ])
   }))
     .then(async () => {
-      // print persisted analytics
-      console.log(`Added ${addedDealsCount} deals`)
-      console.log(`Added ${addedProductsCount} products`)
       db.goOffline()
     })
     .catch((err) => {
@@ -64,6 +66,22 @@ async function main () {
       console.dir(err)
       db.goOffline()
     })
+
+  let deals = db.ref().child('deals')
+  Promise.all(deals.map(async (deal) => {
+    let now = Date.now()
+    let date = deal.lastSeenAt || deal.createdAt
+    if (now - date > 3600) {
+      expiredDealsCount++
+      let u = { expiredAt: firebase.database.ServerValue.TIMESTAMP }
+      await deal.update(u)
+    }
+  }))
+
+  // print persisted analytics
+  console.log(`Added ${addedDealsCount} deals`)
+  console.log(`Expired ${expiredDealsCount} deals`)
+  console.log(`Added ${addedProductsCount} products`)
 }
 
 main()

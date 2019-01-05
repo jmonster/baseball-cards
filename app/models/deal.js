@@ -12,6 +12,8 @@ export default DS.Model.extend({
 
   title: DS.attr('string'),
   description: DS.attr('string'),
+  expiredAt: DS.attr('date'),
+  lastSeenAt: DS.attr('date'),
 
   // TODO we should offer an array of opportunities here
   // e.g. Costco members can get a lower price than Amazon Prime can get a lower price than someone using a 20% off coupon ...
