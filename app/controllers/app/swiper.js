@@ -22,7 +22,7 @@ export default Controller.extend({
   seenDealsIds: alias('dataService.seenDealIds'),
 
   allDeals: computed(function() {
-    return this.model.deals;
+    return this.model.deals.filter(d => !d.expiredAt);
   }),
 
   mutableDeals: computed('allDeals.[]', function() {
