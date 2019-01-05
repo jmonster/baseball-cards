@@ -24,7 +24,7 @@ export default DS.Model.extend({
   // url: DS.attr('string'),
 
   url: computed('product.asin', function() {
-    return `https://www.amazon.com/gp/product/${this.get('product.asin')}`
+    return `https://www.amazon.com/gp/product/${this.get('product.asin')}/?tag=dealzilla0a-20`
   }),
 
   thumbnail: computed('product.asin', function() {
