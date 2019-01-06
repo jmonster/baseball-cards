@@ -72,7 +72,7 @@ async function main () {
       // grab deals collection
       let ref = db.ref().child('deals')
       // grab snapshot
-      ref.on("value", async function (snapshot) {
+      ref.on('value', async function (snapshot) {
         // turn snapshot into object
         let deals = snapshot.val()
         // grab cuids from object
@@ -102,7 +102,6 @@ async function main () {
     })
   }
   await invalidateDeals()
-
 
   // print persisted analytics
   console.log(`Added ${addedDealsCount} deals`)
