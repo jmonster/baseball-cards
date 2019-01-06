@@ -4,7 +4,7 @@ import { later } from '@ember/runloop';
 const mathematicalMikesMagicMalgorithm = (x) => (15/230) * x + 0.4347826087;
 
 export default Component.extend({
-  classNames: ['absolute', 'top-0 bottom-0 left-0 right-0', 'bg-gray'],
+  classNames: ['absolute', 'top-0 bottom-0 left-0 right-0', 'bg-white', 'flex', 'items-center'],
   classNameBindings: ['isSlidLeft', 'isSliding::swipable-list-item-animated'],
 
   isSlidLeft: false,

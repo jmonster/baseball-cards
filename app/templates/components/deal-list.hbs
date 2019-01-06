@@ -6,7 +6,9 @@
   {{#if likedDeals}}
     <div class="liked-deal-list">
       {{#each likedDeals as |deal|}}
-        {{deal-list-item deal=deal class="pv2"}}
+        {{#swipable-list-item}}
+          {{deal-list-item deal=deal class="pv2"}}
+        {{/swipable-list-item}}
       {{/each}}
     </div>
   {{else}}
