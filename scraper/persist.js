@@ -27,9 +27,9 @@ async function main () {
 
     // skip duplicate deals
     if (deal) {
+      let ref = db.ref().child(`deals/${cuid}`)
       let u = { lastSeenAt: firebase.database.ServerValue.TIMESTAMP }
-      await deal.update(u)
-      return Promise.resolve()
+      return ref.update(u)
     }
 
     // don't duplicate product records
@@ -67,16 +67,42 @@ async function main () {
       db.goOffline()
     })
 
-  let deals = db.ref().child('deals')
-  Promise.all(deals.map(async (deal) => {
-    let now = Date.now()
-    let date = deal.lastSeenAt || deal.createdAt
-    if (now - date > 3600) {
-      expiredDealsCount++
-      let u = { expiredAt: firebase.database.ServerValue.TIMESTAMP }
-      await deal.update(u)
-    }
-  }))
+  let invalidateDeals = async function () {
+    return new Promise(resolve => {
+      // grab deals collection
+      let ref = db.ref().child('deals')
+      // grab snapshot
+      ref.on("value", async function (snapshot) {
+        // turn snapshot into object
+        let deals = snapshot.val()
+        // grab cuids from object
+        let cuids = Object.keys(deals)
+        // for each cuid
+        await Promise.all(cuids.map(async (cuid) => {
+          // get deal
+          let deal = deals[cuid]
+          // return if alrady expired
+          if (deal.expiredAt) return
+          // now utc
+          let now = (new Date()).getTime()
+          // last seen or created at time
+          let dealDate = deal.lastSeenAt || deal.createdAt
+          // see if older than
+          // one day in ms
+          if (now - dealDate > 86400000) {
+            expiredDealsCount++
+            let d = db.ref().child(`deals/${cuid}`)
+            let u = { expiredAt: firebase.database.ServerValue.TIMESTAMP }
+            // expire deal
+            return d.update(u)
+          }
+        }))
+        resolve()
+      })
+    })
+  }
+  await invalidateDeals()
+
 
   // print persisted analytics
   console.log(`Added ${addedDealsCount} deals`)
