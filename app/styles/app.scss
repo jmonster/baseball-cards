@@ -35,8 +35,9 @@
   }
 }
 
-.is-slid-left {
-  transform: translate(calc(1.4rem - 100%),0px);
+.has-slid-left {
+  transform: translate(calc(3rem - 100%), 0px);
+  opacity: 0.75;
 }
 
 .swipable-list-item {
@@ -44,6 +45,11 @@
 }
 
 .swipable-list-item-animated {
-  -webkit-transition: all 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  transition:         all 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -webkit-transition: 150ms;
+  transition:         150ms;
+  transition-timing-function: ease-in-out;
+}
+
+.swipable-list-item-is-sliding {
+  touch-action: pan-x;
 }
