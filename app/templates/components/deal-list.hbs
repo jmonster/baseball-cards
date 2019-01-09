@@ -6,15 +6,21 @@
   {{#if likedDeals}}
     <div class="liked-deal-list">
       {{#each likedDeals as |deal|}}
-        {{#swipable-list-item}}
-          {{deal-list-item deal=deal class="pv2"}}
+        {{#swipable-list-item as |sli|}}
+          {{#sli.top}}
+            {{deal-list-item deal=deal class="pv2"}}
+          {{/sli.top}}
+
+          {{#sli.actions}}
+            <h1 class="ma0 ph2 white" {{action 'unlike-deal'}}>👎 unlike 👎</h1>
+          {{/sli.actions}}
         {{/swipable-list-item}}
       {{/each}}
     </div>
   {{else}}
     <div class="hk-well mh2 mv3">
-      <div class="f4 mb2 lh-title">😒</div>
-      <div class="f5 mw7 center lh-copy">You haven't liked anything yet.</div>
+      <span class="f4 mb2 lh-title">🧐</span>
+      <span class="f5 mw7 center lh-copy">You haven't liked anything yet.</span>
     </div>
   {{/if}}
 </div>
@@ -28,29 +34,34 @@
   {{#if dislikedDeals}}
     <div class="liked-deal-list">
       {{#each dislikedDeals as |deal|}}
-        {{deal-list-item deal=deal class="pv2"}}
+        {{#swipable-list-item as |sli|}}
+          {{#sli.top}}
+            {{deal-list-item deal=deal class="pv2"}}
+          {{/sli.top}}
+
+          {{#sli.actions}}
+            <h1 class="ma0 ph2 white" {{action 'unlike-deal'}}>👍 like 👍</h1>
+          {{/sli.actions}}
+        {{/swipable-list-item}}
       {{/each}}
     </div>
   {{else}}
     <div class="hk-well mh2 mv3">
-      <div class="f4 mb2 lh-title">🙅‍♀️</div>
-      <div class="f5 mw7 center lh-copy">You haven't <span class="b">dis</span>liked anything (yet!).</div>
+      <span class="f4 mb2 lh-title">🥴</span>
+      <span class="f5 mw7 center lh-copy">You haven't <span class="b">dis</span>liked anything yet.</span>
     </div>
   {{/if}}
 </div>
 
-<div class="pt2 pb2">
-  <h2 class="mh2 fw5 mb1">
-    ⌛️ <span class="bb b--gray pr3 pl1">Expired</span>
-  </h2>
-  <div class="liked-deal-list">
-    {{#each expiredDeals as |deal|}}
-      {{deal-list-item deal=deal class="pv2"}}
-    {{else}}
-      <div class="hk-well mh2 mv3">
-        <div class="f4 mb2 lh-title">⏲</div>
-        <div class="f5 mw7 center lh-copy">None of your deals have expired yet.</div>
-      </div>
-    {{/each}}
+{{#if expiredDeals}}
+  <div class="pt2 pb2">
+    <h2 class="mh2 fw5 mb1">
+      ⌛️ <span class="bb b--gray pr3 pl1">Expired</span>
+    </h2>
+    <div class="liked-deal-list">
+      {{#each expiredDeals as |deal|}}
+        {{deal-list-item deal=deal class="pv2"}}
+      {{/each}}
+    </div>
   </div>
-</div>
+{{/if}}

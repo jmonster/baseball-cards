@@ -28,5 +28,15 @@ export default Component.extend({
   deals: computed(function() {
     // this function is overriden when the `deals` argument is provided
     throw new Error(`The 'deal-list' component requires that you provide an array as the 'deals' parameter.`);
-  })
+  }),
+
+  actions: {
+    'unlike-deal': function() {
+      // TODO update localStorage
+    },
+
+    'relike-deal': function() {
+      // TODO update localStorage
+    }
+  }
 });
