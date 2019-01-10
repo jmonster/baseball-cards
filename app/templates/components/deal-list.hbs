@@ -53,13 +53,13 @@
   {{/if}}
 </div>
 
-{{#if expiredDeals}}
+{{#if staleDeals}}
   <div class="pt2 pb2">
     <h2 class="mh2 fw5 mb1">
       ⌛️ <span class="bb b--gray pr3 pl1">Expired</span>
     </h2>
     <div class="liked-deal-list">
-      {{#each expiredDeals as |deal|}}
+      {{#each staleDeals as |deal|}}
         {{deal-list-item deal=deal class="pv2"}}
       {{/each}}
     </div>
