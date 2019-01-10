@@ -12,7 +12,7 @@
           {{/sli.top}}
 
           {{#sli.actions}}
-            <button class="ma0 ph2 white" {{action "unlike-deal"}}>👎 unlike 👎</button>
+            <button class="ma0 ph2 white" {{action "unlike-deal" deal.id}}>👎 unlike 👎</button>
           {{/sli.actions}}
         {{/swipable-list-item}}
       {{/each}}
@@ -40,7 +40,7 @@
           {{/sli.top}}
 
           {{#sli.actions}}
-            <button class="ma0 ph2 white" {{action "relike-deal"}}>👍 like 👍</button>
+            <button class="ma0 ph2 white" {{action "relike-deal" deal.id}}>👍 like 👍</button>
           {{/sli.actions}}
         {{/swipable-list-item}}
       {{/each}}

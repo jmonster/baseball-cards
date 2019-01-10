@@ -31,7 +31,7 @@ export default Service.extend({
     return this._fetch('seenDealsIds');
   }),
 
-  addLikedDeal(deal){
+  addLikedDeal(deal, updateSeenDeals=true){
     const idAsString = String(deal.id)
     this.likedDealsIds.pushObject(idAsString);
     localStorage.setItem(
@@ -39,14 +39,25 @@ export default Service.extend({
       JSON.stringify(this.likedDealsIds)
     );
 
-    this.seenDealsIds.pushObject(idAsString);
-    this.saveSeenDeals()
+    if (updateSeenDeals) {
+      this.seenDealsIds.pushObject(idAsString);
+      this.saveSeenDeals()
+    }
   },
 
   addDislikedDeal(deal){
     const idAsString = String(deal.id);
     this.seenDealsIds.pushObject(idAsString);
     this.saveSeenDeals()
+  },
+
+  removeLikedDeal(id) {
+    const idAsString = String(id)
+    const likedDealsIds = this.likedDealsIds.filter(id => id !== idAsString )
+    localStorage.setItem(
+      'likedDealsIds',
+      JSON.stringify(likedDealsIds)
+    );
   },
 
   saveSeenDeals(){
