@@ -14,7 +14,7 @@ export default Component.extend({
     const likedDealsIds = this.likedDealsIds;
     const likedDealsSet = new Set(likedDealsIds);
 
-    return allDeals.filter(d => likedDealsSet.has(String(d.id)));
+    return allDeals.filter(d => likedDealsSet.has(String(d.id) && !d.expiredAt));
   }),
 
   dislikedDeals: computed('deals.[]', 'dislikedDealsIds.[]', function() {
@@ -22,7 +22,18 @@ export default Component.extend({
     const dislikedDeals = this.dislikedDealsIds;
     const dislikedDealsSet = new Set(dislikedDeals);
 
-    return allDeals.filter(d => dislikedDealsSet.has(String(d.id)));
+    return allDeals.filter(d => dislikedDealsSet.has(String(d.id)) && !d.expiredAt);
+  }),
+
+  expiredDeals: computed('deals.[]', 'likedDealsIds.[]', function () {
+    const allDeals = this.deals;
+    const likedDealsIds = this.likedDealsIds;
+    const likedDealsSet = new Set(likedDealsIds);
+
+    let expiredDeals = allDeals.filter(d => likedDealsSet.has(String(d.id)) && d.expiredAt);
+    let now = (new Date()).getTime()
+    // don't show 3 day past expired deals
+    return expiredDeals.filter(d => !(now - d.expiredAt > 86400000 * 3))
   }),
 
   deals: computed(function() {

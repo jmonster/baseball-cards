@@ -47,8 +47,6 @@ async function main () {
       avgPrice
     }
 
-    // const dealId = db.ref().child('deals').push().key;
-
     addedDealsCount++
     return Promise.all([
       db.ref(`products/${productId}`).child('deals').push(cuid),
@@ -56,6 +54,45 @@ async function main () {
     ])
   }))
     .then(async () => {
+      return new Promise(resolve => {
+        // grab deals collection
+        let ref = db.ref().child('deals')
+        // grab snapshot
+        ref.on('value', async function (snapshot) {
+          // turn snapshot into object
+          let deals = snapshot.val()
+          // grab cuids from object
+          let cuids = Object.keys(deals)
+          // for each cuid
+          await Promise.all(cuids.map(async (cuid) => {
+            // get deal
+            let deal = deals[cuid]
+            // return if alrady expired
+            if (deal.expiredAt) return
+            // now utc
+            let now = (new Date()).getTime()
+            // last seen or created at time
+            let dealDate = deal.lastSeenAt || deal.createdAt
+            // see if older than
+            // one day in ms
+            if (now - dealDate > 86400000) {
+              expiredDealsCount++
+              let d = db.ref().child(`deals/${cuid}`)
+              let u = { expiredAt: firebase.database.ServerValue.TIMESTAMP }
+              // expire deal
+              return d.update(u)
+            }
+          }))
+          resolve()
+        })
+      })
+    })
+    .then(async () => {
+      // print persisted analytics
+      console.log(`Added ${addedDealsCount} deals`)
+      console.log(`Expired ${expiredDealsCount} deals`)
+      console.log(`Added ${addedProductsCount} products`)
+
       db.goOffline()
     })
     .catch((err) => {
@@ -66,47 +103,6 @@ async function main () {
       console.dir(err)
       db.goOffline()
     })
-
-  let invalidateDeals = async function () {
-    return new Promise(resolve => {
-      // grab deals collection
-      let ref = db.ref().child('deals')
-      // grab snapshot
-      ref.on('value', async function (snapshot) {
-        // turn snapshot into object
-        let deals = snapshot.val()
-        // grab cuids from object
-        let cuids = Object.keys(deals)
-        // for each cuid
-        await Promise.all(cuids.map(async (cuid) => {
-          // get deal
-          let deal = deals[cuid]
-          // return if alrady expired
-          if (deal.expiredAt) return
-          // now utc
-          let now = (new Date()).getTime()
-          // last seen or created at time
-          let dealDate = deal.lastSeenAt || deal.createdAt
-          // see if older than
-          // one day in ms
-          if (now - dealDate > 86400000) {
-            expiredDealsCount++
-            let d = db.ref().child(`deals/${cuid}`)
-            let u = { expiredAt: firebase.database.ServerValue.TIMESTAMP }
-            // expire deal
-            return d.update(u)
-          }
-        }))
-        resolve()
-      })
-    })
-  }
-  await invalidateDeals()
-
-  // print persisted analytics
-  console.log(`Added ${addedDealsCount} deals`)
-  console.log(`Expired ${expiredDealsCount} deals`)
-  console.log(`Added ${addedProductsCount} products`)
 }
 
 main()

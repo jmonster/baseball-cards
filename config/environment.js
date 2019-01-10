@@ -3,12 +3,12 @@
 module.exports = function(environment) {
   let ENV = {
     firebase: {
-      apiKey: 'AIzaSyB1zuup7KDVsTVyUEqQ4sly6LwSmCJQxu0',
-      authDomain: 'thedealzillaprojectid.firebaseapp.com',
-      databaseURL: 'https://thedealzillaprojectid.firebaseio.com/',
-      projectId: 'thedealzillaprojectid',
-      storageBucket: 'gs://thedealzillaprojectid.appspot.com',
-      messagingSenderId: '520741038114'
+      apiKey: ' AIzaSyAzTSjVfnizg4aJAd_xBYXPXTMTKhrzYjg',
+      authDomain: 'coffee-monkey-volcano.firebaseapp.com',
+      databaseURL: 'https://coffee-monkey-volcano.firebaseio.com/',
+      projectId: 'coffee-monkey-volcano',
+      storageBucket: 'gs://coffee-monkey-volcano.appspot.com',
+      messagingSenderId: '1095002023373'
     },
     torii: {
       sessionServiceName: 'session'
