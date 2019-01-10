@@ -42,12 +42,10 @@ export default Component.extend({
   actions: {
     'unlike-deal': function(id) {
       this.dataService.removeLikedDeal(id);
-      // TODO collapse the slider
     },
 
     'relike-deal': function(id) {
       this.dataService.addLikedDeal(id, false);
-      // TODO collapse the slider
     }
   }
 });
