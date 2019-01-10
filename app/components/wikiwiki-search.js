@@ -60,20 +60,12 @@ export default Component.extend({
 
   actions: {
     didPressKey() {
-      // searchIsPending: true,
       run.debounce(this, this.recomputeResults, DEBOUNCE_WAIT);
-      // this.recomputeResults();
-    },
-
-    didClickResult(result) {
-      this.set('query', '');
-      this.recomputeResults();
-      window.location.href = result.get('url');
     },
 
     didLoseFocus() {
       // must defer with an ember run runloop
-      // or else didClickResult won't properly trigger
+      // or else tapping on a result won't behave properly
       run.later(() => {
         this.set('hasFocus', false);
         this.set('query', '');

@@ -9,13 +9,21 @@
   <div class="wikiwiki-search-results br1 br--bottom z-0 bg-white">
     <ul class="ph0 mv0 list">
       {{#each (await filteredResults) as |result|}}
-        <li class="bt bb b--silver f3 pv2 near-black flex items-center" role="button" {{action "didClickResult" result}}>
+        <a
+          href={{result.url}}
+          class="bt bb b--silver f3 pv2 no-underline near-black flex items-center"
+          role="listitem"
+        >
           <div class="thumbnail-parent pa1 bg-white flex-none">
-            <img class="thumbnail block" src="{{result.thumbnail}}" alt="">
+            <img
+              class="thumbnail block"
+              src={{result.thumbnail}}
+              alt="product thumbnail image"
+            >
           </div>
 
-          <span class="ph1">{{or result.title result.product.title}}</span>
-        </li>
+          <span class="ph1">{{result.title}}</span>
+        </a>
       {{else}}
         {{#if (and hasSearchQuery (not showNotFoundMessage))}}
           <li class="bg-lightest-silver bt bb b--silver f3 flex">
