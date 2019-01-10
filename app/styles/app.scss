@@ -36,8 +36,14 @@
 }
 
 .has-slid-left {
-  transform: translate(calc(3rem - 100%), 0px);
-  opacity: 0.75;
+  transform: translate(calc(2.4rem - 100%), 0px);
+  box-shadow: 4px 0px 1px 0px rgba(0,0,0,0.15);
+}
+
+.has-slid-left::after {
+  content: '>';
+  margin-right: 1rem;
+  color: gray;
 }
 
 .swipable-list-item-animated {

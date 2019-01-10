@@ -13,6 +13,12 @@ body > .ember-view {
   min-height: 0;
 }
 
+button {
+  background: rgba(0, 0, 0, 0.075);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
 .dealzilla-logo {
   display: block;
   width: 60px;
