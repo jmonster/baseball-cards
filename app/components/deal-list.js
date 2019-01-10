@@ -14,7 +14,7 @@ export default Component.extend({
     const likedDealsIds = this.likedDealsIds;
     const likedDealsSet = new Set(likedDealsIds);
 
-    return allDeals.filter(d => likedDealsSet.has(String(d.id) && !d.expiredAt));
+    return allDeals.filter(d => likedDealsSet.has(String(d.id)) && !d.expiredAt);
   }),
 
   dislikedDeals: computed('deals.[]', 'dislikedDealsIds.[]', function() {
