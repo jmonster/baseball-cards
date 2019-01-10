@@ -2,7 +2,7 @@ import Service from '@ember/service';
 import { computed } from '@ember/object';
 
 export default Service.extend({
-  _fetch: function (resourceName) {
+  _fetch: function(resourceName) {
     const resourceAsString = localStorage.getItem(resourceName);
     if (!resourceAsString) { return []; }
 
@@ -18,21 +18,21 @@ export default Service.extend({
 
   // TODO equivalent _put method?
 
-  likedDealsIds: computed(function () {
+  likedDealsIds: computed(function() {
     return this._fetch('likedDealsIds');
   }),
 
-  dislikedDealsIds: computed('likedDealsIds.[]', 'seenDealsIds.[]', function () {
+  dislikedDealsIds: computed('likedDealsIds.[]', 'seenDealsIds.[]', function() {
     const likedDealsIdsSet = new Set(this.likedDealsIds);
     return this.seenDealsIds.filter(id => !likedDealsIdsSet.has(String(id)));
   }),
 
-  seenDealsIds: computed(function () {
+  seenDealsIds: computed(function() {
     return this._fetch('seenDealsIds');
   }),
 
-  addLikedDeal(deal, updateSeenDeals=true){
-    const idAsString = String(deal.id)
+  addLikedDeal(id, updateSeenDeals=true) {
+    const idAsString = String(id);
     this.likedDealsIds.pushObject(idAsString);
     localStorage.setItem(
       'likedDealsIds',
@@ -41,26 +41,28 @@ export default Service.extend({
 
     if (updateSeenDeals) {
       this.seenDealsIds.pushObject(idAsString);
-      this.saveSeenDeals()
+      this.saveSeenDeals();
     }
   },
 
-  addDislikedDeal(deal){
-    const idAsString = String(deal.id);
+  addDislikedDeal(id) {
+    const idAsString = String(id);
     this.seenDealsIds.pushObject(idAsString);
-    this.saveSeenDeals()
+    this.saveSeenDeals();
   },
 
   removeLikedDeal(id) {
     const idAsString = String(id)
-    const likedDealsIds = this.likedDealsIds.filter(id => id !== idAsString )
+    // TODO reimplement using sets so removal can be O(1)
+    const likedDealsIds = this.likedDealsIds.filter(id => id !== idAsString);
+    this.set('likedDealsIds', likedDealsIds);
     localStorage.setItem(
       'likedDealsIds',
       JSON.stringify(likedDealsIds)
     );
   },
 
-  saveSeenDeals(){
+  saveSeenDeals() {
     localStorage.setItem(
       'seenDealsIds',
       JSON.stringify(this.seenDealsIds)

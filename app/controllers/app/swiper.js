@@ -90,9 +90,9 @@ export default Controller.extend({
     const didLikeDeal = delta > 0;
 
     if (didLikeDeal) {
-      this.dataService.addLikedDeal(deal);
+      this.dataService.addLikedDeal(deal.id);
     } else {
-      this.dataService.addDislikedDeal(deal);
+      this.dataService.addDislikedDeal(deal.id);
     }
   },
 });

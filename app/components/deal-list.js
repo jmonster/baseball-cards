@@ -45,7 +45,7 @@ export default Component.extend({
       // TODO collapse the slider
     },
 
-    'relike-deal': function() {
+    'relike-deal': function(id) {
       this.dataService.addLikedDeal(id, false);
       // TODO collapse the slider
     }
