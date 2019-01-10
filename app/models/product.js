@@ -1,4 +1,7 @@
 import DS from 'ember-data';
+import { computed } from '@ember/object';
+import ENV from 'dealzilla/config/environment';
+
 const { hasMany } = DS;
 
 const inverse = null;
@@ -30,5 +33,16 @@ export default DS.Model.extend({
   // latestPrice: DS.attr('dollars'),
   // lowestPriceEver: DS.attr('dollars'),
   // lowestPriceDate: DS.attr('string'),
-  // description: DS.attr('string')
+  // description: DS.attr('string'),
+  url: computed('asin', function() {
+    return `https://www.amazon.com/gp/product/${this.get('asin')}/?tag=${ENV.amazonAffliateTag}`
+  }),
+
+  thumbnail: computed('asin', function() {
+    return `https://images-na.ssl-images-amazon.com/images/P/${this.get('asin')}.01.THUMBZZZ.jpg`;
+  }),
+
+  primaryImage: computed('asin', function() {
+    return `https://images-na.ssl-images-amazon.com/images/P/${this.get('asin')}.01.LZZZZZZZ.jpg`;
+  })
 });

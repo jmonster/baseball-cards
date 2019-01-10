@@ -9,13 +9,12 @@
   <div class="wikiwiki-search-results br1 br--bottom z-0 bg-white">
     <ul class="ph0 mv0 list">
       {{#each (await filteredResults) as |result|}}
-        <li class="f3 flex" role="button" {{action "didClickResult" result}}>
-          {{#link-to
-            "app"
-            class="no-underline dark-gray pv2 w-100 truncate ph2"
-          }}
-            {{result.icon}} {{result.title}}
-          {{/link-to}}
+        <li class="bt bb b--silver f3 pv2 near-black flex items-center" role="button" {{action "didClickResult" result}}>
+          <div class="thumbnail-parent pa1 bg-white flex-none">
+            <img class="thumbnail block" src="{{result.thumbnail}}" alt="">
+          </div>
+
+          <span class="ph1">{{or result.title result.product.title}}</span>
         </li>
       {{else}}
         {{#if (and hasSearchQuery (not showNotFoundMessage))}}
@@ -69,52 +68,6 @@
             <span>view history</span>
           {{/link-to}}
         </li>
-
-        {{#if session.isAuthenticated}}
-          {{!-- <li class="truncate f3 flex ph3 bt br1 b--silver">
-            {{#link-to
-              "app.deals"
-              class="no-underline dark-gray pv2 w-100 truncate"
-            }}
-              <span class="pr2">🍻</span><span>share a deal</span>
-            {{/link-to}}
-          </li> --}}
-
-          {{!-- <li class="truncate f3 flex ph3 bt br1 b--silver">
-            {{#link-to
-              "app.deals"
-              class="no-underline dark-gray pv2 w-100 truncate"
-            }}
-              <span class="pr2">📥</span><span>read messages</span>
-            {{/link-to}}
-          </li> --}}
-
-          <li
-            class="dark-gray pointer pv2 w-100 truncate f3 flex ph3 bt br1 b--silver items-center"
-            role="button"
-            {{action signOut}}
-          >
-            <span class="emojay pr2">🔚</span>
-            <span>sign out</span>
-          </li>
-        {{/if}}
-
-        {{#unless session.isAuthenticated}}
-          <li
-            class="flex dark-gray pointer pv2 w-100 truncate f3 flex ph3 bt br1 b--silver items-center"
-            role="button"
-            {{action signIn "google"}}
-          >
-            {{!-- <img
-              src="https://www.google.com/favicon.ico"
-              alt=""
-              class="pr2"
-              style="max-width: 32px; max-height: 20px;"
-            > --}}
-            <span class="emojay google-emoji pr2"></span>
-            <span>sign in (via Google)</span>
-          </li>
-        {{/unless}}
       {{/unless}}
     </ul>
   </div>

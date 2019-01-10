@@ -1,11 +1,13 @@
 .wikiwiki-search input:focus { outline: none; }
 
-.wikiwiki-search-results li:not(:first-child) {
-  margin-top: 2px;
+.wikiwiki-search-results .thumbnail-parent {
+  width: 50px;
 }
 
-.wikiwiki-search-results li:not(:last) {
-  margin-bottom: 2px;
+.wikiwiki-search-results .thumbnail {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .wikiwiki-search-results ul > li:last-child {

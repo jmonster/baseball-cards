@@ -3,7 +3,7 @@ import { computed } from '@ember/object';
 import { alias, empty, gt } from '@ember/object/computed';
 import { run } from '@ember/runloop';
 
-// const DEBOUNCE_WAIT = 100; // ms
+const DEBOUNCE_WAIT = 150; // ms
 
 export default Component.extend({
   classNames: ['wikiwiki-search', 'flex', 'flex-auto', 'flex-column', 'overflow-container'],
@@ -11,6 +11,9 @@ export default Component.extend({
 
   query: '',
   queryIsEmpty: empty('query'),
+  caseInsensitiveQuery : computed('query', function() {
+    return this.get('query').toLowerCase();
+  }),
 
   hasFocus: false,
   componentIsActive: alias('hasFocus'),
@@ -28,7 +31,7 @@ export default Component.extend({
   },
 
   recomputeResults() {
-    const query = this.query;
+    const query = this.caseInsensitiveQuery;
     this.set('searchIsPending', true);
     this.set('showNotFoundMessage', false);
 
@@ -39,23 +42,11 @@ export default Component.extend({
     } else {
 
       // filter items
-      const matcher = this.matcher(query);
+      // const matcher = this.matcher(query);
       this.items.then((items) => {
-        const fuzzyResults = items.filter((result) => matcher.test(result.title));
-
-        let exactResultIndex = -1;
-        for (let i = 0; i < fuzzyResults.length; i++) {
-          if (fuzzyResults[i].name === query) {
-            exactResultIndex = i;
-            break;
-          }
-        }
-
-        if (exactResultIndex >= 0) {
-          // move exact result to the top of the list
-          const exactResult = fuzzyResults.splice(exactResultIndex, 1)[0];
-          fuzzyResults.unshift(exactResult);
-        }
+        const fuzzyResults = items.filter((product) => {
+          return product.get('title').toLowerCase().includes(query);
+        });
 
         this.set('filteredResults', fuzzyResults);
         this.set('searchIsPending', false);
@@ -70,13 +61,14 @@ export default Component.extend({
   actions: {
     didPressKey() {
       // searchIsPending: true,
-      // run.debounce(this, this.recomputeResults, DEBOUNCE_WAIT);
-      this.recomputeResults();
+      run.debounce(this, this.recomputeResults, DEBOUNCE_WAIT);
+      // this.recomputeResults();
     },
 
-    didClickResult() {
+    didClickResult(result) {
       this.set('query', '');
       this.recomputeResults();
+      window.location.href = result.get('url');
     },
 
     didLoseFocus() {
