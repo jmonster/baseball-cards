@@ -40,10 +40,6 @@
   opacity: 0.75;
 }
 
-.swipable-list-item {
-  height:100px;
-}
-
 .swipable-list-item-animated {
   -webkit-transition: 150ms;
   transition:         150ms;
@@ -52,4 +48,15 @@
 
 .swipable-list-item-is-sliding {
   touch-action: pan-x;
+}
+
+.swipable-list-item-top {
+  width: 100%;
+  z-index: 1;
+  // overflow: hidden;
+}
+
+.swipable-list-item-bottom {
+  margin-left: -100%;
+  z-index: 0;
 }

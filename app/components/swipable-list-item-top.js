@@ -136,7 +136,7 @@ function onTouchend(event) {
 }
 
 export default Component.extend({
-  classNames: ['absolute', 'top-0 bottom-0 left-0 right-0', 'bg-white', 'flex', 'items-center'],
+  classNames: ['swipable-list-item-top', 'bg-white', 'items-center'],
   classNameBindings: ['hasSlidLeft', 'isSliding:swipable-list-item-is-sliding:swipable-list-item-animated'],
 
   hasSlidLeft: false,
