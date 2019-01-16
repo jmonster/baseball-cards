@@ -6,26 +6,11 @@
     class="ma5"
   }}
 
-    <style media="screen">
-      .tinder-card-image {
-        background: no-repeat url({{deal.primaryImage}});
-        background-size: contain;
-        -webkit-background-size: contain;
-        -moz-background-size: contain;
-        -o-background-size: contain;
-        background-position: center center;
-      }
-    </style>
-    <div class="tinder-card-image flex-auto flex-colum"></div>
-
     {{#if showCardDetails}}
-      <div class="tinder-card-details bg-gradient-primary flex flex-column">
-        <div class="pa2 bg-white black ma4 br1 flex-auto ba b--purple">
-          <h2 class="ma2">{{deal.product.title}}</h2>
-          {{!-- <p class="ma3">{{deal}}</p> --}}
-        </div>
-      </div>
+      {{camel-graph product=deal.product}}
     {{else}}
+      {{tinder-card-image imageUrl=deal.primaryImage}}
+
       <!-- TODO make this a component so that: -->
       <!-- great deals are bg-gradient-green -->
       <!-- neutral deals are bg-gradient-silver -->

@@ -4,7 +4,7 @@ import { later } from '@ember/runloop';
 const mathematicalMikesMagicMalgorithm = (x) => (15/230) * x + 0.4347826087;
 
 export default Component.extend({
-  classNames: ["tinder-card", "flex", "flex-auto"],
+  classNames: ['tinder-card', 'flex', 'flex-auto'],
 
   setTranslate(xPos, yPos, el) {
     el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
@@ -35,7 +35,7 @@ export default Component.extend({
 
       else {
         // animate back to center
-        event.currentTarget.style.left = "0px";
+        event.currentTarget.style.left = '0px';
       }
 
       this.setTranslate(0, 0, this.element);
