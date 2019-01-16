@@ -1,1 +1,15 @@
-⭐️⭐️⭐️⭐️⭐️
+{{#if (eq stars 0)}}
+  ⭒⭒⭒⭒⭒
+{{else if (eq stars 1)}}
+  <span class="gold">⭑</span>⭒⭒⭒⭒
+{{else if (eq stars 2)}}
+  <span class="gold">⭑⭑</span>⭒⭒⭒
+{{else if (eq stars 3)}}
+  <span class="gold">⭑⭑⭑</span>⭒⭒
+{{else if (eq stars 4)}}
+  <span class="gold">⭑⭑⭑⭑</span>⭒
+{{else if (eq stars 5)}}
+  <span class="gold">⭑⭑⭑⭑⭑⭑</span>
+{{/if}}
+
+<span class="f5">({{count}})</span>

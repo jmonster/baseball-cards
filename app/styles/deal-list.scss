@@ -9,8 +9,8 @@
 .deal-list-item-image {
   // width: 64px;
   // height: 64px;
-  width: 100%;
-  object-fit: contain;
+  max-width: 140px;
+  // object-fit: contain;
 }
 
 a.deal-list-item {
