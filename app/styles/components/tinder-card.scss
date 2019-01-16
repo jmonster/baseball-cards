@@ -1,6 +1,3 @@
-.tinder-card {
-
-}
 .tinder-card-inner {
   box-shadow: 2px 2px 4px 2px rgba(0,0,0,.2);
 }
@@ -31,6 +28,7 @@
 .tinder-card-badge {
   background: url(/assets/images/branding/shaka.png) no-repeat center center;
 }
+
 .tinder-card-badge, .tinder-card-badge-backdrop {
   position: absolute;
   right: 1rem;
@@ -46,7 +44,6 @@
 .tinder-card-wrapper {
   transform: scale(1);
   transition: transform .2s ease-in-out;
-  // margin-bottom: 12rem;
 }
 
 .is-disappearing .tinder-card-wrapper {
@@ -56,4 +53,15 @@
 .tinder-card-toggler {
   -webkit-tap-highlight-color: transparent;
   -webkit-backface-visibility: hidden;
+}
+
+@media only screen and (max-height: 575px) {
+  .tinder-card {
+    margin: 0px;
+  }
+
+  .tinder-card-inner {
+    border-radius: 0px;
+    box-shadow: none;
+  }
 }

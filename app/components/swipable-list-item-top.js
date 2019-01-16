@@ -115,6 +115,7 @@ function onTouchend(event) {
   this.element.removeEventListener('touchmove', boundOnLeftSwipe);
   this.element.removeEventListener('touchend', boundTouchend);
 
+  // re-enable page scrolling
   document.ontouchmove = function() { return true; };
 
   this.set('boundDetectLeftSwipe', null);
@@ -136,7 +137,7 @@ function onTouchend(event) {
 }
 
 export default Component.extend({
-  classNames: ['swipable-list-item-top', 'bg-white', 'items-center'],
+  classNames: ['swipable-list-item-top', 'bg-white', 'flex', 'items-center'],
   classNameBindings: ['hasSlidLeft', 'isSliding:swipable-list-item-is-sliding:swipable-list-item-animated'],
 
   hasSlidLeft: false,
@@ -156,5 +157,5 @@ export default Component.extend({
     const boundTouchstart = this.get('boundTouchstart');
     this.element.removeEventListener('touchstart', boundTouchstart);
     this._super(...arguments);
-  },
+  }
 });

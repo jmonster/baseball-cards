@@ -1,2 +1,7 @@
-{{deal-list-item-image url=thumbnail}}
+{{#unless isExpired}}
+  <div class="flex-none bg-white w-40">
+    {{deal-list-item-image url=standardImage}}
+  </div>
+{{/unless}}
+
 {{deal-list-item-details deal=deal}}

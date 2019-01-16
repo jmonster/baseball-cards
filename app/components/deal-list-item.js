@@ -7,7 +7,10 @@ export default Component.extend({
   href: alias('deal.url'),
   target: '_blank',
 
-  classNames: ['deal-list-item', 'db', 'mh2', 'link', 'blue', 'flex', 'items-start'],
+  isExpired: alias('deal.isExpired'),
 
-  thumbnail: alias('deal.thumbnail')
+  classNames: ['deal-list-item', 'db', 'link', 'flex', 'items-start', 'bb b--silver'],
+  classNameBindings: ['isExpired:expired'],
+
+  standardImage: alias('deal.standardImage')
 });

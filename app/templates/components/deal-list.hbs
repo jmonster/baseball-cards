@@ -1,5 +1,5 @@
 <div class="pt2 pb2">
-  <h2 class="mh2 fw5 mb1">
+  <h2 class="mh2 fw5 mb3">
     👍 <span class="bb b--gray pr3 pl1">Recent Likes</span>
   </h2>
 
@@ -8,26 +8,29 @@
       {{#each likedDeals as |deal|}}
         {{#swipable-list-item as |sli|}}
           {{#sli.top}}
-            {{deal-list-item deal=deal class="pv2"}}
+            {{deal-list-item deal=deal}}
           {{/sli.top}}
 
           {{#sli.actions}}
-            <button class="ma0 ph2 white" {{action "unlike-deal" deal.id}}>👎 unlike 👎</button>
+          <div class="">
+            <button class="ma0 pv2 ph4 white br1" {{action "unlike-deal" deal.id}}>move to <b>disliked</b> list</button>
+          </div>
           {{/sli.actions}}
         {{/swipable-list-item}}
       {{/each}}
     </div>
   {{else}}
     <div class="hk-well mh2 mv3">
-      <span class="f4 mb2 lh-title">🧐</span>
-      <span class="f5 mw7 center lh-copy">You haven't liked anything yet.</span>
+      <span class="f2 mb2 lh-title">🧐</span>
+      <span class="f3 mw7 center lh-copy">No recent likes.</span>
+      <span class="db mt2">{{link-to 'tap to browse deals' 'app.swiper'}}</span>
     </div>
   {{/if}}
 </div>
 
 
 <div class="pt2 pb2">
-  <h2 class="mh2 fw5 mb1">
+  <h2 class="mh2 fw5 mb3">
     👎 <span class="bb b--gray pr3 pl1">Recent Dislikes</span>
   </h2>
 
@@ -36,31 +39,31 @@
       {{#each dislikedDeals as |deal|}}
         {{#swipable-list-item as |sli|}}
           {{#sli.top}}
-            {{deal-list-item deal=deal class="pv2"}}
+            {{deal-list-item deal=deal}}
           {{/sli.top}}
 
           {{#sli.actions}}
-            <button class="ma0 ph2 white" {{action "relike-deal" deal.id}}>👍 like 👍</button>
+            <button class="ma0 pv2 ph4 white br1" {{action "relike-deal" deal.id}}>move to <b>liked</b> list</button>
           {{/sli.actions}}
         {{/swipable-list-item}}
       {{/each}}
     </div>
   {{else}}
     <div class="hk-well mh2 mv3">
-      <span class="f4 mb2 lh-title">🥴</span>
-      <span class="f5 mw7 center lh-copy">You haven't <span class="b">dis</span>liked anything yet.</span>
+      <span class="f2 mb2 lh-title">🥴</span>
+      <span class="f3 mw7 center lh-copy">No recent dislikes.</span>
     </div>
   {{/if}}
 </div>
 
 {{#if staleDeals}}
   <div class="pt2 pb2">
-    <h2 class="mh2 fw5 mb1">
+    <h2 class="mh2 fw5 mb3">
       ⌛️ <span class="bb b--gray pr3 pl1">Expired</span>
     </h2>
     <div class="liked-deal-list">
       {{#each staleDeals as |deal|}}
-        {{deal-list-item deal=deal class="pv2"}}
+        {{deal-list-item deal=deal}}
       {{/each}}
     </div>
   </div>

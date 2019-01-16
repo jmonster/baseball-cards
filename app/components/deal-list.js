@@ -7,7 +7,7 @@ import { filter, filterBy, setDiff } from '@ember/object/computed';
 export default Component.extend({
   dataService: inject(),
 
-  nonExpiredDeals: filterBy('deals', 'expiredAt', null),
+  nonExpiredDeals: filterBy('deals', 'isExpired', false),
   expiredDeals: setDiff('deals', 'nonExpiredDeals'),
   likedDealsIds: alias('dataService.likedDealsIds'),
   dislikedDealsIds: alias('dataService.dislikedDealsIds'),
@@ -29,7 +29,7 @@ export default Component.extend({
   }),
 
   // exclude 3 day past expired deals
-  staleDeals: filter('expiredDeals', function(deal, index, expiredDeals) {
+  staleDeals: filter('expiredDeals.[]', function(deal, index, expiredDeals) {
     let now = (new Date()).getTime()
     return expiredDeals.filter(d => !(now - d.expiredAt > 86400000 * 3));
   }),

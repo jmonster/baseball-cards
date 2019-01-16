@@ -3,7 +3,7 @@
 @import "animate";
 
 @import "global";
-@import "spinner";
+// @import "spinner";
 @import "home";
 @import "deal-list";
 
@@ -11,58 +11,6 @@
 @import "components/x-input";
 @import "components/wikiwiki-search";
 @import "components/tinder-card";
+@import "components/swipable-list-item";
+
 @import url('https://fonts.googleapis.com/css?family=Rubik:400,700');
-
-.swiper-padding {
-  margin-bottom: 20px; // mb4
-  margin-top: 10px;    // mt2
-}
-
-@media only screen and (max-height: 575px) {
-  .tinder-card {
-    margin: 0px;
-  }
-
-  .tinder-card-inner {
-    border-radius: 0px;
-    box-shadow: none;
-  }
-
-  .swiper-padding {
-    margin-bottom: 0px; // mb4
-    margin-top: 0px;    // mt2
-    justify-content: center;
-  }
-}
-
-.has-slid-left {
-  transform: translate(calc(2.4rem - 100%), 0px);
-  box-shadow: 4px 0px 1px 0px rgba(0,0,0,0.15);
-}
-
-.has-slid-left::after {
-  content: '>';
-  margin-right: 1rem;
-  color: gray;
-}
-
-.swipable-list-item-animated {
-  -webkit-transition: 150ms;
-  transition:         150ms;
-  transition-timing-function: ease-in-out;
-}
-
-.swipable-list-item-is-sliding {
-  touch-action: pan-x;
-}
-
-.swipable-list-item-top {
-  width: 100%;
-  z-index: 1;
-  // overflow: hidden;
-}
-
-.swipable-list-item-bottom {
-  margin-left: -100%;
-  z-index: 0;
-}

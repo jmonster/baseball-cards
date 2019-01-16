@@ -68,7 +68,7 @@ async function main () {
             // get deal
             let deal = deals[cuid]
             // return if alrady expired
-            if (deal.expiredAt) return
+            if (deal.isExpired) return
             // now utc
             let now = (new Date()).getTime()
             // last seen or created at time

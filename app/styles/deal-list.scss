@@ -7,20 +7,22 @@
 }
 
 .deal-list-item-image {
-  width: 64px;
-  height: 64px;
+  // width: 64px;
+  // height: 64px;
+  width: 100%;
   object-fit: contain;
 }
 
-.deal-list-item-details-product-name {
-  color: #034ca2;
+a.deal-list-item {
+  color: #4e535a;
 }
 
-.deal-list-item:visited,
-.deal-list-item:visited .deal-list-item-details-product-name {
-  color: #4e535a;
-  -webkit-box-flex: 0;
-  flex: none;
+a.deal-list-item:visited {
+  color: #57729a;
+}
+
+a.deal-list-item.expired {
+  color: silver;
 }
 
 .deal-list-item:visited,

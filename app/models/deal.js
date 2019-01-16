@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import { computed } from '@ember/object';
+import { bool } from '@ember/object/computed';
 import ENV from 'dealzilla/config/environment';
 
 const inverse = null;
@@ -13,6 +14,8 @@ export default DS.Model.extend({
   title: DS.attr('string'),
   description: DS.attr('string'),
   expiredAt: DS.attr('date'),
+  // isExpired: true,
+  isExpired: bool('expiredAt'),
   lastSeenAt: DS.attr('date'),
 
   // TODO we should offer an array of opportunities here
@@ -32,6 +35,10 @@ export default DS.Model.extend({
 
   thumbnail: computed('product.asin', function() {
     return `https://images-na.ssl-images-amazon.com/images/P/${this.get('product.asin')}.01.THUMBZZZ.jpg`;
+  }),
+
+  standardImage: computed('product.asin', function() {
+    return `https://images-na.ssl-images-amazon.com/images/P/${this.get('product.asin')}.jpg`;
   }),
 
   primaryImage: computed('product.asin', function() {
