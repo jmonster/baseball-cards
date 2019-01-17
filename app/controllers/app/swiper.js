@@ -3,6 +3,7 @@ import { computed, observer } from '@ember/object';
 import { inject } from '@ember/service';
 import { alias } from '@ember/object/computed';
 import { isEmpty } from '@ember/utils';
+import { equal } from '@ember/object/computed';
 
 /**
  * Shuffles array in place. ES6 version
@@ -20,6 +21,10 @@ export default Controller.extend({
   dataService: inject(),
 
   seenDealsIds: alias('dataService.seenDealIds'),
+  detailIndex: 0,
+
+  showCamelGraph: equal('detailIndex', 1),
+  showAdditionalActions: equal('detailIndex', 2),
 
   allDeals: computed(function() {
     return this.model.deals.filter(d => !d.isExpired);
@@ -63,11 +68,13 @@ export default Controller.extend({
 
   actions: {
     onLeftTap() {
-      this.set('showCardDetails', false);
+      const count = this.get('detailIndex');
+      this.set('detailIndex', count <= 0 ? 0 : count - 1);
     },
 
     onRightTap() {
-      this.set('showCardDetails', true);
+      const count = this.get('detailIndex');
+      this.set('detailIndex', count >= 2 ? count : count + 1);
     },
 
     removeCard(delta) {
@@ -77,12 +84,12 @@ export default Controller.extend({
       this.mutableDeals.shiftObject();
 
       // reset state
-      this.set('showCardDetails', false);
+      this.set('detailIndex', 0);
     },
 
     reset() {
       this.set('allDeals', this.model.deals);
-      this.set('showCardDetails', false);
+      this.set('detailIndex', 0);
     }
   },
 

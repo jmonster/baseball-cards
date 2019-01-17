@@ -6,8 +6,14 @@
     class="ma5"
   }}
 
-    {{#if showCardDetails}}
-      {{camel-graph product=deal.product}}
+    {{#if showCamelGraph}}
+      {{camel-graph-img product=deal.product}}
+    {{else if showAdditionalActions}}
+      <h1 class="ml1">Additional Resources</h1>
+      <ul class="z-1">
+        <li>{{fake-spot-link product=deal.product}}</li>
+        <li>{{camel-link product=deal.product}}</li>
+      </ul>
     {{else}}
       {{tinder-card-image imageUrl=deal.primaryImage}}
 

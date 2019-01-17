@@ -13,7 +13,9 @@
 
           {{#sli.actions}}
           <div class="">
-            <button class="ma0 pv2 ph4 white br1" {{action "unlike-deal" deal.id}}>move to <b>disliked</b> list</button>
+            {{#dz-button click=(action 'unlike-deal' deal.id)}}
+              move to <b>disliked</b> list
+            {{/dz-button}}
           </div>
           {{/sli.actions}}
         {{/swipable-list-item}}
@@ -43,7 +45,9 @@
           {{/sli.top}}
 
           {{#sli.actions}}
-            <button class="ma0 pv2 ph4 white br1" {{action "relike-deal" deal.id}}>move to <b>liked</b> list</button>
+            {{#dz-button click=(action 'relike-deal' deal.id)}}
+              move to <b>liked</b> list
+            {{/dz-button}}
           {{/sli.actions}}
         {{/swipable-list-item}}
       {{/each}}
