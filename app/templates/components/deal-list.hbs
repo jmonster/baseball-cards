@@ -12,9 +12,17 @@
           {{/sli.top}}
 
           {{#sli.actions}}
-            <div class="">
+            <div class="flex flex-column">
               {{#dz-button click=(action "unlike-deal" deal.id)}}
                 move to <b>disliked</b> list
+              {{/dz-button}}
+
+              {{#dz-button click=(action "hopToFakeSpot" deal) class="mv1"}}
+                view <b>fakespot</b> score
+              {{/dz-button}}
+
+              {{#dz-button click=(action "hopToCamelCamelCamel" deal)}}
+                view <b>camelcamelcamel</b> overview
               {{/dz-button}}
             </div>
           {{/sli.actions}}

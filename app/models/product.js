@@ -44,5 +44,13 @@ export default DS.Model.extend({
 
   primaryImage: computed('asin', function() {
     return `https://images-na.ssl-images-amazon.com/images/P/${this.get('asin')}.01.LZZZZZZZ.jpg`;
+  }),
+
+  fakespotUrl: computed('asin', function() {
+    return `https://www.fakespot.com/analyze?url=https%3A%2F%2Fwww.amazon.com%2Fgp%2Fproduct%2F${this.get('asin')}`;
+  }),
+
+  camelcamelcamelUrl: computed('asin', function() {
+    return `https://camelcamelcamel.com//product/${this.get('asin')}`
   })
 });
