@@ -12,11 +12,11 @@
           {{/sli.top}}
 
           {{#sli.actions}}
-          <div class="">
-            {{#dz-button click=(action 'unlike-deal' deal.id)}}
-              move to <b>disliked</b> list
-            {{/dz-button}}
-          </div>
+            <div class="">
+              {{#dz-button click=(action "unlike-deal" deal.id)}}
+                move to <b>disliked</b> list
+              {{/dz-button}}
+            </div>
           {{/sli.actions}}
         {{/swipable-list-item}}
       {{/each}}
@@ -25,7 +25,7 @@
     <div class="hk-well mh2 mv3">
       <span class="f2 mb2 lh-title">🧐</span>
       <span class="f3 mw7 center lh-copy">No recent likes.</span>
-      <span class="db mt2">{{link-to 'tap to browse deals' 'app.swiper'}}</span>
+      <span class="db mt2">{{link-to "tap to browse deals" "app.swiper"}}</span>
     </div>
   {{/if}}
 </div>
@@ -45,7 +45,7 @@
           {{/sli.top}}
 
           {{#sli.actions}}
-            {{#dz-button click=(action 'relike-deal' deal.id)}}
+            {{#dz-button click=(action "relike-deal" deal.id)}}
               move to <b>liked</b> list
             {{/dz-button}}
           {{/sli.actions}}
