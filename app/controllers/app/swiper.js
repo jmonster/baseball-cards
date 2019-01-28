@@ -60,12 +60,6 @@ export default Controller.extend({
     }
   }),
 
-  mutableDealsObserver: observer('mutableDeals.[]', function () {
-    if (isEmpty(this.mutableDeals)) {
-      this.transitionToRoute('app.deals');
-    }
-  }),
-
   actions: {
     onLeftTap() {
       const count = this.get('detailIndex');
@@ -85,6 +79,10 @@ export default Controller.extend({
 
       // reset state
       this.set('detailIndex', 0);
+
+      if (isEmpty(this.mutableDeals)) {
+        this.transitionToRoute('app.deals');
+      }
     },
 
     reset() {
