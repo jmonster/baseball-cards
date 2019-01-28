@@ -11,14 +11,10 @@ export default Route.extend({
   isDesktop: alias('browser.isDesktop'),
 
   beforeModel() {
-    const hasSeenDeals = this.seenDealsIds.length || false;
+    const notDev = !(window.location.hostname === 'localhost');
 
-    if (this.isDesktop) {
+    if (notDev && this.isDesktop) {
       this.transitionTo('desktop');
-    } else if (hasSeenDeals) {
-      this.transitionTo('app.deals');
-    } else {
-      this.transitionTo('app.swiper');
     }
   },
 
