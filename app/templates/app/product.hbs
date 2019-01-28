@@ -1,6 +1,6 @@
-{{deal-list-item-image url=product.primaryImage class="self-center pa2"}}
+<div class="flex flex-column pa2">
+  {{deal-list-item-image url=product.primaryImage class="self-center"}}
 
-<div class="mh3 mb3">
   <span class="f4 b">{{product.title}}</span>
   <div class="mb2 flex justify-between items-center db f5">
     <span>by Menon™{{product.manufacturer}}</span>
@@ -10,13 +10,13 @@
   <div class="flex flex-auto flex-column">
     {{#dz-button
       click=(route-action "hopToAmazon" product)
-      class="f2 mh3 light-orange bg-black"
+      class="f2 light-orange bg-black"
     }}
       see product on <b>amazon</b>
     {{/dz-button}}
 
     {{#dz-button
-      class="mh3 mv1 bg-gray light-gray"
+      class="mv1 bg-gradient-silver light-gray"
       disabled=true
     }}
       <b>alert</b> me when on sale
@@ -24,14 +24,14 @@
 
     {{#dz-button
       click=(route-action "hopToFakeSpot" product)
-      class="mh3 white bg-purple"
+      class="white bg-gradient-primary"
     }}
       view <b>fakespot</b> score
     {{/dz-button}}
 
     {{#dz-button
       click=(route-action "hopToCamelCamelCamel" product)
-      class="mh3 mt1 white bg-purple"
+      class="mt1 white bg-gradient-primary"
     }}
       view <b>camelcamelcamel</b> overview
     {{/dz-button}}
