@@ -42,6 +42,10 @@ export default DS.Model.extend({
     return `https://images-na.ssl-images-amazon.com/images/P/${this.get('asin')}.01.THUMBZZZ.jpg`;
   }),
 
+  standardImage: computed('asin', function() {
+    return `https://images-na.ssl-images-amazon.com/images/P/${this.get('asin')}.jpg`;
+  }),
+
   primaryImage: computed('asin', function() {
     return `https://images-na.ssl-images-amazon.com/images/P/${this.get('asin')}.01.LZZZZZZZ.jpg`;
   }),

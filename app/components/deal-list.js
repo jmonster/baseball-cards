@@ -46,14 +46,6 @@ export default Component.extend({
 
     'relike-deal': function(id) {
       this.dataService.addLikedDeal(id, false);
-    },
-
-    'hopToCamelCamelCamel': function(deal) {
-      window.open(deal.get('product.camelcamelcamelUrl'), '_blank');
-    },
-
-    'hopToFakeSpot': function(deal) {
-      window.open(deal.get('product.fakespotUrl'), '_blank');
     }
   }
 });

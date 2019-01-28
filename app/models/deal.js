@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import { computed } from '@ember/object';
+import { alias } from '@ember/object/computed';
 import { bool } from '@ember/object/computed';
 import ENV from 'dealzilla/config/environment';
 
@@ -29,19 +30,8 @@ export default DS.Model.extend({
   // wiki: DS.attr('string'), // someday soon
   // url: DS.attr('string'),
 
-  url: computed('product.asin', function() {
-    return `https://www.amazon.com/gp/product/${this.get('product.asin')}/?tag=${ENV.amazonAffliateTag}`
-  }),
-
-  thumbnail: computed('product.asin', function() {
-    return `https://images-na.ssl-images-amazon.com/images/P/${this.get('product.asin')}.01.THUMBZZZ.jpg`;
-  }),
-
-  standardImage: computed('product.asin', function() {
-    return `https://images-na.ssl-images-amazon.com/images/P/${this.get('product.asin')}.jpg`;
-  }),
-
-  primaryImage: computed('product.asin', function() {
-    return `https://images-na.ssl-images-amazon.com/images/P/${this.get('product.asin')}.01.LZZZZZZZ.jpg`;
-  })
+  url: alias('product.url'),
+  thumbnail: alias('product.thumbnail'),
+  standardImage: alias('product.standardImage'),
+  primaryImage: alias('product.primaryImage')
 });

@@ -13,15 +13,15 @@
 
           {{#sli.actions}}
             <div class="flex flex-column">
-              {{#dz-button click=(action "unlike-deal" deal.id)}}
+              {{#dz-button class="white" click=(action "unlike-deal" deal.id)}}
                 move to <b>disliked</b> list
               {{/dz-button}}
 
-              {{#dz-button click=(action "hopToFakeSpot" deal) class="mv1"}}
+              {{#dz-button class="white" click=(route-action "hopToFakeSpot" deal.product) class="mv1"}}
                 view <b>fakespot</b> score
               {{/dz-button}}
 
-              {{#dz-button click=(action "hopToCamelCamelCamel" deal)}}
+              {{#dz-button class="white" click=(route-action "hopToCamelCamelCamel" deal.product)}}
                 view <b>camelcamelcamel</b> overview
               {{/dz-button}}
             </div>

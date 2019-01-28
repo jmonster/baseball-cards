@@ -10,8 +10,9 @@ Router.map(function() {
   this.route('app', { path: '/' }, function(){
     this.route('deals');
     this.route('swiper');
+    this.route('product', { path: '/products/:product_id'});
   });
-  
+
   this.route('desktop')
 });
 

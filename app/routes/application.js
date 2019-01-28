@@ -53,6 +53,18 @@ export default Route.extend({
       this.session.close()
         .then(() => { this.transitionTo('/'); })
         .catch((/*err*/) => { window.location.assign('/'); });
+    },
+
+    hopToAmazon(product) {
+      window.open(product.get('url'), '_blank');
+    },
+
+    hopToFakeSpot(product) {
+      window.open(product.get('fakespotUrl'), '_blank');
+    },
+
+    hopToCamelCamelCamel(product) {
+      window.open(product.get('camelcamelcamelUrl'), '_blank');
     }
   }
 });
