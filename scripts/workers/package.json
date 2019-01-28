@@ -1,0 +1,12 @@
+{
+  "name": "queue-workers",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "johnny domino",
+  "private": true,
+  "dependencies": {
+    "bull": "^3.6.0",
+    "cheerio": "^1.0.0-rc.2",
+    "got": "^9.6.0"
+  }
+}
