@@ -8,13 +8,19 @@ function sanitizePrice (input) {
 }
 
 module.exports = async function () {
-  const promise = new Promise(async (resolve) => {
-    const { body } = await request.get(CAMEL_RSS)
+  const promise = new Promise(async (resolve, reject) => {
+    let body;
+
+    try {
+      body = await request.get(CAMEL_RSS);
+    } catch(err) {
+      return reject(err);
+    }
 
     parseString(body, (err, { rss: { channel: [{ item }] } }) => {
       if (err) {
         console.error(err)
-        return
+        return reject(err);
       }
       const modifiedItems = item.map((it) => {
         return {

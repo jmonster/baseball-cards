@@ -1,12 +1,24 @@
 const firebase = require('firebase')
 const camel = require('./camelcamelcamel')
-const { firebase: firebaseConfig } = require('../config/environment')()
+const { firebase: firebaseConfig } = require('../../config/environment')()
 const { getProductFromDB, getDealFromDB } = require('./firefirefire')
+const amazonFetchQueue = require('../workers/amazon-fetch-queue')
+
 
 async function main () {
+  // setup DB access
   firebase.initializeApp(firebaseConfig)
   const db = firebase.database()
-  const scrapedDeals = await camel()
+
+  // fetch CCC's deals list (via their RSS feed)
+  let scrapedDeals;
+  try {
+    scrapedDeals = await camel();
+  } catch(err) {
+    console.error("ERROR: Unable to access camelcamelcamel.");
+    console.error(err);
+    process.exit(-3);
+  }
 
   // persisted analytics
   let addedDealsCount = 0
@@ -19,20 +31,27 @@ async function main () {
   // products _currently_ use the asin as their id;
   //    this is fine as we only support amazon at the moment
   Promise.all(scrapedDeals.map(async function ({ asin, cuid, title, price, msrp, avgPrice }) {
+    // add this deal to our price monitoring queue
+    amazonFetchQueue.add(`asin:${asin}`, { asin }, {
+      repeat: { every: 8.64e+7 }, // ever 24 hours
+      jobId: asin                 // unique / only 1 job for this product
+    })
+
     // TODO fetch all deals and products in one query
     const productId = asin // TODO support more than just Amazon
     const product = await getProductFromDB(productId, db)
     const deal = await getDealFromDB(cuid, db)
     const createdAt = firebase.database.ServerValue.TIMESTAMP
 
-    // skip duplicate deals
+    // skip duplicate deals (ensure unique `cuid` values)
     if (deal) {
+      // update the deal to note that we observe it is still being a deal right now
       let ref = db.ref().child(`deals/${cuid}`)
       let u = { lastSeenAt: firebase.database.ServerValue.TIMESTAMP }
       return ref.update(u)
     }
 
-    // don't duplicate product records
+    // skip duplicate products
     if (!product) {
       addedProductsCount++
       // create product record to compliment the deal
@@ -55,14 +74,15 @@ async function main () {
   }))
     .then(async () => {
       return new Promise(resolve => {
-        // grab deals collection
+        // grab (all) deals
         let ref = db.ref().child('deals')
-        // grab snapshot
         ref.on('value', async function (snapshot) {
           // turn snapshot into object
           let deals = snapshot.val()
+
           // grab cuids from object
           let cuids = Object.keys(deals)
+
           // for each cuid
           await Promise.all(cuids.map(async (cuid) => {
             // get deal
@@ -75,7 +95,7 @@ async function main () {
             let dealDate = deal.lastSeenAt || deal.createdAt
             // see if older than
             // one day in ms
-            if (now - dealDate > 86400000) {
+            if (now - dealDate > 8.64e+7) {
               expiredDealsCount++
               let d = db.ref().child(`deals/${cuid}`)
               let u = { expiredAt: firebase.database.ServerValue.TIMESTAMP }

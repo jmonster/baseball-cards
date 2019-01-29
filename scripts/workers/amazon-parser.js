@@ -1,5 +1,8 @@
 const cheerio = require('cheerio')
 
+// TODO error handling
+// unexpected exceptions seems to break the queue?
+
 module.exports = async function amazonParser(job) {
   const { asin, html } = job.data;
   console.info(`parsing ${asin}`);
@@ -13,6 +16,11 @@ module.exports = async function amazonParser(job) {
   const reviewHeader = $('#reviewsMedley');
   const reviewCount = reviewHeader.find('h2[data-hook="total-review-count"]').text().match(/\d+/)[0];
   const weightedScore = reviewHeader.find('i[data-hook="average-star-rating"]').text().match(/\d+\.\d+/)[0];
+
+  // TODO this assumes there are 5 diff scores
+  // but when there are 0% of a certain score it is omitted
+  // so we need to instead explicitly check which rating we're looking at
+  // and store the magnitude under that specific label
   const weights = reviewHeader.find('table tr.a-histogram-row .histogram-review-count').map((i,el) => {
     // 0th index is for 5 stars, 4th index is for 1 star
     return cheerio(el).text().match(/\d+/)[0];
@@ -37,6 +45,7 @@ module.exports = async function amazonParser(job) {
 
   job.progress(75);
 
+  // TODO add product description
   const data = {
     price, bestOffer, reviewCount, weightedScore, weights, //reviews, images
   };
