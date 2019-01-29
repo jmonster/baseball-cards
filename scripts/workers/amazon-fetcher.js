@@ -6,7 +6,9 @@ const fetchAmazonProduct = async function({ data: { asin } }) {
   console.info(`amazon-fetcher'ing ${asin}`);
 
   const { body: html } = await amazon.get(asin);
-  amazonPageParseQueue.add({ asin, html }, { attempts: 1 });
+  amazonPageParseQueue.add({ asin, html }, {
+    attempts: 1
+  });
 
   return { asin };
 };
