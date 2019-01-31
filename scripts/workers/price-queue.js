@@ -4,13 +4,11 @@ const port = 6379;
 const host = '127.0.0.1';
 const password = '';
 
-const amazonPageParseQueue = new Queue('amazon-parse',{
+const priceQueue = new Queue('price',{
   redis: { port, host, password },
   defaultJobOptions: {
-    removeOnFail: true,
-    removeOnComplete: true,
-    backoff: 10000
+    removeOnComplete: true
   }
 });
 
-module.exports = amazonPageParseQueue;
+module.exports = priceQueue;
