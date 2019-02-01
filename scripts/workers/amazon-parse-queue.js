@@ -1,16 +1,11 @@
-const Queue = require('bull');
+const Queue = require('bee-queue');
 
-const port = 6379;
-const host = '127.0.0.1';
-const password = '';
-
-const amazonPageParseQueue = new Queue('amazon-parse',{
-  redis: { port, host, password },
-  defaultJobOptions: {
-    removeOnFail: true,
-    removeOnComplete: true,
-    backoff: 10000
-  }
+const redis = { port: 6379, host: '127.0.0.1' };
+const queue = new Queue('amazon-parse',{
+  redis,
+  storeJobs: false,
+  removeOnSuccess: true,
+  removeOnFailure: true
 });
 
-module.exports = amazonPageParseQueue;
+module.exports = queue;

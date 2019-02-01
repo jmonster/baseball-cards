@@ -5,7 +5,8 @@
   "author": "johnny domino",
   "private": true,
   "dependencies": {
-    "bull": "^3.6.0",
+    "bee-queue": "^1.2.2",
+    "bottleneck": "^2.15.3",
     "cheerio": "^1.0.0-rc.2",
     "got": "^9.6.0"
   }

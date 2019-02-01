@@ -1,26 +1,43 @@
+// const { limiter } = require('./amazon-fetch-queue');
 const amazon = require('./amazon-client');
-const amazonPageParseQueue = require('./amazon-parse-queue');
-const amazonFetchQueue = require('./amazon-fetch-queue');
+const Bottleneck = require('bottleneck');
 
+const amazonFetchQueue = require('./amazon-fetch-queue');
+const amazonPageParseQueue = require('./amazon-parse-queue');
+
+const limiter = new Bottleneck({
+  // kick off at most 1 request/second
+  minTime: 2000,   // 1 second
+
+  // run at most 1 request simultaneously
+  maxConcurrent: 1 // 1
+});
 
 const fetchAmazonProduct = async function(job) {
   const { data: { asin } } = job;
   console.info(`amazon-fetcher'ing ${asin}`);
-  job.progress(1);
+  job.reportProgress(1);
 
   try {
-    const { body: html } = await amazon.get(asin);
-    job.progress(99);
+    const { body: html } = await amazon.get(asin, { timeout: 7000 });
+    job.reportProgress(99);
 
-    amazonPageParseQueue.add({ asin, html }, {
-      attempts: 1
-    });
+    amazonFetchQueue
+      .createJob({ asin })
+      .retries(3)
+      .delayUntil(Date.now() + 8.64e+7) // 24h from now
+      .save();
 
-    job.progress(100);
-    return true;
+    return amazonPageParseQueue
+      .createJob({ asin, html })
+      .retries(0)
+      .save();
   } catch(err) {
-    console.log(`status: ${err.statusCode}`);
-    throw new Error('Unable to fetch Amazon page.');
+    console.error(err);
+    // hax because we lose the original error in our `job retrying` handler
+    err.message = err.statusCode;
+    throw err;
   }
 };
-module.exports = fetchAmazonProduct;
+
+module.exports = limiter.wrap(fetchAmazonProduct);

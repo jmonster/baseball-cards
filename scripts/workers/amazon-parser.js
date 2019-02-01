@@ -1,12 +1,23 @@
-const cheerio = require('cheerio')
-const priceQueue = require('./price-queue');
+const cheerio = require('cheerio');
+const firebase = require('firebase');
 
+const db = firebase.database();
+const priceQueue = require('./price-queue');
+const { shaZam } = require('../scraper/firefirefire')
+
+// TODO refactor all the CSS selectors into a json config file
+// TODO write a shared function for find a css property,
+//      grabbing it's text and running the result through
+//      a filter to strip whitespace, convert numbers, etc
+// TODO have a function take multiple css selectors
+//      and progressively try them until it finds a result
+//      e.g. different selectors for finding the price
 module.exports = async function amazonParser(job) {
   const { asin, html } = job.data;
   let $;
 
   console.info(`parsing ${asin}`);
-  job.progress(1);
+  job.reportProgress(1);
 
   try {
     $ = cheerio.load(html);
@@ -15,21 +26,24 @@ module.exports = async function amazonParser(job) {
     throw new Error('Unable to cheerio.load(html)');
   }
 
-  job.progress(25);
+  job.reportProgress(25);
 
   // review metrics
-  let price, bestOffer, reviewCount, weightedScore;
+  let price, bestOffer, reviewCount, weightedScore, description;
   const weights = {};
 
   try {
-    const priceStr = $('#priceblock_ourprice').text().replace(/\t|\r|\n|\$/mgi, '');
-    const priceStr_m = priceStr && priceStr.match(/\d+\.?\d+/);
-    price = priceStr_m && priceStr_m[0];
-    price = price || $('#new-button-price').text();
-    price = price && price.replace('$','').replace(',','').replace('.','');
+    let priceStr = $('#priceblock_ourprice').text();
+    priceStr = priceStr || $('#new-button-price').text();
+    priceStr = priceStr || $('#newBuyBoxPrice').text();
+    priceStr = priceStr || $('.offer-price').text();
 
-    // enqueue this price point to be analyzed/recorded
-    priceQueue.add({ asin, price });
+    const priceStr_m = priceStr && priceStr.match(/\d+\.?\d*/);
+    price = priceStr_m && priceStr_m[0];
+    price = price && price.trim().replace('$','').replace(',','').replace('.','');
+
+    // enqueue this price point to be analyzed+recorded
+    priceQueue.createJob({ asin, price }).save();
 
     const bestOfferStr = $('#mbc-upd-olp-link').text();
     bestOffer = bestOfferStr && bestOfferStr.match(/\d+\.?\d+/)[0];
@@ -42,6 +56,8 @@ module.exports = async function amazonParser(job) {
     const weightedScoreSection = reviewHeader && reviewHeader.find('i[data-hook="average-star-rating"]').text();
     const weightedScoreSection_m = weightedScoreSection && weightedScoreSection.match(/\d+\.\d+/);
     weightedScore = weightedScoreSection_m && weightedScoreSection_m[0];
+
+    description = $('#productDescription_feature_div').html().trim();
 
     // TODO this assumes there are 5 diff scores
     // but when there are 0% of a certain score it is omitted
@@ -67,8 +83,7 @@ module.exports = async function amazonParser(job) {
     throw new Error('Unable to parse review summary');
   }
 
-  job.progress(50);
-
+  job.reportProgress(50);
 
   // inidividual reviews
   let rawReviews, reviews
@@ -90,7 +105,7 @@ module.exports = async function amazonParser(job) {
     throw new Error('Unable to parse individual (top) reviews')
   }
 
-  job.progress(75);
+  job.reportProgress(75);
 
   let images;
   try {
@@ -102,15 +117,51 @@ module.exports = async function amazonParser(job) {
     throw new Error("Unable to parse customer photos");
   }
 
-  job.progress(99);
-
   // TODO add product description
   const data = {
-    asin, price, bestOffer, reviewCount, weightedScore, weights, reviews, images
+    asin, description, lastPrice: price, bestOffer, reviewCount, weightedScore, weights, images
   };
 
-  // console.info(data)
+
+  // fetch the product from firebase
+  try {
+    const productRef = db.ref(`products/${asin}`);
+    const reviewsRef = db.ref(`reviews/${asin}`);
+
+    const reviewSnapshot = await reviewsRef.once('value');
+    const persistedReviews = reviewSnapshot.val() || {};
+    const persistedReviewIds = Object.keys(persistedReviews);
+    const setOfIds = new Set(persistedReviewIds); // O(1) lookups
+    const newReviews = reviews.filter((review) => {
+      const { name, title } = review;
+      const hashId = shaZam(name+title);
+
+      review.hashId = hashId;
+
+      // true when hashId is not in our set
+      return !setOfIds.has(hashId);
+    });
+
+    // create new review records + capture their keys
+    // TODO batch these?
+    const newReviewIds = newReviews.map((r) => {
+      const hashId = r.hashId;
+      delete r.hashId;
+
+      db.ref(`reviews/${asin}`).child(hashId).set(r);
+      return hashId;
+    });
+
+    // update the product itself
+    productRef.update(data); // update product
+
+    // TODO batch these?
+    // add review ids to product
+    newReviewIds.forEach((key) => db.ref(`products/${asin}/reviews`).child(key).set(key));
+  } catch(err) {
+    console.error(err);
+    throw err;
+  }
+
   console.log(`parsed ${asin}`);
-  job.progress(100);
-  return true;
 };
