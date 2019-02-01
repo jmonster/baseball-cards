@@ -43,7 +43,8 @@ module.exports = async function amazonParser(job) {
     price = price && price.trim().replace('$','').replace(',','').replace('.','');
 
     // enqueue this price point to be analyzed+recorded
-    priceQueue.createJob({ asin, price }).save();
+    await priceQueue.removeJob(asin); // avoid duplicating this work
+    priceQueue.createJob({ asin, price }).setId(asin).save();
 
     const bestOfferStr = $('#mbc-upd-olp-link').text();
     bestOffer = bestOfferStr && bestOfferStr.match(/\d+\.?\d+/)[0];

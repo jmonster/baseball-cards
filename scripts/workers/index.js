@@ -21,8 +21,13 @@ async function seedQueue() {
   const products = snapshot.val();
   const ASINs = Object.keys(products);
   ASINs.forEach(async (asin) => {
+    // remove (possible) existing job
+    await amazonFetchQueue.removeJob(asin);
+
+    // add new job
     amazonFetchQueue
       .createJob({ asin })
+      .setId(asin)
       .retries(3)
       .save();
   });

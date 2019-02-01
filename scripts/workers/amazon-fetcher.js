@@ -22,14 +22,19 @@ const fetchAmazonProduct = async function(job) {
     const { body: html } = await amazon.get(asin, { timeout: 7000 });
     job.reportProgress(99);
 
+    await amazonFetchQueue.removeJob(asin);
     amazonFetchQueue
       .createJob({ asin })
+      .setId(asin)
       .retries(3)
       .delayUntil(Date.now() + 8.64e+7) // 24h from now
       .save();
 
+    // avoid duplicating parsing jobs
+    await amazonPageParseQueue.removeJob(asin);
     return amazonPageParseQueue
       .createJob({ asin, html })
+      .setId(asin)
       .retries(0)
       .save();
   } catch(err) {
