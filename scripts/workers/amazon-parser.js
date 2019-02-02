@@ -59,7 +59,8 @@ module.exports = async function amazonParser(job) {
     const weightedScoreSection_m = weightedScoreSection && weightedScoreSection.match(/\d+\.\d+/);
     weightedScore = weightedScoreSection_m && weightedScoreSection_m[0];
 
-    description = $('#productDescription_feature_div').html().trim();
+    const descriptionHtml = $('#productDescription_feature_div').html();
+    description = descriptionHtml && descriptionHtml.trim();
     brand = $('#bylineInfo').text().replace(/by/,'').trim();
 
     // TODO this assumes there are 5 diff scores
