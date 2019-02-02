@@ -3,7 +3,7 @@
 
   <span class="f4 b">{{product.title}}</span>
   <div class="mb2 flex justify-between items-center db f5">
-    <span>by Menon™{{product.manufacturer}}</span>
+    {{#if product.brand}}<span>by {{product.brand}}™</span>{{/if}}
     <span>{{rating-bar stars=4 count=4815}}</span>
   </div>
 

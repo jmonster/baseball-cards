@@ -2,7 +2,7 @@ import { Factory, faker, trait } from 'ember-cli-mirage';
 
 export default Factory.extend({
   name: () => `${faker.company.bsAdjective()} ${faker.company.bsNoun()}`,
-  manufacturer: () => faker.company.companyName(),
+  brand: () => faker.company.companyName(),
   msrp: () => faker.random.number(1000)*100 + 100, // at least $100
   originalReleaseDate: () => faker.date.past(),
   link: () => faker.internet.url(),

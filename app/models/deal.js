@@ -2,7 +2,6 @@ import DS from 'ember-data';
 import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { bool } from '@ember/object/computed';
-import ENV from 'dealzilla/config/environment';
 
 const inverse = null;
 

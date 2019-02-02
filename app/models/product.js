@@ -16,8 +16,7 @@ export default DS.Model.extend({
   title: DS.attr('string'),
   asin: DS.attr('string'),
   msrp: DS.attr('dollars'),
-
-  // manufacturer: DS.attr('string'), // TODO it's own model?
+  brand: DS.attr('string'),
   // meta: {
   //   format, // bluray, dvd, vinyl, cassette, digital, ...
   //   numberOfDiscs,

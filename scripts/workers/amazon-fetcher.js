@@ -26,6 +26,7 @@ const fetchAmazonProduct = async function(job) {
     amazonFetchQueue
       .createJob({ asin })
       .setId(asin)
+      .timeout(10000)
       .retries(3)
       .delayUntil(Date.now() + 8.64e+7) // 24h from now
       .save();
@@ -35,6 +36,7 @@ const fetchAmazonProduct = async function(job) {
     return amazonPageParseQueue
       .createJob({ asin, html })
       .setId(asin)
+      .timeout(3000)
       .retries(0)
       .save();
   } catch(err) {

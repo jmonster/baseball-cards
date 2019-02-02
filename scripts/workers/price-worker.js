@@ -32,7 +32,44 @@ module.exports = async function priceWorker(job) {
   } finally {
     // record latest price point
     console.log('price-worker submitting new price point');
-    return priceRef.child(timestamp).set({ price });
+
+    // look up deal for this product and expire it if the price has gone up
+    // TODO detch all deals for this product
+    // loop through looking for any not expired
+    try {
+      const dealsRef = db.ref('deals');
+      const lastDealRec = await dealsRef.orderByChild('product').equalTo(asin).limitToLast(1).once('value');
+      const lastDealVal = lastDealRec && lastDealRec.val();
+      const [lastDealId] = (lastDealVal && Object.keys(lastDealVal)) || [];
+      const [lastDeal] = (lastDealVal && Object.values(lastDealVal)) || [];
+
+      if (lastDeal) {
+        console.log(`lastDeal: ${JSON.stringify(lastDeal, null, 2)}`);
+        console.log(`lastDeal.expiredAt: ${lastDeal.expiredAt}`);
+        console.log(`lastDeal.price: ${lastDeal.price}`);
+        console.log(`price: ${price}`);
+
+        let isExpired = (price === UNAVAILABLE) || (price > lastDeal.price);
+
+        // expire deals with higher prices than the deal
+        if (!lastDeal.expiredAt && isExpired) {
+          console.log(`expiring ${lastDealId}`);
+          const expiredAt = Date.now();
+          db.ref(`deals/${lastDealId}`).update({ expiredAt });
+        }
+
+        if (lastDeal.price > price) {
+          // update deal with now even lower price
+          const lastSeenAt = Date.now();
+          db.ref(`deals/${lastDealId}`).update({ price, lastSeenAt });
+        }
+      }
+
+      return priceRef.child(timestamp).set({ price });
+    } catch (aaa) {
+      console.error(aaa);
+    }
+
   }
   // TODO identify cost benefits of batching these requests
 };

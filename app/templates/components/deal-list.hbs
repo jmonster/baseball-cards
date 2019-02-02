@@ -17,11 +17,18 @@
                 move to <b>disliked</b> list
               {{/dz-button}}
 
-              {{#dz-button class="white" click=(route-action "hopToFakeSpot" deal.product) class="mv1"}}
+              {{#dz-button
+                click=(route-action "hopToFakeSpot" deal.product)
+                class="white mv1"
+              }}
                 view <b>fakespot</b> score
               {{/dz-button}}
 
-              {{#dz-button class="white" click=(route-action "hopToCamelCamelCamel" deal.product)}}
+              {{#dz-button
+                class="white"
+                click=(route-action "hopToCamelCamelCamel"
+                deal.product)
+              }}
                 view <b>camelcamelcamel</b> overview
               {{/dz-button}}
             </div>

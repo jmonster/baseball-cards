@@ -1,5 +1,5 @@
 <span class="db f4 mb1 b">{{product.title}}</span>
-<span class="db f5 mb1">by Menon™{{product.manufacturer}}</span>
+{{#if product.brand}}<span class="db f5 mb1">by {{product.brand}}™</span>{{/if}}
 <span class="db f5 mv2">{{rating-bar stars=4 count=4815}}</span>
 <span class="db f5 flex mt3 mb1">
   <span class="currency-symbol">$</span>

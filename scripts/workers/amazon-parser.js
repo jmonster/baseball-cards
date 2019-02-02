@@ -29,22 +29,23 @@ module.exports = async function amazonParser(job) {
   job.reportProgress(25);
 
   // review metrics
-  let price, bestOffer, reviewCount, weightedScore, description;
+  let price, bestOffer, reviewCount, weightedScore, description, brand;
   const weights = {};
 
-  try {
-    let priceStr = $('#priceblock_ourprice').text();
-    priceStr = priceStr || $('#new-button-price').text();
-    priceStr = priceStr || $('#newBuyBoxPrice').text();
-    priceStr = priceStr || $('.offer-price').text();
+  // console.log(html);
 
-    const priceStr_m = priceStr && priceStr.match(/\d+\.?\d*/);
-    price = priceStr_m && priceStr_m[0];
-    price = price && price.trim().replace('$','').replace(',','').replace('.','');
+  try {
+    price = price || $('#cerberus-data-metrics').attr('data-asin-price');
+    price = price || $('span#newBuyBoxPrice').text();
+    price = price || $('#priceblock_ourprice').text();
+    price = price || $('#new-button-price').text();
+    price = price || $('#newBuyBoxPrice').text();
+    price = price || $('.offer-price').text();
+    price = price.replace(/\D/mg, '');
 
     // enqueue this price point to be analyzed+recorded
     await priceQueue.removeJob(asin); // avoid duplicating this work
-    priceQueue.createJob({ asin, price }).setId(asin).save();
+    priceQueue.createJob({ asin, price }).setId(asin).timeout(5000).save();
 
     const bestOfferStr = $('#mbc-upd-olp-link').text();
     bestOffer = bestOfferStr && bestOfferStr.match(/\d+\.?\d+/)[0];
@@ -59,6 +60,7 @@ module.exports = async function amazonParser(job) {
     weightedScore = weightedScoreSection_m && weightedScoreSection_m[0];
 
     description = $('#productDescription_feature_div').html().trim();
+    brand = $('#bylineInfo').text().replace(/by/,'').trim();
 
     // TODO this assumes there are 5 diff scores
     // but when there are 0% of a certain score it is omitted
@@ -120,9 +122,8 @@ module.exports = async function amazonParser(job) {
 
   // TODO add product description
   const data = {
-    asin, description, lastPrice: price, bestOffer, reviewCount, weightedScore, weights, images
+    asin, brand, description, lastPrice: price, bestOffer, reviewCount, weightedScore, weights, images
   };
-
 
   // fetch the product from firebase
   try {
@@ -154,7 +155,7 @@ module.exports = async function amazonParser(job) {
     });
 
     // update the product itself
-    productRef.update(data); // update product
+    // productRef.update(data); // update product
 
     // TODO batch these?
     // add review ids to product
