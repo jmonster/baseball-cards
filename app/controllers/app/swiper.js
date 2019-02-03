@@ -1,49 +1,27 @@
 import Controller from '@ember/controller';
-import { computed, observer } from '@ember/object';
-import { inject } from '@ember/service';
-import { alias, equal, setDiff, union } from '@ember/object/computed';
-import { isEmpty } from '@ember/utils';
+import { computed } from '@ember/object';
+import { alias, equal, setDiff, union, filterBy } from '@ember/object/computed';
 import { storageFor } from 'ember-local-storage';
-
-/**
- * Shuffles array in place. ES6 version
- * @param {Array} a items An array containing the items.
- */
-function shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-}
 
 export default Controller.extend({
   likedDealIds: storageFor('deal-likes'),
   dislikedDealIds: storageFor('deal-dislikes'),
   seenDealIds: union('likedDealIds', 'dislikedDealIds'),
-  allDealIds: computed('allActiveDeals.[]', function() {
+  allDealIds: computed('model.deals.[]', function() {
     return this.model.deals.map(({ id }) => id);
   }),
   unseenDealIds: setDiff('allDealIds', 'seenDealIds'),
+  unseenDeals: computed('unseenDealIds.[]', function() {
+    const unseenIdSet = new Set(this.unseenDealIds.toArray());
+    return this.model.deals.filter((d) => unseenIdSet.has(d.id));
+  }),
+  expiredDeals: filterBy('model.deals', 'isExpired'),
+  browseableDeals: setDiff('unseenDeals', 'expiredDeals'),
+  currentDeal: alias('browseableDeals.firstObject'),
 
   detailIndex: 0,
-
   showCamelGraph: equal('detailIndex', 1),
   showAdditionalActions: equal('detailIndex', 2),
-
-  allActiveDeals: computed('unseenDealIds.[]', 'model.deals.[]', function() {
-    const unseenSetOfDealIds = new Set(this.unseenDealIds);
-
-    return this.model.deals.filter(d => {
-      return (!d.isExpired && unseenSetOfDealIds.has(d.id));
-    });
-  }),
-
-  mutableDeals: computed('allActiveDeals.[]', function() {
-    return shuffle(this.allActiveDeals.toArray());
-  }),
-
-  currentDeal: alias('mutableDeals.firstObject'),
 
   // deal iterator, sort of..
   // this enables us to have the template/view
@@ -66,15 +44,8 @@ export default Controller.extend({
     removeCard(delta) {
       this.addToDealsList(delta, this.currentDeal);
 
-      // effectively increment the iterator onto the next deal
-      this.mutableDeals.shiftObject();
-
       // reset state
       this.set('detailIndex', 0);
-
-      if (isEmpty(this.mutableDeals)) {
-        this.transitionToRoute('app.deals');
-      }
     },
 
     reset() {
