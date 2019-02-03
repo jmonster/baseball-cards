@@ -1,9 +1,9 @@
 import Controller from '@ember/controller';
 import { computed, observer } from '@ember/object';
 import { inject } from '@ember/service';
-import { alias } from '@ember/object/computed';
+import { alias, equal, setDiff, union } from '@ember/object/computed';
 import { isEmpty } from '@ember/utils';
-import { equal } from '@ember/object/computed';
+import { storageFor } from 'ember-local-storage';
 
 /**
  * Shuffles array in place. ES6 version
@@ -18,46 +18,38 @@ function shuffle(a) {
 }
 
 export default Controller.extend({
-  dataService: inject(),
+  likedDealIds: storageFor('deal-likes'),
+  dislikedDealIds: storageFor('deal-dislikes'),
+  seenDealIds: union('likedDealIds', 'dislikedDealIds'),
+  allDealIds: computed('allActiveDeals.[]', function() {
+    return this.model.deals.map(({ id }) => id);
+  }),
+  unseenDealIds: setDiff('allDealIds', 'seenDealIds'),
 
-  seenDealsIds: alias('dataService.seenDealIds'),
   detailIndex: 0,
 
   showCamelGraph: equal('detailIndex', 1),
   showAdditionalActions: equal('detailIndex', 2),
 
-  allDeals: computed(function() {
-    return this.model.deals.filter(d => !d.isExpired);
+  allActiveDeals: computed('unseenDealIds.[]', 'model.deals.[]', function() {
+    const unseenSetOfDealIds = new Set(this.unseenDealIds);
+
+    return this.model.deals.filter(d => {
+      return (!d.isExpired && unseenSetOfDealIds.has(d.id));
+    });
   }),
 
-  mutableDeals: computed('allDeals.[]', function() {
-    return shuffle(this.allDeals.toArray());
+  mutableDeals: computed('allActiveDeals.[]', function() {
+    return shuffle(this.allActiveDeals.toArray());
   }),
 
-  currentDeal: alias('paginatedDeals.firstObject'),
+  currentDeal: alias('mutableDeals.firstObject'),
 
-  // what/how is being paginated?
-  paginatedDeals: computed('mutableDeals.[]', 'seenDeals.[]', function() {
-    const seenDealIds = new Set(this.seenDealsIds);
-    // wtf?
-    let nextDeal = [this.mutableDeals[0]];
-    let tries = 100;
-
-    while(tries) {
-      if (!nextDeal || !nextDeal[0]) {
-        return [];
-      }
-
-      const nextDealId = String(nextDeal[0].id);
-      if (seenDealIds.has(nextDealId)) {
-        // wtf? explain what you're trying to do in this loop and?
-        nextDeal = [this.mutableDeals[(101-tries)]];
-      } else {
-        return nextDeal;
-      }
-
-      tries--;
-    }
+  // deal iterator, sort of..
+  // this enables us to have the template/view
+  // generate a new component each time the currentDeal changes
+  paginatedDeals: computed('currentDeal', function() {
+    return this.currentDeal ? [this.currentDeal] : [];
   }),
 
   actions: {
@@ -86,18 +78,17 @@ export default Controller.extend({
     },
 
     reset() {
-      this.set('allDeals', this.model.deals);
+      // this.set('allActiveDeals', this.model.deals);
       this.set('detailIndex', 0);
     }
   },
 
   addToDealsList(delta, deal) {
     const didLikeDeal = delta > 0;
-
     if (didLikeDeal) {
-      this.dataService.addLikedDeal(deal.id);
+      this.likedDealIds.pushObject(deal.id);
     } else {
-      this.dataService.addDislikedDeal(deal.id);
+      this.dislikedDealIds.pushObject(deal.id);
     }
   },
 });

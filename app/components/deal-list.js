@@ -1,31 +1,29 @@
 import Component from '@ember/component';
-import { inject } from '@ember/service';
 import { computed } from '@ember/object';
-import { alias } from '@ember/object/computed';
 import { filter, filterBy, setDiff } from '@ember/object/computed';
+import { storageFor } from 'ember-local-storage';
 
 export default Component.extend({
-  dataService: inject(),
+  likedDealIds: storageFor('deal-likes'),
+  dislikedDealIds: storageFor('deal-dislikes'),
 
   nonExpiredDeals: filterBy('deals', 'isExpired', false),
   expiredDeals: setDiff('deals', 'nonExpiredDeals'),
-  likedDealsIds: alias('dataService.likedDealsIds'),
-  dislikedDealsIds: alias('dataService.dislikedDealsIds'),
 
-  likedDeals: computed('nonExpiredDeals.[]', 'likedDealsIds.[]', function() {
+  likedDeals: computed('nonExpiredDeals.[]', 'likedDealIds.[]', function() {
     const allDeals = this.nonExpiredDeals;
-    const likedDealsIds = this.likedDealsIds;
-    const likedDealsSet = new Set(likedDealsIds);
+    const likedDealIds = this.likedDealIds;
+    const likedDealsSet = new Set(likedDealIds.toArray()); // O(1) lookups
 
-    return allDeals.filter(d => likedDealsSet.has(String(d.id)));
+    return allDeals.filter(({id}) => likedDealsSet.has(String(id)));
   }),
 
-  dislikedDeals: computed('nonExpiredDeals.[]', 'dislikedDealsIds.[]', function() {
+  dislikedDeals: computed('nonExpiredDeals.[]', 'dislikedDealIds.[]', function() {
     const allDeals = this.nonExpiredDeals;
-    const dislikedDeals = this.dislikedDealsIds;
-    const dislikedDealsSet = new Set(dislikedDeals);
+    const dislikedDeals = this.dislikedDealIds;
+    const dislikedDealsSet = new Set(dislikedDeals.toArray());  // O(1) lookups
 
-    return allDeals.filter(d => dislikedDealsSet.has(String(d.id)));
+    return allDeals.filter(({id}) => dislikedDealsSet.has(String(id)));
   }),
 
   // exclude 3 day past expired deals
@@ -41,11 +39,19 @@ export default Component.extend({
 
   actions: {
     'unlike-deal': function(id) {
-      this.dataService.removeLikedDeal(id);
+      // add to disliked collection
+      this.dislikedDealIds.pushObject(id);
+
+      // remove from liked collection
+      this.likedDealIds.removeObject(id);
     },
 
     'relike-deal': function(id) {
-      this.dataService.addLikedDeal(id, false);
+      // add to liked collection
+      this.likedDealIds.pushObject(id);
+
+      // remove from disliked collection
+      this.dislikedDealIds.removeObject(id);
     }
   }
 });

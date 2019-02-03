@@ -14,6 +14,12 @@ module.exports = function(environment) {
       sessionServiceName: 'session'
     },
     amazonAffliateTag: 'dealzilla0a-20',
+    'ember-local-storage': {
+      namespace: true, // will use the modulePrefix e.g. 'my-app'
+      namespace: 'zil', // will use 'customNamespace'
+      // keyDelimiter: '/' // will use / as a delimiter - the default is :
+    },
+
     modulePrefix: 'dealzilla',
     environment,
     rootURL: '/',

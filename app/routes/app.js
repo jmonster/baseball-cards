@@ -1,14 +1,15 @@
 import Route from '@ember/routing/route';
+import RSVP from 'rsvp';
 import { inject } from '@ember/service';
 import { alias } from '@ember/object/computed';
-import RSVP from 'rsvp';
+import { storageFor } from 'ember-local-storage';
 
 export default Route.extend({
-  dataService: inject(),
   browser: inject(),
-
-  seenDealsIds: alias('dataService.seenDealsIds'),
   isDesktop: alias('browser.isDesktop'),
+
+  likedDealIds: storageFor('deal-likes'),
+  dislikedDealIds: storageFor('deal-dislikes'),
 
   beforeModel() {
     const notDev = !(window.location.hostname === 'localhost');
@@ -19,9 +20,26 @@ export default Route.extend({
   },
 
   model() {
-    return RSVP.hash({
-      deals: this.store.findAll('deal'),
-      tags: this.store.findAll('tag')
+    const deals = this.store.findAll('deal');
+    const tags = this.store.findAll('tag');
+
+    // cleanup our localstorage set of liked/disliked ids
+    // to remove anything not part of `deals`
+    // TODO move this logic to the deal record?
+    // ---- and do it anytime a deal becomes expired?
+    // ---- that way it can happy in-real-time as updates come in from firebase
+    deals.then((deals) => {
+      const dealIds = new Set(deals.map((d) => d.id));
+
+      const inactiveLikedDealIds = this.likedDealIds.filter((id) => !dealIds.has(id));
+      const inactiveDislikedDealIds = this.dislikedDealIds.filter((id) => !dealIds.has(id));
+
+      this.likedDealIds.removeObjects(inactiveLikedDealIds);
+      this.dislikedDealIds.removeObjects(inactiveDislikedDealIds);
+
+      // TODO ensure uniqueness
     });
+
+    return RSVP.hash({ deals, tags });
   },
 });

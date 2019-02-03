@@ -2,11 +2,13 @@ import Component from '@ember/component';
 import { inject } from '@ember/service';
 import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
+import { storageFor } from 'ember-local-storage';
+
 
 export default Component.extend({
   classNames: ['navigation', 'z-1', 'flex', 'flex-none', 'bg-gradient-primary', 'shadow-outer-1'],
   router: inject(),
-  dataService: inject(),
+  likedDealIds: storageFor('deal-likes'),
 
   linkToRouteName: computed('router.currentRouteName', function() {
     const currentRoute = this.get('router.currentRouteName');
@@ -18,6 +20,5 @@ export default Component.extend({
     }
   }),
 
-  // TODO subtract expired deals from the count
-  likedDealCount: alias('dataService.likedDealsIds.length')
+  likedDealCount: alias('likedDealIds.length')
 });
