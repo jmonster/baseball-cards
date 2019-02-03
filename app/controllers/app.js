@@ -11,8 +11,7 @@ export default Controller.extend({
   }),
 
   thingsToFilterOn: computed(async function () {
-    const deals = await this.store.findAll('deal');
-    return deals.map((deal) => deal.get('product'));
+    return this.model.deals.map((deal) => deal.get('product'));
 
     // the following is useful to combine multiple sources
     // return RSVP.all([
