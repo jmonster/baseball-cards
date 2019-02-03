@@ -33,12 +33,14 @@ const fetchAmazonProduct = async function(job) {
 
     // avoid duplicating parsing jobs
     await amazonPageParseQueue.removeJob(asin);
+
     return amazonPageParseQueue
       .createJob({ asin, html })
       .setId(asin)
       .timeout(3000)
       .retries(0)
-      .save();
+      .save()
+      .then(() => { /* wait for promise but ignore the result */ });
   } catch(err) {
     console.error(err);
     // hax because we lose the original error in our `job retrying` handler

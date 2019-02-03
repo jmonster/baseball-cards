@@ -58,7 +58,7 @@ module.exports = async function priceWorker(job) {
 
     // record latest price point
     console.log('price-worker done');
-    return priceRef.child(timestamp).set({ price });
+    priceRef.child(timestamp).set({ price });
   }
   // TODO identify cost benefits of batching these requests
 };
