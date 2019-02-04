@@ -10,6 +10,7 @@ export default DS.Model.extend({
   deals: hasMany('deal',  { inverse, async: true }),
   // offers: hasMany('offer', { inverse, async: true }), // array of diff merchants, diff sellers on amazon, etc
   // images: hasMany('image', { inverse, async: true }),
+  images: DS.attr('array'),
   // tags: hasMany('tag', { inverse, async: true }),
   // reviews: hasMany('review'),
 
@@ -17,6 +18,8 @@ export default DS.Model.extend({
   asin: DS.attr('string'),
   msrp: DS.attr('dollars'),
   brand: DS.attr('string'),
+  description: DS.attr('string'),
+
   // meta: {
   //   format, // bluray, dvd, vinyl, cassette, digital, ...
   //   numberOfDiscs,
@@ -32,7 +35,6 @@ export default DS.Model.extend({
   // latestPrice: DS.attr('dollars'),
   // lowestPriceEver: DS.attr('dollars'),
   // lowestPriceDate: DS.attr('string'),
-  // description: DS.attr('string'),
   url: computed('asin', function() {
     return `https://www.amazon.com/gp/product/${this.get('asin')}/?tag=${ENV.amazonAffliateTag}`
   }),

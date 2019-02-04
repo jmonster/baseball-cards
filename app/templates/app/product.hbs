@@ -1,13 +1,13 @@
-<div class="flex flex-column pa2">
+<div class="flex flex-column flex-none pa2">
   {{deal-list-item-image url=product.primaryImage class="self-center"}}
 
   <span class="f4 b">{{product.title}}</span>
-  <div class="mb2 flex justify-between items-center db f5">
+  <div class="mb2 flex flex-none justify-between items-center db f5">
     {{#if product.brand}}<span>by {{product.brand}}™</span>{{/if}}
     <span>{{rating-bar stars=4 count=4815}}</span>
   </div>
 
-  <div class="flex flex-auto flex-column">
+  <div class="flex flex-column flex-none">
     {{#dz-button
       click=(route-action "hopToAmazon" product)
       class="f2 light-orange bg-black"
@@ -38,4 +38,9 @@
   </div>
 </div>
 
-{{camel-graph-img product=product}}
+<div class="amazon-description pa2 bt b--silver">
+  {{{product.description}}}
+</div>
+
+{{!-- camel^3's website is hosed so.. let's just omit this for now --}}
+{{!-- {{camel-graph-img product=product}} --}}

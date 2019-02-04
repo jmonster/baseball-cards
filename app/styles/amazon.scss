@@ -1,0 +1,25 @@
+.disclaim strong {
+  margin-left: 4px;
+  // background: red;
+}
+
+#productDescription,
+#productDescription h3,
+div[data-template-name="productDescription"] {
+  margin: 0 !important;
+}
+
+#productDescription p {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.amazon-description ul {
+  padding: 0;
+}
+
+div[id="productDescription"] {
+  // fixes issue when viewing the Rokinon lens -- http://localhost:4200/product/B003VSGZ4S
+  // the table in this description was too wide and the entire page would go all wonky donky
+  overflow: scroll;
+}
