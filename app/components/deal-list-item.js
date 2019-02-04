@@ -9,7 +9,7 @@ export default Component.extend({
 
   isExpired: alias('deal.isExpired'),
 
-  classNames: ['deal-list-item', 'db', 'link', 'flex', 'items-start', 'bb b--silver'],
+  classNames: ['deal-list-item', 'link', 'flex flex-auto', 'items-start', 'ma1'],
   classNameBindings: ['isExpired:expired'],
 
   standardImage: alias('deal.standardImage')

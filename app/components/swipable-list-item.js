@@ -1,5 +1,5 @@
 import Component from '@ember/component';
 
 export default Component.extend({
-  classNames: ['swipable-list-item', 'flex', 'flex-auto']
+  classNames: ['swipable-list-item', 'flex', 'flex-auto', 'bb b--silver']
 });

@@ -8,7 +8,7 @@
       {{#each likedDeals as |deal|}}
         {{#swipable-list-item as |sli|}}
           {{#sli.top}}
-            {{deal-list-item deal=deal}}
+            {{deal-list-item deal=deal liked=true}}
           {{/sli.top}}
 
           {{#sli.actions}}
@@ -56,7 +56,7 @@
       {{#each dislikedDeals as |deal|}}
         {{#swipable-list-item as |sli|}}
           {{#sli.top}}
-            {{deal-list-item deal=deal}}
+            {{deal-list-item deal=deal liked=false}}
           {{/sli.top}}
 
           {{#sli.actions}}
@@ -80,7 +80,7 @@
     <h2 class="mh2 fw5 mb3">
       <span class="bb b--gray pr3 pl1">Expired</span>
     </h2>
-    <div class="liked-deal-list">
+    <div class="expired-deal-list">
       {{#each staleDeals as |deal|}}
         {{deal-list-item-expired deal=deal}}
       {{/each}}

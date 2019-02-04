@@ -1,5 +1,5 @@
-{{#unless isExpired}}
+{{#if liked}}
   {{deal-list-item-image url=standardImage class="bg-white self-center"}}
-{{/unless}}
+{{/if}}
 
-{{deal-list-item-details deal=deal}}
+{{deal-list-item-details deal=deal liked=liked}}
