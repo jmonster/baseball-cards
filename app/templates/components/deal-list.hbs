@@ -1,6 +1,6 @@
 <div class="pt2 pb2">
   <h2 class="mh2 fw5 mb3">
-    👍 <span class="bb b--gray pr3 pl1">Recent Likes</span>
+    <span class="bb b--gray pr3 pl1">Recent Likes</span>
   </h2>
 
   {{#if likedDeals}}
@@ -48,7 +48,7 @@
 
 <div class="pt2 pb2">
   <h2 class="mh2 fw5 mb3">
-    👎 <span class="bb b--gray pr3 pl1">Recent Dislikes</span>
+    <span class="bb b--gray pr3 pl1">Recent Dislikes</span>
   </h2>
 
   {{#if dislikedDeals}}
@@ -78,11 +78,11 @@
 {{#if staleDeals}}
   <div class="pt2 pb2">
     <h2 class="mh2 fw5 mb3">
-      ⌛️ <span class="bb b--gray pr3 pl1">Expired</span>
+      <span class="bb b--gray pr3 pl1">Expired</span>
     </h2>
     <div class="liked-deal-list">
       {{#each staleDeals as |deal|}}
-        {{deal-list-item deal=deal}}
+        {{deal-list-item-expired deal=deal}}
       {{/each}}
     </div>
   </div>

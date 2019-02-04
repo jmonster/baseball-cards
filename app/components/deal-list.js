@@ -3,6 +3,8 @@ import { computed } from '@ember/object';
 import { filter, filterBy, setDiff } from '@ember/object/computed';
 import { storageFor } from 'ember-local-storage';
 
+const THREE_DAYS = 3 * 8.64e+7;
+
 export default Component.extend({
   likedDealIds: storageFor('deal-likes'),
   dislikedDealIds: storageFor('deal-dislikes'),
@@ -28,8 +30,9 @@ export default Component.extend({
 
   // exclude 3 day past expired deals
   staleDeals: filter('expiredDeals.[]', function(deal, index, expiredDeals) {
-    let now = (new Date()).getTime()
-    return expiredDeals.filter(d => !(now - d.expiredAt > 86400000 * 3));
+    const now = Date.now();
+    const delta = now - deal.expiredAt - THREE_DAYS;
+    return delta > 0;
   }),
 
   deals: computed(function() {
