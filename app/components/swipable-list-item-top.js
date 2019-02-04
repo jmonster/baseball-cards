@@ -32,7 +32,7 @@ function detectLeftSwipe(event) {
     // begin tracking the swipe event
     const boundOnLeftSwipe = onLeftSwipe.bind(this);
     this.set('boundOnLeftSwipe', boundOnLeftSwipe);
-    this.element.addEventListener('touchmove', boundOnLeftSwipe);
+    this.element.addEventListener('touchmove', boundOnLeftSwipe, { passive: false });
 
     // prevent the browser from doing it's thing (i.e. scrolling)
     event.preventDefault();
@@ -102,8 +102,8 @@ function onTouchstart(event) {
   this.set('boundDetectLeftSwipe', boundDetectLeftSwipe);
   this.set('boundTouchend', boundTouchend);
 
-  this.element.addEventListener('touchmove', boundDetectLeftSwipe);
-  this.element.addEventListener('touchend', boundTouchend);
+  this.element.addEventListener('touchmove', boundDetectLeftSwipe, { passive: false });
+  this.element.addEventListener('touchend', boundTouchend, { passive: true });
 }
 
 function onTouchend(event) {
@@ -148,9 +148,10 @@ export default Component.extend({
   },
 
   didInsertElement() {
+    const hasSlidLeft = this.get('hasSlidLeft');
     const boundTouchstart = onTouchstart.bind(this);
     this.set('boundTouchstart', boundTouchstart);
-    this.element.addEventListener('touchstart', boundTouchstart);
+    this.element.addEventListener('touchstart', boundTouchstart, { passive: hasSlidLeft });
   },
 
   willDestroyElement() {

@@ -16,7 +16,7 @@ export default Component.extend({
 
       this.set('initialX', touch.clientX);
       this.set('initialY', touch.clientY);
-    });
+    }, { passive: true });
 
     this.element.addEventListener('touchend', (event) => {
       const rect = event.currentTarget.getBoundingClientRect();
@@ -39,7 +39,7 @@ export default Component.extend({
       }
 
       this.setTranslate(0, 0, this.element);
-    });
+    }, { passive: true });
 
     this.element.addEventListener('touchmove', (event) => {
       event.preventDefault();
@@ -59,7 +59,7 @@ export default Component.extend({
       const angle = mathematicalMikesMagicMalgorithm(diff);
 
       this.element.style.transform += `rotate(${angle}deg)`;
-    });
+    }, { passive: false });
   },
 
   actions: {
