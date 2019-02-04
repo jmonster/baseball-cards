@@ -8,7 +8,7 @@
       {{#each likedDeals as |deal|}}
         {{#swipable-list-item as |sli|}}
           {{#sli.top}}
-            {{deal-list-item deal=deal liked=true}}
+            {{deal-list-item deal=deal liked=true click=(action onDealListItemClick deal)}}
           {{/sli.top}}
 
           {{#sli.actions}}
