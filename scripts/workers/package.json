@@ -8,6 +8,8 @@
     "bee-queue": "^1.2.2",
     "bottleneck": "^2.15.3",
     "cheerio": "^1.0.0-rc.2",
+    "dotenv": "^6.2.0",
+    "form-data": "^2.3.3",
     "got": "^9.6.0"
   }
 }
