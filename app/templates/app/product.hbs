@@ -1,5 +1,10 @@
 <div class="flex flex-column flex-none pa2">
-  {{deal-list-item-image url=product.primaryImage class="self-center"}}
+  <img
+    class="self-center"
+    src={{product.primaryImage}}
+    alt="primary product image"
+    referrerpolicy="no-referrer"
+    >
 
   <span class="f4 b">{{product.title}}</span>
   <div class="mb2 flex flex-none justify-between items-center db f5">
