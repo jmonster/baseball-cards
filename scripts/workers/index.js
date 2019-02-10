@@ -9,10 +9,15 @@ const amazonParseQueue = require('./amazon-parse-queue');
 const priceQueue = require('./price-queue');
 
 // register workers
-amazonFetchQueue.process(require('./amazon-fetcher.js'));
-amazonParseQueue.process(require('./amazon-parser.js'));
-priceQueue.process(require('./price-worker.js'));
+amazonFetchQueue.process(1, require('./amazon-fetcher.js'));
+amazonParseQueue.process(1, require('./amazon-parser.js'));
+priceQueue.process(1, require('./price-worker.js'));
 
+(async function() {
+  const counts = await amazonFetchQueue.checkHealth();
+  // print all the job counts
+  console.log('job state counts:', counts);
+})();
 // grab all products out of firebase
 // enqueue to check all their prices
 // set to repeat daily (I guess, why not)
@@ -28,7 +33,6 @@ async function seedQueue() {
     // add new job
     amazonFetchQueue
       .createJob({ asin })
-      .setId(asin)
       .timeout(10000)
       .retries(3)
       .save();

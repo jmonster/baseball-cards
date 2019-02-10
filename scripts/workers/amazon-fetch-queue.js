@@ -6,13 +6,15 @@ const redis = { port: 6379, host: '127.0.0.1' };
 const queue = new Queue('amazon-fetch',
   {
     redis,
-    storeJobs: false,
+    storeJobs: true,
     removeOnSuccess: true,
-    removeOnFailure: true
+    removeOnFailure: true,
+    activateDelayedJobs: true,
+    stallInterval: 5000
   }
 );
 
-async function retry(jobId, err) {
+async function onRetry(jobId, err) {
   if (+err.message === 404) {
     // abandon products that 404
     console.log('removing job ', jobId);
@@ -34,6 +36,24 @@ async function retry(jobId, err) {
   }
 }
 
-queue.on('job retrying', retry);
+async function onSuccess(jobId, { asin }) {
+  // debugger;
+  console.log(`Job ${jobId} succeeded for product ${asin}.`);
+
+  // (idempotent) remove existing, if any
+  await queue.removeJob(asin);
+
+  queue
+    .createJob({ asin })
+    .setId(asin) // ensure uniqueness / singularity
+    .timeout(10000)
+    .retries(3)
+    // .delayUntil(Date.now() + (10 * 60 * 1000)) // 10m from now
+    .delayUntil(Date.now() + 8.64e+7) // 24h from now
+    .save();
+}
+
+queue.on('job retrying', onRetry);
+queue.on('job succeeded', onSuccess);
 
 module.exports = queue;

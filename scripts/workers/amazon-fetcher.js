@@ -2,7 +2,6 @@
 const amazon = require('./amazon-client');
 const Bottleneck = require('bottleneck');
 
-const amazonFetchQueue = require('./amazon-fetch-queue');
 const amazonPageParseQueue = require('./amazon-parse-queue');
 
 const limiter = new Bottleneck({
@@ -22,25 +21,16 @@ const fetchAmazonProduct = async function(job) {
     const { body: html } = await amazon.get(asin, { timeout: 7000 });
     job.reportProgress(99);
 
-    await amazonFetchQueue.removeJob(asin);
-    amazonFetchQueue
-      .createJob({ asin })
-      .setId(asin)
-      .timeout(10000)
-      .retries(3)
-      .delayUntil(Date.now() + 8.64e+7) // 24h from now
-      .save();
-
     // avoid duplicating parsing jobs
     await amazonPageParseQueue.removeJob(asin);
-
-    return amazonPageParseQueue
+    await amazonPageParseQueue
       .createJob({ asin, html })
       .setId(asin)
       .timeout(3000)
       .retries(0)
-      .save()
-      .then(() => { /* wait for promise but ignore the result */ });
+      .save();
+    
+    return { asin };
   } catch(err) {
     console.error(err);
     // hax because we lose the original error in our `job retrying` handler
