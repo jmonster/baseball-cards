@@ -20,7 +20,11 @@ export default Route.extend({
   },
 
   model() {
-    const deals = this.store.findAll('deal');
+    // deals that have expired <= 3 days ago
+    const deals = this.store.query('deal', {
+      orderBy: 'expiredAt',
+      startAt: Date.now() - (3 * 8.64e+7)
+    });
     const tags = this.store.findAll('tag');
 
     // cleanup our localstorage set of liked/disliked ids
