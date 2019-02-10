@@ -4,7 +4,7 @@
     src={{product.primaryImage}}
     alt="primary product image"
     referrerpolicy="no-referrer"
-    >
+  >
 
   <span class="f4 b">{{product.title}}</span>
   <div class="mb2 flex flex-none justify-between items-center db f5">
@@ -44,6 +44,7 @@
 </div>
 
 <div class="amazon-description pa2 bt b--silver">
+  {{! template-lint-disable no-triple-curlies}}
   {{{product.description}}}
 </div>
 

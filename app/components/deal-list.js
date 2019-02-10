@@ -29,7 +29,7 @@ export default Component.extend({
   }),
 
   // exclude 3 day past expired deals
-  staleDeals: filter('expiredDeals.[]', function(deal, index, expiredDeals) {
+  staleDeals: filter('expiredDeals.[]', function(deal) {
     const now = Date.now();
     const delta = now - deal.expiredAt - THREE_DAYS;
     return delta > 0;
