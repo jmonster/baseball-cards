@@ -1,11 +1,15 @@
+const { REDIS_PORT: port, REDIS_HOST: host, REDIS_PASSWORD: password } = process.env;
+
 const Queue = require('bee-queue');
 const firebase = require('firebase');
 
+const { firebase: firebaseConfig } = require('../../config/environment')();
+firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
-const redis = { port: 6379, host: '127.0.0.1' };
+
 const queue = new Queue('amazon-fetch',
   {
-    redis,
+    redis: password ? { port, host, password } : { port, host },
     storeJobs: true,
     removeOnSuccess: true,
     removeOnFailure: true,
@@ -37,7 +41,6 @@ async function onRetry(jobId, err) {
 }
 
 async function onSuccess(jobId, { asin }) {
-  // debugger;
   console.log(`Job ${jobId} succeeded for product ${asin}.`);
 
   // (idempotent) remove existing, if any
@@ -48,7 +51,6 @@ async function onSuccess(jobId, { asin }) {
     .setId(asin) // ensure uniqueness / singularity
     .timeout(10000)
     .retries(3)
-    // .delayUntil(Date.now() + (10 * 60 * 1000)) // 10m from now
     .delayUntil(Date.now() + 8.64e+7) // 24h from now
     .save();
 }

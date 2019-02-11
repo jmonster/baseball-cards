@@ -1,17 +1,17 @@
 const firebase = require('firebase')
-const { firebase: firebaseConfig } = require('../../config/environment')()
+const { firebase: firebaseConfig } = require('../config/environment')()
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
 const DAY = 8.64e+7;
-const amazonFetchQueue = require('./amazon-fetch-queue');
-const amazonParseQueue = require('./amazon-parse-queue');
-const priceQueue = require('./price-queue');
+const amazonFetchQueue = require('./queues/amazon-fetch-queue');
+const amazonParseQueue = require('./queues/amazon-parse-queue');
+const priceQueue = require('./queues/updated-price-queue');
 
 // register workers
-amazonFetchQueue.process(1, require('./amazon-fetcher.js'));
-amazonParseQueue.process(1, require('./amazon-parser.js'));
-priceQueue.process(1, require('./price-worker.js'));
+amazonFetchQueue.process(1, require('./workers/amazon-fetch-product.js'));
+amazonParseQueue.process(1, require('./workers/amazon-parse-product.js'));
+priceQueue.process(1, require('./workers/record-new-price.js'));
 
 (async function() {
   const counts = await amazonFetchQueue.checkHealth();

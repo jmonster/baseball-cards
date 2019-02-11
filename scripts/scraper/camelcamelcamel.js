@@ -1,27 +1,21 @@
-const request = require('superagent')
-const parseString = require('xml2js').parseString
-const CAMEL_RSS = 'https://camelcamelcamel.com/popular.xml'
+const got = require('got');
+const parseString = require('xml2js').parseString;
+const CAMEL_RSS = 'https://camelcamelcamel.com/popular.xml';
 
 function sanitizePrice (input) {
   // eslint-disable-next-line no-useless-escape
-  return parseInt(input.replace(',', '').replace(/[\.\,]/, ''), 10)
+  return parseInt(input.replace(',', '').replace(/[\.\,]/, ''), 10);
 }
 
-module.exports = async function () {
-  const promise = new Promise(async (resolve, reject) => {
-    let body;
+module.exports = async function() {
+  const { body } = await got(CAMEL_RSS);
+  console.log('got body');
 
-    try {
-      body = await request.get(CAMEL_RSS);
-    } catch(err) {
-      return reject(err);
-    }
-
+  const pending = new Promise(function(resolve, reject) {
     parseString(body, (err, { rss: { channel: [{ item }] } }) => {
-      if (err) {
-        console.error(err)
-        return reject(err);
-      }
+      if (err) { return reject(err); }
+      console.log('got parsed');
+
       const modifiedItems = item.map((it) => {
         return {
           asin: it.link[0].match(/product\/([a-zA-Z\d]{10})/)[1],
@@ -31,13 +25,14 @@ module.exports = async function () {
           msrp: sanitizePrice(it.description[0].match(/List Price: \$(.+\.\d{2})/)[1]),
           avgPrice: sanitizePrice(it.description[0].match(/Avg\. Price: \$(.+\.\d{2})/)[1])
         }
-      })
+      });
 
-      resolve(modifiedItems)
-    })
-  })
+      console.log('got modified');
+      return resolve(modifiedItems);
+    });
+  });
 
-  return promise
+  return pending;
 }
 
 // usage

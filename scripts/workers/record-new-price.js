@@ -12,11 +12,8 @@ function keysAndValues(snapshot) {
 }
 
 module.exports = async function priceWorker(job) {
-  console.log('price-worker start');
   const { asin, price: incomingPrice } = job.data;
   const price = incomingPrice || UNAVAILABLE;
-
-  // { <ASIN>: { <TIMESTAMP>: [{ price: '999'}] }
   const timestamp = Date.now();
   const priceRef = db.ref(`prices/${asin}`);
 

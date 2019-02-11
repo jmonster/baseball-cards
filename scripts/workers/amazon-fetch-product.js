@@ -1,8 +1,7 @@
-// const { limiter } = require('./amazon-fetch-queue');
-const amazon = require('./amazon-client');
+const amazon = require('../lib/amazon-client');
 const Bottleneck = require('bottleneck');
 
-const amazonPageParseQueue = require('./amazon-parse-queue');
+const amazonPageParseQueue = require('../queues/amazon-parse-queue');
 
 const limiter = new Bottleneck({
   // kick off at most 1 request/second

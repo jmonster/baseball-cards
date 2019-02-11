@@ -2,8 +2,8 @@ const cheerio = require('cheerio');
 const firebase = require('firebase');
 
 const db = firebase.database();
-const priceQueue = require('./price-queue');
-const { shaZam } = require('../scraper/firefirefire')
+const priceQueue = require('../queues/updated-price-queue');
+const { shaZam } = require('../scraper/helpers');
 
 // TODO refactor all the CSS selectors into a json config file
 // TODO write a shared function for find a css property,

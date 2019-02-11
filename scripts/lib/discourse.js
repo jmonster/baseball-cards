@@ -8,7 +8,7 @@ const discourse = got.extend({
 });
 
 
-exports.postTopic = async function(title, raw, { api_key, api_username }) {
+exports.postTopic = async function({title, raw, api_key, api_username }) {
   const body = new FormData();
 
   body.append('api_key', api_key);
@@ -24,10 +24,7 @@ exports.postTopic = async function(title, raw, { api_key, api_username }) {
 
 // NOTES: title must be unique and of a minimum length/words
 // NOTES: raw must be of a minimum length/words
-// exports.postTopic(
-//   'this-is-the-topic-title',
-//   'this-is-the-body-of-the-post',
-//   { api_key, api_username: 'johnny' } // the author we're submitting as
-// ).catch((err) => {
+// exports.postTopic({title, raw, api_key, api_username })
+// .catch((err) => {
 //   console.error(err);
 // });
