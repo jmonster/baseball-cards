@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Amazon Worker",
-      "program": "${workspaceFolder}/scripts/workers/index.js"
+      "program": "${workspaceFolder}/scripts/scraper/camel2firebase.js"
     }
   ]
 }
