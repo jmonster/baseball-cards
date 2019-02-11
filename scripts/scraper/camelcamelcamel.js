@@ -9,12 +9,10 @@ function sanitizePrice (input) {
 
 module.exports = async function() {
   const { body } = await got(CAMEL_RSS);
-  console.log('got body');
 
   const pending = new Promise(function(resolve, reject) {
     parseString(body, (err, { rss: { channel: [{ item }] } }) => {
       if (err) { return reject(err); }
-      console.log('got parsed');
 
       const modifiedItems = item.map((it) => {
         return {
@@ -27,7 +25,6 @@ module.exports = async function() {
         }
       });
 
-      console.log('got modified');
       return resolve(modifiedItems);
     });
   });
@@ -38,7 +35,6 @@ module.exports = async function() {
 // usage
 // (async () => {
 //   const deals = await module.exports();
-//   console.log(deals);
 //   /*
 //   {
 //     asin: 'B07K1WWS63',
