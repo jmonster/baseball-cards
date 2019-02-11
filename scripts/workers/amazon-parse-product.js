@@ -121,7 +121,6 @@ module.exports = async function amazonParser(job) {
     throw new Error("Unable to parse customer photos");
   }
 
-  // TODO add product description
   const data = {
     asin, brand, description, lastPrice: price, bestOffer, reviewCount, weightedScore, weights, images
   };
@@ -156,7 +155,7 @@ module.exports = async function amazonParser(job) {
     });
 
     // update the product itself
-    // productRef.update(data); // update product
+    productRef.update(data); // update product
 
     // TODO batch these?
     // add review ids to product
@@ -167,4 +166,5 @@ module.exports = async function amazonParser(job) {
   }
 
   console.log(`parsed ${asin}`);
+  return { asin };
 };

@@ -4,8 +4,9 @@ const Queue = require('bee-queue');
 const firebase = require('firebase');
 
 const { firebase: firebaseConfig } = require('../../config/environment')();
-firebase.initializeApp(firebaseConfig);
+// firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
+const serverTimestamp = firebase.database.ServerValue.TIMESTAMP;
 
 const queue = new Queue('amazon-fetch',
   {
@@ -19,9 +20,10 @@ const queue = new Queue('amazon-fetch',
 );
 
 async function onRetry(jobId, err) {
+  console.log(`Job ${jobId} failed.`);
+
   if (+err.message === 404) {
     // abandon products that 404
-    console.log('removing job ', jobId);
     queue.removeJob(jobId);
 
     // remove any deals related to this product
@@ -32,9 +34,9 @@ async function onRetry(jobId, err) {
     const [lastDealId] = (lastDealVal && Object.keys(lastDealVal)) || [];
     const [lastDeal] = (lastDealVal && Object.values(lastDealVal)) || [];
 
+    // expire the deal that referenced this (unavailable) product
     if (!lastDeal.expiredAt) {
-      console.log(`expiring ${lastDealId}`);
-      const expiredAt = Date.now();
+      const expiredAt = serverTimestamp;
       db.ref(`deals/${lastDealId}`).update({ expiredAt });
     }
   }
@@ -43,7 +45,7 @@ async function onRetry(jobId, err) {
 async function onSuccess(jobId, { asin }) {
   console.log(`Job ${jobId} succeeded for product ${asin}.`);
 
-  // (idempotent) remove existing, if any
+  // (idempotent) remove existing job, if any
   await queue.removeJob(asin);
 
   queue

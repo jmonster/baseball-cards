@@ -1,5 +1,7 @@
+require('dotenv').config();
+
 const firebase = require('firebase')
-const { firebase: firebaseConfig } = require('../config/environment')()
+const { firebase: firebaseConfig } = require('../config/environment')();
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
@@ -7,11 +9,13 @@ const DAY = 8.64e+7;
 const amazonFetchQueue = require('./queues/amazon-fetch-queue');
 const amazonParseQueue = require('./queues/amazon-parse-queue');
 const priceQueue = require('./queues/updated-price-queue');
+const updatedProductQueue = require('./queues/updated-product-queue');
 
 // register workers
 amazonFetchQueue.process(1, require('./workers/amazon-fetch-product.js'));
 amazonParseQueue.process(1, require('./workers/amazon-parse-product.js'));
 priceQueue.process(1, require('./workers/record-new-price.js'));
+updatedProductQueue.process(1, require('./workers/updated-product'));
 
 (async function() {
   const counts = await amazonFetchQueue.checkHealth();
@@ -39,4 +43,4 @@ async function seedQueue() {
   });
 }
 
-// seedQueue();
+seedQueue();
