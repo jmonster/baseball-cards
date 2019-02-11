@@ -1,9 +1,16 @@
+const { REDIS_PORT: port, REDIS_HOST: host, REDIS_PASSWORD: password } = process.env;
+
 const firebase = require('firebase');
 const camel = require('./camelcamelcamel');
 const { firebase: firebaseConfig } = require('../../config/environment')();
 const { getProductFromDB, getDealFromDB } = require('./helpers');
-const amazonFetchQueue = require('../queues/amazon-fetch-queue');
-
+const Queue = require('bee-queue');
+const queue = new Queue('amazon-fetch',
+  {
+    redis: password ? { port, host, password } : { port, host },
+    isWorker: false
+  }
+);
 const ONE_DAY = 8.64e+7;
 
 async function main () {
@@ -36,7 +43,7 @@ async function main () {
   //    this is fine as we only support amazon at the moment
   await Promise.all(scrapedDeals.map(async function({ asin, cuid, title, price, msrp, avgPrice }) {
     // add this deal to our price monitoring queue
-    amazonFetchQueue
+    queue
       .createJob({ asin })
       .timeout(10000)
       .retries(3)
@@ -110,7 +117,7 @@ async function main () {
     console.log(`Added ${addedDealsCount} deals`);
     console.log(`Expired ${expiredDealsCount} deals`);
     console.log(`Added ${addedProductsCount} products`);
-
+    queue.close();
     return db.goOffline();
   })
   .catch((err) => {
@@ -119,6 +126,7 @@ async function main () {
   // at main (/Users/johnny/Documents/projects/dealzilla/scraper/persist.js:29:11)
   // at process._tickCallback (internal/process/next_tick.js:68:7)
     console.error(err);
+    queue.close();
     return db.goOffline();
   });
 }
