@@ -11,21 +11,12 @@ function shaZam (input) {
 
 exports.getProductFromDB =getProductFromDB;
 async function getProductFromDB (productId, db) {
-  return new Promise((resolve) => {
-    const child = db.ref().child('products/' + productId);
-    child.once('value', (snapshot) => resolve(snapshot.val()));
-  }).catch((err) => {
-    console.error(err);
-  })
+  const snapshot = await db.ref().child(`products/${productId}`).once('value');
+  return snapshot.val();
 }
 
 exports.getDealFromDB = getDealFromDB;
 async function getDealFromDB (dealId, db) {
-  return new Promise((resolve) => {
-    const child = db.ref().child(`deals/${dealId}`);
-    child.once('value', (snapshot) => resolve(snapshot.val()));
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+  const snapshot = await db.ref().child(`deals/${dealId}`).once('value');
+  return snapshot.val();
 }
