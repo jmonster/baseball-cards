@@ -1,4 +1,13 @@
+# Redis
 To have launchd start redis now and restart at login:
   brew services start redis
 Or, if you don't want/need a background service you can just run:
   redis-server /usr/local/etc/redis.conf
+
+# Queue
+To have launchd start the dealzilla worker queue:
+  cp com.dealzilla.queue.plist /Library/LaunchDaemons/
+  chmod +x /Library/LaunchDaemons/com.dealzilla.queue.plist
+  sudo launchctl load -w /Library/LaunchDaemons/com.dealzilla.queue.plist
+To stop that
+  sudo launchctl unload -w /Library/LaunchDaemons/com.dealzilla.queue.plist

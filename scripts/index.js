@@ -1,3 +1,4 @@
+#! /usr/local/bin/node
 require('dotenv').config();
 
 const firebase = require('firebase')
@@ -22,6 +23,7 @@ updatedProductQueue.process(1, require('./workers/updated-product'));
   // print all the job counts
   console.log('job state counts:', counts);
 })();
+
 // grab all products out of firebase
 // enqueue to check all their prices
 // set to repeat daily (I guess, why not)
@@ -43,4 +45,5 @@ async function seedQueue() {
   });
 }
 
-seedQueue();
+// seedQueue();
+console.log('oh no! look! it\'s dealzilla! RAWWWWWWR!');

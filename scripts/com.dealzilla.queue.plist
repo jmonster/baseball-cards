@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.dealzilla.queue</string>
+	<key>LaunchOnlyOnce</key>
+	<true/>
+	<key>StandardOutPath</key>
+	<string>/tmp/startup.stdout</string>
+	<key>StandardErrorPath</key>
+	<string>/tmp/startup.stderr</string>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>PATH</key>
+		<string>/Users/johnny/.asdf/shims:/Users/johnny/.asdf/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+	</dict>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Users/johnny/Documents/projects/dealzilla/scripts/index.js</string>
+	</array>
+	<key>UserName</key>
+	<string>johnny</string>
+	<key>GroupName</key>
+	<string>everyone</string>
+	<key>KeepAlive</key>
+	<true/>
+</dict>
+</plist>
