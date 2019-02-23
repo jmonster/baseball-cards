@@ -7,7 +7,13 @@ Or, if you don't want/need a background service you can just run:
 # Queue
 To have launchd start the dealzilla worker queue:
   cp com.dealzilla.queue.plist /Library/LaunchDaemons/
-  chmod +x /Library/LaunchDaemons/com.dealzilla.queue.plist
   sudo launchctl load -w /Library/LaunchDaemons/com.dealzilla.queue.plist
 To stop that
   sudo launchctl unload -w /Library/LaunchDaemons/com.dealzilla.queue.plist
+
+# CamelCamelCamel RSS feed
+To have launchd start the (scheduled) dealzilla camelcamelcamel RSS catcher:
+  cp com.dealzilla.camels.plist /Library/LaunchDaemons/
+  sudo launchctl load -w /Library/LaunchDaemons/com.dealzilla.camels.plist
+To stop that
+  sudo launchctl unload -w /Library/LaunchDaemons/com.dealzilla.camels.plist

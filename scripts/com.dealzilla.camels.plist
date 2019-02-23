@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>Label</key>
-	<string>com.dealzilla.queue</string>
+	<string>com.dealzilla.camels</string>
 	<key>LaunchOnlyOnce</key>
-	<false/>
+	<true/>
 	<key>StandardOutPath</key>
-	<string>/tmp/dealzilla.queue.stdout</string>
+	<string>/tmp/dealzilla.camels.stdout</string>
 	<key>StandardErrorPath</key>
-	<string>/tmp/dealzilla.queue.stderr</string>
+	<string>/tmp/dealzilla.camels.stderr</string>
 	<key>EnvironmentVariables</key>
 	<dict>
 		<key>PATH</key>
@@ -17,8 +17,13 @@
 	</dict>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/Users/johnny/Documents/projects/dealzilla/scripts/index.js</string>
+		<string>/Users/johnny/Documents/projects/dealzilla/scripts/scraper/camel2firebase.js</string>
 	</array>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>6</integer>
+  </dict>
 	<key>UserName</key>
 	<string>johnny</string>
 	<key>GroupName</key>

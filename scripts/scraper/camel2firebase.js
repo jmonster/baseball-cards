@@ -1,3 +1,5 @@
+#! /usr/local/bin/node
+require('dotenv').config();
 const { REDIS_PORT: port, REDIS_HOST: host, REDIS_PASSWORD: password } = process.env;
 
 const firebase = require('firebase');

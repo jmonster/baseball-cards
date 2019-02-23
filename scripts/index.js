@@ -20,14 +20,13 @@ updatedProductQueue.process(1, require('./workers/updated-product'));
 
 (async function() {
   const counts = await amazonFetchQueue.checkHealth();
-  // print all the job counts
-  console.log('job state counts:', counts);
+  console.log(counts); // print all the job counts
 })();
 
 // grab all products out of firebase
 // enqueue to check all their prices
 // set to repeat daily (I guess, why not)
-async function seedQueue() {
+async function seedQueueFromFirebase() {
   const snapshot = await db.ref().child('products').once('value');
   const products = snapshot.val();
   const ASINs = Object.keys(products);
@@ -45,5 +44,5 @@ async function seedQueue() {
   });
 }
 
-// seedQueue();
+// seedQueueFromFirebase();
 console.log('oh no! look! it\'s dealzilla! RAWWWWWWR!');
