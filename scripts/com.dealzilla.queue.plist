@@ -17,10 +17,10 @@
 	</dict>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/Users/johnny/Documents/projects/dealzilla/scripts/index.js</string>
+		<string>/Users/jdomino/Documents/dealzilla/scripts/index.js</string>
 	</array>
 	<key>UserName</key>
-	<string>johnny</string>
+	<string>jdomino</string>
 	<key>GroupName</key>
 	<string>everyone</string>
 	<key>KeepAlive</key>
