@@ -28,8 +28,8 @@ async function main () {
   let scrapedDeals;
   try {
     scrapedDeals = await camel();
-  } catch(err) {
-    console.error("ERROR: Unable to access camelcamelcamel.");
+  } catch (err) {
+    console.error('ERROR: Unable to access camelcamelcamel.');
     console.error(err);
     process.exit(-3);
   }

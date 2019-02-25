@@ -14,6 +14,6 @@ module.exports = {
     node: true
   },
   rules: {
-
+    'semi': ['error', 'always', { 'omitLastInOneLineBlock': true }]
   }
 };
