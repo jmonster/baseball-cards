@@ -15,7 +15,6 @@ module.exports = function(environment) {
     },
     amazonAffliateTag: 'dealzilla0a-20',
     'ember-local-storage': {
-      namespace: true, // will use the modulePrefix e.g. 'my-app'
       namespace: 'zil', // will use 'customNamespace'
       // keyDelimiter: '/' // will use / as a delimiter - the default is :
     },
