@@ -28,7 +28,7 @@ const fetchAmazonProduct = async function(job) {
       .timeout(3000)
       .retries(0)
       .save();
-    
+
     return { asin };
   } catch(err) {
     console.error(err);
@@ -38,4 +38,4 @@ const fetchAmazonProduct = async function(job) {
   }
 };
 
-module.exports = limiter.wrap(fetchAmazonProduct);
+exports.worker = limiter.wrap(fetchAmazonProduct);

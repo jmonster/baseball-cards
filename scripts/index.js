@@ -1,27 +1,40 @@
 #! /usr/local/bin/node
 require('dotenv').config();
 
+const DAY = 8.64e+7;
+
+// Firebase
 const firebase = require('firebase')
 const { firebase: firebaseConfig } = require('../config/environment')();
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-const DAY = 8.64e+7;
-const amazonFetchQueue = require('./queues/amazon-fetch-queue');
+const { queue: AmazonFetchQueue } = require('./queues/amazon-fetch-queue');
+const amazonFetchQueue = AmazonFetchQueue(db);
+
 const amazonParseQueue = require('./queues/amazon-parse-queue');
 const priceQueue = require('./queues/updated-price-queue');
 const updatedProductQueue = require('./queues/updated-product-queue');
 
-// register workers
-amazonFetchQueue.process(1, require('./workers/amazon-fetch-product.js'));
-amazonParseQueue.process(1, require('./workers/amazon-parse-product.js'));
-priceQueue.process(1, require('./workers/record-new-price.js'));
-updatedProductQueue.process(1, require('./workers/updated-product'));
+const { worker: RecordNewPriceWorker } = require('./workers/record-new-price');
+const { worker: UpdatedProductWorker } = require('./workers/updated-product');
+const { worker: amazonFetchProduct } = require('./workers/amazon-fetch-product');
+const { worker: AmazonParseProduct } = require('./workers/amazon-parse-product');
 
-(async function() {
+const amazonParseProduct = AmazonParseProduct(db);
+const recordNewPriceWorker = RecordNewPriceWorker(db);
+const updatedProductWorker = UpdatedProductWorker(db);
+
+// register workers
+amazonFetchQueue.process(1, amazonFetchProduct);
+amazonParseQueue.process(1, amazonParseProduct);
+priceQueue.process(1, recordNewPriceWorker);
+updatedProductQueue.process(1, updatedProductWorker);
+
+async function checkHealth() {
   const counts = await amazonFetchQueue.checkHealth();
   console.log(counts); // print all the job counts
-})();
+};
 
 // grab all products out of firebase
 // enqueue to check all their prices
@@ -44,5 +57,6 @@ async function seedQueueFromFirebase() {
   });
 }
 
+checkHealth();
 // seedQueueFromFirebase();
 console.log('oh no! look! it\'s dealzilla! RAWWWWWWR!');
