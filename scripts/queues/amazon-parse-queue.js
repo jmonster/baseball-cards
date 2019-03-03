@@ -1,15 +1,14 @@
 const { REDIS_PORT: port, REDIS_HOST: host, REDIS_PASSWORD: password } = process.env;
-
 const Queue = require('bee-queue');
 
-const amazonParseQueue = new Queue('amazon-parse',{
+const amazonParseQueue = new Queue('amazon-parse', {
   redis: password ? { port, host, password } : { port, host },
   storeJobs: false,
   removeOnSuccess: true,
   removeOnFailure: true
 });
 
-const updatedProductQ = new Queue('updated-product',{
+const updatedProductQ = new Queue('updated-product', {
   redis: password ? { port, host, password } : { port, host },
   isWorker: false
 });
