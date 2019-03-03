@@ -5,7 +5,8 @@
   "author": "johnny domino",
   "private": true,
   "scripts": {
-    "test": "mocha --recursive tests"
+    "test": "mocha --recursive tests",
+    "add-from-camelcamelcamel": "node ./scraper/camel2firebase"
   },
   "dependencies": {
     "bee-queue": "^1.2.2",
