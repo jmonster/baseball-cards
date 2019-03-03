@@ -13,7 +13,7 @@ describe('amazon-client', function() {
 
   it('verifies Amazon gotOptions are being utilized', async function() {
     const { request: { gotOptions } } = await amazonClient.get('/example');
-    const { headers: { accept: acceptHeader }} = gotOptions;
+    const { headers: { accept: acceptHeader } } = gotOptions;
 
     assert.equal(gotOptions.href, `${baseUrl}/example`);
     assert.equal(gotOptions.protocol, 'https:');

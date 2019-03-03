@@ -13,7 +13,7 @@ describe('discourse', function() {
       .post('/posts', bodyAsString)
       .reply(200, `{"key": "value"}`, { 'Content-Type': 'application/json' });
 
-    response = await postTopic({title, raw, api_key, api_username });
+    response = await postTopic({ title, raw, api_key, api_username });
   });
 
   it('verifies Discourse gotOptions are being utilized', async function() {

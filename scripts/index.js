@@ -1,10 +1,8 @@
 #! /usr/local/bin/node
 require('dotenv').config();
 
-const DAY = 8.64e+7;
-
 // Firebase
-const firebase = require('firebase')
+const firebase = require('firebase');
 const { firebase: firebaseConfig } = require('../config/environment')();
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
@@ -36,27 +34,6 @@ async function checkHealth() {
   console.log(counts); // print all the job counts
 };
 
-// grab all products out of firebase
-// enqueue to check all their prices
-// set to repeat daily (I guess, why not)
-async function seedQueueFromFirebase() {
-  const snapshot = await db.ref().child('products').once('value');
-  const products = snapshot.val();
-  const ASINs = Object.keys(products);
-  // const ASINs = ['B07HHVF2XG'];
-  ASINs.forEach(async (asin) => {
-    // remove (possible) existing job
-    await amazonFetchQueue.removeJob(asin);
-
-    // add new job
-    amazonFetchQueue
-      .createJob({ asin })
-      .timeout(10000)
-      .retries(3)
-      .save();
-  });
-}
-
 checkHealth();
-// seedQueueFromFirebase();
+
 console.log('oh no! look! it\'s dealzilla! RAWWWWWWR!');

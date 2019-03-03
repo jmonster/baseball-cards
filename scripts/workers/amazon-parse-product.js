@@ -19,7 +19,7 @@ exports.worker = function(db) {
 
     try {
       $ = cheerio.load(html);
-    } catch(err) {
+    } catch (err) {
       console.error('balls.');
       throw new Error('Unable to cheerio.load(html)');
     }
@@ -59,28 +59,26 @@ exports.worker = function(db) {
 
       const descriptionHtml = $('#productDescription_feature_div').html();
       description = descriptionHtml && descriptionHtml.trim();
-      brand = $('#bylineInfo').text().replace(/by/,'').trim();
+      brand = $('#bylineInfo').text().replace(/by/, '').trim();
 
       // TODO this assumes there are 5 diff scores
       // but when there are 0% of a certain score it is omitted
       // so we need to instead explicitly check which rating we're looking at
       // and store the magnitude under that specific label
-      reviewHeader.find('table tr.a-histogram-row .histogram-review-count').each((i,el) => {
+      reviewHeader.find('table tr.a-histogram-row .histogram-review-count').each((i, el) => {
         // 0th index is for 5 stars, 4th index is for 1 star
         const $$ = cheerio(el);
         const elClass = $$.attr('class');
         const elClass_m = elClass && elClass.match(/(\d)star/);
         const numberOfStars = elClass_m && elClass_m[1];
-
-        const valueStr = $$.text();
         const value_m = $$.text().match(/\d+/);
 
         if (numberOfStars) {
           weights[numberOfStars] = value_m && value_m[0];
         }
       }).get();
-    } catch(err) {
-      console.error('balls2.')
+    } catch (err) {
+      console.error('balls2.');
       console.error(err);
       throw new Error('Unable to parse review summary');
     }
@@ -88,23 +86,24 @@ exports.worker = function(db) {
     job.reportProgress(50);
 
     // inidividual reviews
-    let rawReviews, reviews
+    let rawReviews, reviews;
+
     try {
       rawReviews = $('div[data-hook="review"]');
       reviews = rawReviews.map((i, el) => {
         const r = cheerio(el);
         const name = r.find('span.a-profile-name').text();
         const title = r.find('a[data-hook="review-title"]').text();
-        const color = r.find('span[data-hook="format-strip-linkless"]').text().replace(/^Color\:\ /,'');
+        const color = r.find('span[data-hook="format-strip-linkless"]').text().replace(/^Color: /, '');
         const body = r.find('div[data-hook="review-collapsed"]').html();
         const rating_m = r.find('i[data-hook="review-star-rating"]').text().match(/\d/);
         const rating = rating_m && rating_m[0];
 
-        return { name, rating, title, color, body }
+        return { name, rating, title, color, body };
       }).get();
-    } catch(err) {
+    } catch (err) {
       console.error('balls3.');
-      throw new Error('Unable to parse individual (top) reviews')
+      throw new Error('Unable to parse individual (top) reviews');
     }
 
     job.reportProgress(75);
@@ -112,11 +111,11 @@ exports.worker = function(db) {
     let images;
     try {
       images = $('img.cr-customer-image-thumbnail').map((i, el) => {
-        return cheerio(el).attr('src')
+        return cheerio(el).attr('src');
       }).get();
-    } catch(err) {
+    } catch (err) {
       console.error('balls4.');
-      throw new Error("Unable to parse customer photos");
+      throw new Error('Unable to parse customer photos');
     }
 
     const data = {
@@ -134,7 +133,7 @@ exports.worker = function(db) {
       const setOfIds = new Set(persistedReviewIds); // O(1) lookups
       const newReviews = reviews.filter((review) => {
         const { name, title } = review;
-        const hashId = shaZam(name+title);
+        const hashId = shaZam(name + title);
 
         review.hashId = hashId;
 
@@ -158,7 +157,7 @@ exports.worker = function(db) {
       // TODO batch these?
       // add review ids to product
       newReviewIds.forEach((key) => db.ref(`products/${asin}/reviews`).child(key).set(key));
-    } catch(err) {
+    } catch (err) {
       console.error(err);
       throw err;
     }

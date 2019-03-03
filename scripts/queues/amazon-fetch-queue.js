@@ -31,7 +31,7 @@ function AmazonFetchQueue(db) {
       const [lastDealId] = (lastDealVal && Object.keys(lastDealVal)) || [];
       const [lastDeal] = (lastDealVal && Object.values(lastDealVal)) || [];
 
-      if (!lastDeal) { return; }
+      if (!lastDeal) { return }
 
       // expire the deal that referenced this (unavailable) product
       if (!lastDeal.expiredAt) {

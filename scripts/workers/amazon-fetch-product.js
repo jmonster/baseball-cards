@@ -5,7 +5,7 @@ const amazonPageParseQueue = require('../queues/amazon-parse-queue');
 
 const limiter = new Bottleneck({
   // kick off at most 1 request/second
-  minTime: 2000,   // 1 second
+  minTime: 2000, // 1 second
 
   // run at most 1 request simultaneously
   maxConcurrent: 1 // 1
@@ -30,7 +30,7 @@ const fetchAmazonProduct = async function(job) {
       .save();
 
     return { asin };
-  } catch(err) {
+  } catch (err) {
     console.error(err);
     // hax because we lose the original error in our `job retrying` handler
     err.message = err.statusCode;

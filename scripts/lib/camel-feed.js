@@ -3,7 +3,7 @@ const CAMEL_RSS = process.env.CAMEL_RSS;
 const got = require('got');
 const parseString = require('xml2js').parseString;
 
-function sanitizePrice (input) {
+function sanitizePrice(input) {
   // eslint-disable-next-line no-useless-escape
   return parseInt(input.replace(',', '').replace(/[\.\,]/, ''), 10);
 }
@@ -12,7 +12,7 @@ module.exports = async function() {
   const { body } = await got(CAMEL_RSS);
   const pending = new Promise(function(resolve, reject) {
     parseString(body, (err, { rss: { channel: [{ item }] } }) => {
-      if (err) { return reject(err); }
+      if (err) { return reject(err) }
 
       const modifiedItems = item.map((it) => {
         return {
@@ -22,7 +22,7 @@ module.exports = async function() {
           price: sanitizePrice(it.description[0].match(/Current Price: \$(.+\.\d{2})/)[1]),
           msrp: sanitizePrice(it.description[0].match(/List Price: \$(.+\.\d{2})/)[1]),
           avgPrice: sanitizePrice(it.description[0].match(/Avg\. Price: \$(.+\.\d{2})/)[1])
-        }
+        };
       });
 
       return resolve(modifiedItems);
@@ -30,7 +30,7 @@ module.exports = async function() {
   });
 
   return pending;
-}
+};
 
 // usage
 // (async () => {

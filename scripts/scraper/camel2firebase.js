@@ -16,7 +16,7 @@ const queue = new Queue('amazon-fetch',
   }
 );
 
-async function main () {
+async function main() {
   // setup DB access
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
@@ -83,7 +83,7 @@ async function main () {
       created_at: createdAt,
       price,
       avgPrice
-    }
+    };
 
     addedDealsCount++;
     return Promise.all([
@@ -92,49 +92,49 @@ async function main () {
       db.ref().update({ [`/deals/${cuid}`]: _deal })
     ]);
   }))
-  .then(async () => {
+    .then(async () => {
     // grab (all) deals
-    const ref = db.ref().child('deals');
-    const snapshot = await ref.once('value');
-    const deals = snapshot.val();
+      const ref = db.ref().child('deals');
+      const snapshot = await ref.once('value');
+      const deals = snapshot.val();
 
-    // grab cuids from object
-    const cuids = Object.keys(deals);
-    cuids.forEach((cuid) => {
-      const deal = deals[cuid];
+      // grab cuids from object
+      const cuids = Object.keys(deals);
+      cuids.forEach((cuid) => {
+        const deal = deals[cuid];
 
-      // return if alrady expired
-      if (deal.isExpired) { return; }
+        // return if alrady expired
+        if (deal.isExpired) { return }
 
-      const now = Date.now();
-      const dealDate = deal.lastSeenAt || deal.createdAt;
+        const now = Date.now();
+        const dealDate = deal.lastSeenAt || deal.createdAt;
 
-      if ((now - dealDate) > ONE_DAY) {
-        expiredDealsCount++;
+        if ((now - dealDate) > ONE_DAY) {
+          expiredDealsCount++;
 
-        batchUpdates[`/deals/${cuid}`] = { expiredAt: serverTimestamp };
-      }
-    });
+          batchUpdates[`/deals/${cuid}`] = { expiredAt: serverTimestamp };
+        }
+      });
 
-    return db.ref().update(batchUpdates);
-  })
-  .then(async () => {
+      return db.ref().update(batchUpdates);
+    })
+    .then(async () => {
     // print persisted analytics
-    console.log(`Added ${addedDealsCount} deals`);
-    console.log(`Expired ${expiredDealsCount} deals`);
-    console.log(`Added ${addedProductsCount} products`);
-    queue.close();
-    return db.goOffline();
-  })
-  .catch((err) => {
-  // TypeError: Cannot read property 'Symbol(Symbol.iterator)' of undefined
-  // at Function.all (<anonymous>)
-  // at main (/Users/johnny/Documents/projects/dealzilla/scraper/persist.js:29:11)
-  // at process._tickCallback (internal/process/next_tick.js:68:7)
-    console.error(err);
-    queue.close();
-    return db.goOffline();
-  });
+      console.log(`Added ${addedDealsCount} deals`);
+      console.log(`Expired ${expiredDealsCount} deals`);
+      console.log(`Added ${addedProductsCount} products`);
+      queue.close();
+      return db.goOffline();
+    })
+    .catch((err) => {
+      // TypeError: Cannot read property 'Symbol(Symbol.iterator)' of undefined
+      // at Function.all (<anonymous>)
+      // at main (/Users/johnny/Documents/projects/dealzilla/scraper/persist.js:29:11)
+      // at process._tickCallback (internal/process/next_tick.js:68:7)
+      console.error(err);
+      queue.close();
+      return db.goOffline();
+    });
 }
 
 main();

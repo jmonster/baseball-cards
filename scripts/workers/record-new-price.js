@@ -6,7 +6,7 @@ exports.keysAndValues = function keysAndValues(snapshot) {
   const [value] = Object.values(val);
 
   return { key, value };
-}
+};
 
 exports.worker = function worker(db) {
   return async function priceWorker(job) {
@@ -25,7 +25,7 @@ exports.worker = function worker(db) {
       if (lastKnownPrice && (lastKnownPrice === price)) {
         priceRef.child(lastKnownKey).remove();
       }
-    } catch(err) {
+    } catch (err) {
       console.error(err);
     } finally {
       const dealsRef = db.ref('deals');
@@ -53,4 +53,4 @@ exports.worker = function worker(db) {
       priceRef.child(timestamp).set({ price });
     }
   };
-}
+};

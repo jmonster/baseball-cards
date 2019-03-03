@@ -10,7 +10,7 @@ exports.postTopic = async function({ title, raw, api_key, api_username }) {
     body: new URLSearchParams({ api_key, api_username, title, raw }).toString(),
     searchParams: new URLSearchParams([['api_key', api_key]])
   });
-}
+};
 
 // NOTES: title must be unique and of a minimum length/words
 // NOTES: raw must be of a minimum length/words

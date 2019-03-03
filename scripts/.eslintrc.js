@@ -21,6 +21,7 @@ module.exports = {
         'named': 'never',
         'anonymous': 'ignore'
       }
-    ]
+    ],
+    'camelcase': ['off']
   }
 };
