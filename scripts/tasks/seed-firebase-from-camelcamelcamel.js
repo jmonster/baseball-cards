@@ -1,5 +1,7 @@
 #! /usr/local/bin/node
+
 require('dotenv').config();
+
 const ONE_DAY = 8.64e+7;
 const { REDIS_PORT: port, REDIS_HOST: host, REDIS_PASSWORD: password } = process.env;
 
@@ -7,7 +9,7 @@ const Queue = require('bee-queue');
 const firebase = require('firebase');
 const camel = require('../lib/camel-feed');
 const { firebase: firebaseConfig } = require('../../config/environment')();
-const { getProductFromDB, getDealFromDB } = require('./lib/firebase-sugar');
+const { getProductFromDB, getDealFromDB } = require('../lib/firebase-sugar');
 
 const queue = new Queue('amazon-fetch',
   {

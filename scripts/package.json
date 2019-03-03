@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "test": "mocha --recursive tests",
-    "add-from-camelcamelcamel": "node ./scraper/camel2firebase",
+    "seed-firebase-from-camelcamelcamel": "node ./tasks/seed-firebase-from-camelcamelcamel",
+    "seed-queue-from-firebase": "node ./tasks/seed-queue-from-firebase",
     "lint": "eslint lib queues scraper workers index.js"
   },
   "dependencies": {

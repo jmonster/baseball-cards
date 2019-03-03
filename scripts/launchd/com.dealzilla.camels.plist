@@ -17,7 +17,7 @@
 	</dict>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/Users/jdomino/Documents/projects/dealzilla/scripts/scraper/camel2firebase.js</string>
+		<string>/Users/jdomino/Documents/projects/dealzilla/scripts/tasks/seed-firebase-from-camelcamelcamel.js</string>
 	</array>
   <key>StartCalendarInterval</key>
   <dict>
