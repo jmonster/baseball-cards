@@ -1,24 +1,28 @@
 #! /usr/local/bin/node
 require('dotenv').config();
+const ONE_DAY = 8.64e+7;
 const { REDIS_PORT: port, REDIS_HOST: host, REDIS_PASSWORD: password } = process.env;
 
-const firebase = require('firebase');
-const camel = require('./camelcamelcamel');
-const { firebase: firebaseConfig } = require('../../config/environment')();
-const { getProductFromDB, getDealFromDB } = require('./helpers');
 const Queue = require('bee-queue');
+const firebase = require('firebase');
+const camel = require('../lib/camel-feed');
+const { firebase: firebaseConfig } = require('../../config/environment')();
+const { getProductFromDB, getDealFromDB } = require('./lib/firebase-sugar');
+
 const queue = new Queue('amazon-fetch',
   {
     redis: password ? { port, host, password } : { port, host },
     isWorker: false
   }
 );
-const ONE_DAY = 8.64e+7;
 
 async function main () {
   // setup DB access
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
+
+  // TODO update this module to instead inject items into the queue
+  // rather than redefining how to add to firebase
 
   // fetch CCC's deals list (via their RSS feed)
   let scrapedDeals;
@@ -50,7 +54,7 @@ async function main () {
       .timeout(10000)
       .retries(3)
       .save();
-    
+
     // TODO fetch all deals and products in one query
     const productId = asin; // TODO support more than just Amazon
     const createdAt = serverTimestamp;
@@ -80,7 +84,7 @@ async function main () {
       price,
       avgPrice
     }
-    
+
     addedDealsCount++;
     return Promise.all([
       // i think there is simpler syntax for this
@@ -101,7 +105,7 @@ async function main () {
 
       // return if alrady expired
       if (deal.isExpired) { return; }
-      
+
       const now = Date.now();
       const dealDate = deal.lastSeenAt || deal.createdAt;
 

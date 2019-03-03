@@ -1,6 +1,6 @@
 const cheerio = require('cheerio');
 const priceQueue = require('../queues/updated-price-queue');
-const { shaZam } = require('../scraper/helpers');
+const shaZam = require('../lib/shazam');
 
 // TODO refactor all the CSS selectors into a json config file
 // TODO write a shared function for find a css property,

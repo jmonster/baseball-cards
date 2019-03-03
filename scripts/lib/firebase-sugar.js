@@ -1,14 +1,3 @@
-const crypto = require('crypto')
-
-exports.shaZam =
-function shaZam (input) {
-  return crypto
-    .createHash('sha1')
-    .update(input)
-    .digest('hex')
-    .slice(0, 16);
-}
-
 exports.getProductFromDB =getProductFromDB;
 async function getProductFromDB (productId, db) {
   const snapshot = await db.ref().child(`products/${productId}`).once('value');

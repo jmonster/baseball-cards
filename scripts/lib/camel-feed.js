@@ -1,6 +1,7 @@
+const CAMEL_RSS = process.env.CAMEL_RSS;
+
 const got = require('got');
 const parseString = require('xml2js').parseString;
-const CAMEL_RSS = 'https://camelcamelcamel.com/popular.xml';
 
 function sanitizePrice (input) {
   // eslint-disable-next-line no-useless-escape
@@ -9,7 +10,6 @@ function sanitizePrice (input) {
 
 module.exports = async function() {
   const { body } = await got(CAMEL_RSS);
-
   const pending = new Promise(function(resolve, reject) {
     parseString(body, (err, { rss: { channel: [{ item }] } }) => {
       if (err) { return reject(err); }
