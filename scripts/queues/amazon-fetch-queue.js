@@ -2,10 +2,6 @@ const { REDIS_PORT: port, REDIS_HOST: host, REDIS_PASSWORD: password } = process
 
 const Queue = require('bee-queue');
 const firebase = require('firebase');
-
-const { firebase: firebaseConfig } = require('../../config/environment')();
-// firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
 const serverTimestamp = firebase.database.ServerValue.TIMESTAMP;
 
 function AmazonFetchQueue(db) {
