@@ -1,6 +1,6 @@
 # dealzilla
 
-![](https://dumielauxepices.net/sites/default/files/drawn-godzilla-shin-godzilla-542260-6053434.jpg)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f14acceb-c3d5-4926-a234-c71d57146912/deploy-status)](https://app.netlify.com/sites/dealzilla/deploys)
 
 ## Prerequisites
 
