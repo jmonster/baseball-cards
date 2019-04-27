@@ -1,23 +1,13 @@
 import Route from '@ember/routing/route';
 import RSVP from 'rsvp';
 import { inject } from '@ember/service';
-import { alias } from '@ember/object/computed';
 import { storageFor } from 'ember-local-storage';
 
 export default Route.extend({
   browser: inject(),
-  isDesktop: alias('browser.isDesktop'),
 
   likedDealIds: storageFor('deal-likes'),
   dislikedDealIds: storageFor('deal-dislikes'),
-
-  beforeModel() {
-    const notDev = !(window.location.hostname === 'localhost');
-
-    if (notDev && this.isDesktop) {
-      this.transitionTo('desktop');
-    }
-  },
 
   model() {
     // deals that have expired <= 3 days ago

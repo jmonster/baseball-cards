@@ -12,8 +12,6 @@ Router.map(function() {
     this.route('swiper');
     this.route('product', { path: '/product/:product_id'});
   });
-
-  this.route('desktop')
 });
 
 export default Router;
