@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>dealzilla</title>
     <meta name="description" content="">
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta property="og:image" content="https://media1.giphy.com/media/u0oIDvwGoAMzC/giphy.gif"/>
@@ -11,98 +10,11 @@
     {{content-for "head"}}
     <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css">
     <link integrity="" rel="stylesheet" href="{{rootURL}}assets/dealzilla.css">
-
-    <!-- a few inline styles for fassssst initial page rendering -->
-    <style media="screen">
-      input { padding: 0; margin: 0; }
-      button, input { overflow: visible; }
-      button, input, optgroup, select, textarea { font: inherit; margin: 0; }
-      .h-100 { height: 100%; }
-      .o-50 { opacity: .5; }
-      .bg-white { background-color: #fff; }
-      .bn { border-style: none; border-width: 0; }
-      .br1 { border-radius: 4px; }
-      .f2 { font-size: 17px; }
-      .f4 { font-size: 14px; }
-      .w-100 { width: 100%; }
-      .ma0 { margin: 0; }
-      .mh1 { margin-left: 5px; margin-right: 5px; }
-      .pa1 { padding: 5px; }
-      .ph2 { padding-left: 10px; padding-right: 10px; }
-      .pv2 { padding-top: 10px; padding-bottom: 10px; }
-      .bg-gradient-primary { background: linear-gradient(135deg, #ac8ece, #79589f); }
-      .flex { display: -webkit-box; display: flex; }
-      .flex-column {
-        -ms-flex-direction: column;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        flex-direction: column;
-      }
-      .flex-none {
-        -ms-flex: none;
-        -webkit-box-flex: 0;
-        flex: none;
-      }
-      .flex-auto {
-        -ms-flex: 1 1 auto;
-        -webkit-box-flex: 1;
-        flex: 1 1 auto;
-        min-width: 0;
-        min-height: 0;
-      }
-      .flex-1 {
-        -ms-flex: 1;
-        -webkit-box-flex: 1;
-        flex: 1;
-      }
-      .justify-center {
-        -ms-flex-pack: center;
-        -webkit-box-pack: center;
-        justify-content: center;
-      }
-      .items-center {
-        -ms-flex-align: center;
-        -webkit-box-align: center;
-        align-items: center;
-      }
-      .shadow-outer-1 {
-        -webkit-box-shadow: 0 0 0 1px rgba(89,105,129,0.1), 0 1px 3px 0 rgba(89,105,129,0.1), 0 1px 2px 0 rgba(0,0,0,0.05);
-        box-shadow: 0 0 0 1px rgba(89,105,129,0.1), 0 1px 3px 0 rgba(89,105,129,0.1), 0 1px 2px 0 rgba(0,0,0,0.05);
-      }
-      .navigation .logo {
-        background: transparent;
-        backdrop-filter: saturate(130%) brightness(90%);
-        -webkit-backdrop-filter: saturate(130%) brightness(90%);
-        min-height: 60px;
-        background: rgba(0, 0, 0, 0.075);
-      }
-      .dealzilla-logo {
-        display: block;
-        width: 60px;
-        height: 60px;
-        background: url(/assets/images/branding/dinosaur.svg);
-        background-size: 60px 60px;
-      }
-    </style>
     {{content-for "head-footer"}}
   </head>
 
   <body class="h-100 w-100 ma0 flex flex-column">
     {{content-for "body"}}
-
-    <div id="initial-loading-indicator" class="o-50 flex">
-      <div class="navigation flex flex-none bg-gradient-primary shadow-outer-1 w-100">
-          <div class="logo flex-none flex items-center">
-              <div class="dealzilla-logo mh1"></div>
-          </div>
-
-          <div class="ph2 justify-center pv2 f4 wikiwiki-search flex flex-auto flex-column overflow-container">
-              <div class="br1 pa1 search-input bg-white flex"><span class="flex justify-center items-center mh1 f2">🔍</span>
-                  <input disabled class="flex-1 br1 bn pv2 ma0 z-1 search-input bg-white" type="text" placeholder="Almost there...">
-              </div>
-          </div>
-      </div>
-    </div>
 
     <script src="{{rootURL}}assets/vendor.js"></script>
     <script src="{{rootURL}}assets/dealzilla.js"></script>

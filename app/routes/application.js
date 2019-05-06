@@ -1,13 +1,9 @@
-import { on } from '@ember/object/evented';
 import Route from '@ember/routing/route'
 
 export default Route.extend({
-  removeInitialLoading: on('activate', function() {
-    if (document) {
-      const initalLoadingIndicator = document.getElementById('initial-loading-indicator');
-      initalLoadingIndicator && initalLoadingIndicator.remove();
-    }
-  }),
+  title(tokens) {
+    return tokens.length ? `🦖 ${tokens.join('|')}` : '🦖dealzi||a';
+  },
 
   actions: {
     signIn(/*provider*/) {

@@ -61,7 +61,8 @@ function onLeftSwipe(event) {
     this.setTranslate(updatedX, updatedY, this.element);
   }
 
-  document.ontouchmove = function (e) {
+  // fastboot hax
+  window.document.ontouchmove = function (e) {
     e.preventDefault();
     return false;
   }
@@ -116,7 +117,8 @@ function onTouchend(event) {
   this.element.removeEventListener('touchend', boundTouchend);
 
   // re-enable page scrolling
-  document.ontouchmove = function() { return true; };
+  // fastboot hax
+  window.document.ontouchmove = function() { return true; };
 
   this.set('boundDetectLeftSwipe', null);
   this.set('boundOnLeftSwipe', null);

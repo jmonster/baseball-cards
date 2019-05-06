@@ -7,5 +7,9 @@ export default Route.extend(RouteQueryManager, {
   async model(params) {
     const { product: content } = await this.get('apollo').watchQuery({ query: productQuery, variables: { 'id': params.product_id } });
     return Product.create({ content });
+  },
+
+  async titleToken(model) {
+    return model.get('title');
   }
 });
