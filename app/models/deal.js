@@ -1,33 +1,24 @@
-import DS from 'ember-data';
+import ObjectProxy from '@ember/object/proxy';
 import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
-import { bool } from '@ember/object/computed';
+import Product from 'dealzilla/models/product';
 
-const inverse = null;
+export default ObjectProxy.extend({
 
-export default DS.Model.extend({
-  product: DS.belongsTo('product', { inverse, async: true }),
-  reviews: DS.hasMany('review', { inverse, async: true }),
-  tags: DS.hasMany('tag', { inverse, async: true }),
-  // images: DS.hasMany('image', { inverse, async: true }),
+  product: computed('content.product', function() {
+    return Product.create({ content: this.content.product });
+  }),
 
-  title: DS.attr('string'),
-  description: DS.attr('string'),
-  expiredAt: DS.attr('number'),
-  // isExpired: true,
-  isExpired: bool('expiredAt'),
-  lastSeenAt: DS.attr('date'),
-
-  // TODO we should offer an array of opportunities here
-  // e.g. Costco members can get a lower price than Amazon Prime can get a lower price than someone using a 20% off coupon ...
-  price: DS.attr('dollars'),
   savings: computed('price', 'product.msrp', function() {
     const delta = this.get('price') / this.get('product.msrp');
     const inverse = 1 - delta;
-    return parseInt(inverse * 100, 10);
+    // recall that price is in cents; no need to divide by 100
+    return Math.abs(Math.round(inverse));
   }),
-  // wiki: DS.attr('string'), // someday soon
-  // url: DS.attr('string'),
+
+  isExpired: computed(function() {
+    return !!this.content.expiredAt;
+  }),
 
   url: alias('product.url'),
   thumbnail: alias('product.thumbnail'),

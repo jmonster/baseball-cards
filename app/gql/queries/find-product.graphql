@@ -1,0 +1,32 @@
+query findProductById($id: ID){
+  product(id:$id) {
+    id
+    asin
+    prices {
+      value
+      timestamp
+    }
+    deals {
+      id
+      tags
+      title
+      description
+      price
+      expiredAt
+    }
+    images {
+      url
+      alt
+    }
+    reviews {
+      body
+      rating
+    }
+    tags
+    title
+    msrp
+    brand
+    description
+    url
+  }
+}

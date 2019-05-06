@@ -1,0 +1,11 @@
+query {
+  deals {
+    id
+    title,
+    price,
+    expiredAt,
+    product {
+      id, title, asin, msrp, url
+    }
+  }
+}

@@ -17,7 +17,7 @@ export default Component.extend({
     const likedDealIds = this.likedDealIds;
     const likedDealsSet = new Set(likedDealIds.toArray()); // O(1) lookups
 
-    return allDeals.filter(({id}) => likedDealsSet.has(String(id)));
+    return allDeals.filter((d) => likedDealsSet.has(String(d.get('id'))));
   }),
 
   dislikedDeals: computed('nonExpiredDeals.[]', 'dislikedDealIds.[]', function() {
@@ -25,7 +25,7 @@ export default Component.extend({
     const dislikedDeals = this.dislikedDealIds;
     const dislikedDealsSet = new Set(dislikedDeals.toArray());  // O(1) lookups
 
-    return allDeals.filter(({id}) => dislikedDealsSet.has(String(id)));
+    return allDeals.filter((d) => dislikedDealsSet.has(String(d.get('id'))));
   }),
 
   // exclude 3 day past expired deals

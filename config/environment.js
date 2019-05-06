@@ -2,21 +2,18 @@
 
 module.exports = function(environment) {
   let ENV = {
-    firebase: {
-      apiKey: 'AIzaSyB1zuup7KDVsTVyUEqQ4sly6LwSmCJQxu0',
-      authDomain: 'thedealzillaprojectid.firebaseapp.com',
-      databaseURL: 'https://thedealzillaprojectid.firebaseio.com/',
-      projectId: 'thedealzillaprojectid',
-      storageBucket: 'gs://thedealzillaprojectid.appspot.com',
-      messagingSenderId: '520741038114'
-    },
-    torii: {
-      sessionServiceName: 'session'
-    },
     amazonAffliateTag: 'dealzilla0a-20',
     'ember-local-storage': {
       namespace: 'zil', // will use 'customNamespace'
       // keyDelimiter: '/' // will use / as a delimiter - the default is :
+    },
+
+    apollo: {
+      // apiURL: 'http://127.0.0.1:4000/graphql',
+      apiURL: 'https://dealzilla-api.domino.now.sh/graphql',
+      // Optionally, set the credentials property of the Fetch Request interface
+      // to control when a cookie is sent:
+      // requestCredentials: 'same-origin', // other choices: 'include', 'omit'
     },
 
     modulePrefix: 'dealzilla',

@@ -1,9 +1,9 @@
 import { computed } from '@ember/object';
-import { inject } from '@ember/service';
 import Controller from '@ember/controller';
+import { alias }  from '@ember/object/computed';
 
 export default Controller.extend({
-  store: inject(),
+  deals: alias('model'),
 
   // dynamically change the layout of the main container
   justify: computed('currentRouteName', function () {
@@ -11,7 +11,7 @@ export default Controller.extend({
   }),
 
   thingsToFilterOn: computed(async function () {
-    return this.model.deals.map((deal) => deal.get('product'));
+    return this.deals.map((deal) => deal.get('product'));
 
     // the following is useful to combine multiple sources
     // return RSVP.all([

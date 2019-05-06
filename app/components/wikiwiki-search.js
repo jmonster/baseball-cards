@@ -59,8 +59,8 @@ export default Component.extend({
   searchIsPending: false,
   notFoundGif: computed(function() {
     const notFoundGifs = [
-      'https://media2.giphy.com/media/v0WTZglGVd4bu/giphy.gif',
-      'https://media1.tenor.com/images/99d772f27c3537355d4dc1e49bd22e4b/tenor.gif'
+      '/assets/images/404/ren-stimpy.gif',
+      '/assets/images/404/aint-found-shit.gif'
     ];
 
     const randomIndex = Math.floor(Math.random() * notFoundGifs.length);
