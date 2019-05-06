@@ -1,25 +1,22 @@
 import ApolloService from 'ember-apollo-client/services/apollo';
 import { setContext } from 'apollo-link-context';
 
-export default ApolloService.extend({
-  clientOptions() {
-    const httpLink = this._super().link;
+class Apollo13 extends ApolloService {
+  link() {
+    const httpLink = super.link();
     const cacheLink = setContext(() => {
       return {
 
-
         headers: {
           /* Authorization header goes here */
-          /* NOTE: the `cache-control` header is ignored */
+          'cache-control': 'max-age=600' // 10 minutes
         }
-
 
       };
     });
 
-    return {
-      link: cacheLink.concat(httpLink),
-      cache: this.cache()
-    };
+    return cacheLink.concat(httpLink);
   }
-});
+}
+
+export default Apollo13;

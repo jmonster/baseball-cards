@@ -20,9 +20,8 @@ export default Component.extend({
 
   // a collection of objects with a `name` key
   // from which we will filter/search on
-  items: computed(function() {
-    throw new Error("You must provide an `items` property to the _wikiwiki-search_ component.")
-  }),
+  // this is overriden when the `items` argument is provided
+  items: null,
 
   matcher: function(query) {
     const escapedQuery = query.replace(/[^a-z0-9-]+/i, ''); // strip invalid chars

@@ -35,10 +35,8 @@ export default Component.extend({
     return delta > 0;
   }),
 
-  deals: computed(function() {
-    // this function is overriden when the `deals` argument is provided
-    throw new Error(`The 'deal-list' component requires that you provide an array as the 'deals' parameter.`);
-  }),
+  // this is overriden when the `deals` argument is provided
+  deals: null,
 
   actions: {
     'unlike-deal': function(id) {

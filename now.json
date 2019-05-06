@@ -23,5 +23,6 @@
       "headers": { "cache-control": "s-maxage=30" }
     }
   ],
-  "version": 2
+  "version": 2,
+  "alias": "dealzil.la"
 }
