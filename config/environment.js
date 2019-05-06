@@ -37,7 +37,7 @@ module.exports = function(environment) {
     },
 
     fastboot: {
-      hostWhitelist: ['dealzil.la', /^.*\.domino\.now\.sh$/, /^localhost:\d+$/, '127.0.0.1']
+      hostWhitelist: ['dealzil.la', 'dealzilla-spa.herokuapp.com', /^.*\.domino\.now\.sh$/, /^localhost:\d+$/, '127.0.0.1']
     }
   };
 
