@@ -1,9 +1,7 @@
 {
   "builds": [
-    {
-      "src": "package.json",
-      "use": "@now/static-build"
-    }
+    { "src": "package.json", "use": "@now/static-build", "config": { "distDir": "../diss" } },
+    { "src": "fastboot.js",  "use": "@now/node" }
   ],
   "name": "dealzilla-spa",
   "routes": [
@@ -19,7 +17,7 @@
     },
     {
       "src": "^/(.*)",
-      "dest": "/index.html",
+      "dest": "fastboot.js",
       "headers": { "cache-control": "s-maxage=30" }
     }
   ],

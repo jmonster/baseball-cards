@@ -11,7 +11,7 @@
   },
   "scripts": {
     "deploy": "now",
-    "now-build": "ember build --environment=production",
+    "now-build": "ember build --environment=production --output-path=/tmp/diss",
     "lint:hbs": "ember-template-lint app/templates",
     "lint:js": "eslint app config mirage tests",
     "start": "ember serve",
@@ -64,5 +64,9 @@
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "express": "^4.16.4",
+    "fastboot-express-middleware": "^1.2.0"
+  }
 }
