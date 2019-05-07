@@ -4,9 +4,23 @@ import productQuery from 'dealzilla/gql/queries/find-product.graphql';
 import Product from 'dealzilla/models/product';
 
 export default Route.extend(RouteQueryManager, {
+  findProductFromDeals(id) {
+    const deals = this.modelFor('app');
+    const products = deals.map((d) => d.product);
+
+    return products.find((p) => p.get('id') === id);
+  },
+
   async model(params) {
-    const { product: content } = await this.get('apollo').watchQuery({ query: productQuery, variables: { 'id': params.product_id } });
-    return Product.create({ content });
+    let product = this.findProductFromDeals(params.product_id);
+
+    if (!product) {
+      // fetch products we don't already have
+      const { product: content } = await this.get('apollo').watchQuery({ query: productQuery, variables: { 'id': params.product_id } });
+      product = Product.create({ content });
+    }
+
+    return product;
   },
 
   async titleToken(model) {
