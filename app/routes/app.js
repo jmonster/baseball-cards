@@ -14,7 +14,6 @@ export default Route.extend(RouteQueryManager, {
   async model() {
     // deals that have expired <= 3 days ago
     const { deals } = await this.get('apollo').query({ query: recentDealsQuery });
-
     // const deals = this.store.query('deal', {
     //   orderBy: 'expiredAt',
     //   startAt: Date.now() - (3 * 8.64e+7)

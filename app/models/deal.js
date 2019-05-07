@@ -4,16 +4,24 @@ import { alias } from '@ember/object/computed';
 import Product from 'dealzilla/models/product';
 
 export default ObjectProxy.extend({
+  init({ content: { price }}) {
+    this._super(...arguments);
+
+    // convert cents to dollars+cents (as a decimal)
+    this.set('price', price /= Math.pow(10, 2));
+  },
 
   product: computed('content.product', function() {
     return Product.create({ content: this.content.product });
   }),
 
   savings: computed('price', 'product.msrp', function() {
-    const delta = this.get('price') / this.get('product.msrp');
-    const inverse = 1 - delta;
-    // recall that price is in cents; no need to divide by 100
-    return Math.abs(Math.round(inverse));
+    const price = this.get('price');
+    const msrp = this.get('product.msrp');
+    const delta = price / msrp * 100;
+    const percentage = Math.round(delta);
+
+    return price > msrp ? -percentage : percents;
   }),
 
   isExpired: computed(function() {
