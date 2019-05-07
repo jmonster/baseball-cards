@@ -34,10 +34,6 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    },
-
-    fastboot: {
-      hostWhitelist: ['dealzil.la', 'dealzilla-spa.herokuapp.com', /^.*\.domino\.now\.sh$/, /^localhost:\d+$/, '127.0.0.1']
     }
   };
 
