@@ -16,7 +16,7 @@
     },
     {
       "src": "^/(.*)",
-      "dest": "fastboot.js",
+      "dest": "/index.html",
       "headers": { "cache-control": "s-maxage=30" }
     }
   ],
