@@ -6,7 +6,7 @@ import { storageFor } from 'ember-local-storage';
 
 
 export default Component.extend({
-  classNames: [],
+  classNames: ['z-1'],
   router: inject(),
   likedDealIds: storageFor('deal-likes'),
 
