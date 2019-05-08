@@ -39,17 +39,13 @@
     {{/if}}
   {{/tinder-card}}
 {{else}}
-  <div class="f3 hk-well mh2 mv3 flex flex-column justify-center flex-auto">
-    <span class="db f2 b mb1">🥳 you got'em all</span>
+  <div class="flex-auto f3 mv3 flex flex-column items-center">
+    <span class="db f2 b mb1 mt3">🥳 you got'em all</span>
     <span>check back soon for more deals</span>
 
-    <div class="bb b--silver mv3"></div>
+    <div class="flex-auto bb b--gray w-100 mv3"></div>
 
-    <span class="db">...but there are some other things you can do!</span>
+    <span class="db light-purple">looking for something else to do?</span>
     <span class="db pv2 f2">{{link-to "review your likes" "app.deals"}}</span>
-    <span class="db pv2 light-gray">
-      <span class="db"></span>yeah, that's all we've got..
-      <span class="db">sorry if I got your hopes up</span>
-    </span>
   </div>
 {{/each}}

@@ -6,7 +6,7 @@ import { run } from '@ember/runloop';
 const DEBOUNCE_WAIT = 150; // ms
 
 export default Component.extend({
-  classNames: ['wikiwiki-search', 'flex', 'flex-auto', 'flex-column', 'overflow-container'],
+  classNames: ['wikiwiki-search', 'flex', 'flex-auto', 'flex-column', 'overflow-container', 'shadow-4', 'f2'],
   classNameBindings: ['hasFocus'],
 
   query: '',

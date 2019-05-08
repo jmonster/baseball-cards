@@ -1,6 +1,6 @@
 <div class="pt2 pb2">
   <h2 class="mh2 fw5 mb3">
-    <span class="bb b--gray pr3 pl1">Recent Likes</span>
+    Likes
   </h2>
 
   {{#if likedDeals}}
@@ -13,19 +13,19 @@
 
           {{#sli.actions}}
             <div class="flex flex-column">
-              {{#dz-button class="white" click=(action "unlike-deal" deal.id)}}
+              {{#dz-button class="dark-purple" click=(action "unlike-deal" deal.id)}}
                 move to <b>disliked</b> list
               {{/dz-button}}
 
               {{#dz-button
                 click=(route-action "hopToFakeSpot" deal.product)
-                class="white mv1"
+                class="dark-purple mv1"
               }}
                 view <b>fakespot</b> score
               {{/dz-button}}
 
               {{#dz-button
-                class="white"
+                class="dark-purple"
                 click=(route-action "hopToCamelCamelCamel"
                 deal.product)
               }}
@@ -37,7 +37,7 @@
       {{/each}}
     </div>
   {{else}}
-    <div class="hk-well mh2 mv3">
+    <div class="jd-well mh2 mv3">
       <span class="f2 mb2 lh-title">🧐</span>
       <span class="f3 mw7 center lh-copy">No recent likes.</span>
       <span class="db mt2">{{link-to "tap to browse deals" "app.swiper"}}</span>
@@ -48,7 +48,7 @@
 
 <div class="pt2 pb2">
   <h2 class="mh2 fw5 mb3">
-    <span class="bb b--gray pr3 pl1">Recent Dislikes</span>
+    Dislikes
   </h2>
 
   {{#if dislikedDeals}}
@@ -60,7 +60,7 @@
           {{/sli.top}}
 
           {{#sli.actions}}
-            {{#dz-button click=(action "relike-deal" deal.id)}}
+            {{#dz-button class="dark-purple" click=(action "relike-deal" deal.id)}}
               move to <b>liked</b> list
             {{/dz-button}}
           {{/sli.actions}}
@@ -68,7 +68,7 @@
       {{/each}}
     </div>
   {{else}}
-    <div class="hk-well mh2 mv3">
+    <div class="jd-well mh2 mv3">
       <span class="f2 mb2 lh-title">🥴</span>
       <span class="f3 mw7 center lh-copy">No recent dislikes.</span>
     </div>
@@ -78,7 +78,7 @@
 {{#if staleDeals}}
   <div class="pt2 pb2">
     <h2 class="mh2 fw5 mb3">
-      <span class="bb b--gray pr3 pl1">Expired</span>
+      <span class="pr3 pl1">Expired</span>
     </h2>
     <div class="expired-deal-list">
       {{#each staleDeals as |deal|}}

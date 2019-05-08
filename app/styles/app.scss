@@ -14,3 +14,45 @@
 @import "components/wikiwiki-search";
 @import "components/tinder-card";
 @import "components/swipable-list-item";
+
+.jd-well {
+  text-align: center;
+  padding: 20px;
+  border-radius: 6px;
+  border: 1px solid #652DC1;
+}
+
+$highlight-padding: 0 4px;
+.highlight-yellow {
+  padding: $highlight-padding;
+  background-color: #FFFF66;
+}
+
+.highlight-green {
+  padding: $highlight-padding;
+  background-color: #66FF66;
+}
+
+.highlight-pink {
+  padding: $highlight-padding;
+  background-color: #FF6EFF;
+}
+
+.highlight-blue {
+  padding: $highlight-padding;
+  background-color: #95E0E8;
+}
+
+.highlight-purple {
+  padding: $highlight-padding;
+  background-color: #ACACE6;
+  font-weight: bold;
+}
+
+// #search-field {
+//   border-bottom: 1px #79589f solid;
+// }
+
+h2 {
+  border-bottom: 1px solid darkpurple;
+}

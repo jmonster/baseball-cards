@@ -1,10 +1,13 @@
 {{#if liked}}
   <span class="db f4 mb1 b">{{product.title}}</span>
-  <span class="db f5 mb1">by {{product.brand}}™</span>
-  <span class="db f5 mv2">{{rating-bar stars=4 count=4815}}</span>
-  <div class="f5 flex mt3 mb1">
-    <span class="currency-symbol">$</span>
-    <span class="currency-number f1">{{deal.price}}</span>
+  <span class="flex items-center justify-between f5 mb1">
+    <span class="self-end">{{rating-bar stars=4 count=4815}}</span>
+  </span>
+  <div class="flex flex-auto">
+    <span class="f5 flex flex-none mt1 mb1 highlight-green">
+      <span class="currency-symbol f3 fw6">$</span>
+      <span class="currency-number f1">{{deal.price}}</span>
+    </span>
   </div>
 {{else}}
   <span class="db mb1 flex-auto">{{product.title}}</span>
