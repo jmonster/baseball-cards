@@ -21,7 +21,7 @@ export default ObjectProxy.extend({
     const delta = price / msrp * 100;
     const percentage = Math.round(delta);
 
-    return price > msrp ? -percentage : percents;
+    return price > msrp ? -percentage : percentage;
   }),
 
   isExpired: computed(function() {

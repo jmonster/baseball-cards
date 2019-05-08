@@ -15,7 +15,7 @@
   <div class="flex flex-column flex-none">
     {{#dz-button
       click=(route-action "hopToAmazon" product)
-      class="f2 white bg-gradient-primary ba b--black"
+      class="f2 white bg-gradient-primary b--purple"
     }}
       see product on <b>amazon</b>.com
     {{/dz-button}}
@@ -26,17 +26,17 @@
     }}
       <b>alert</b> me when on sale
     {{/dz-button}}
-
+{{!-- purple bg-white ma0 pv2 ph4 br1 ember-view b--purple --}}
     {{#dz-button
       click=(route-action "hopToFakeSpot" product)
-      class="white bg-gradient-primary bn"
+      class="purple bg-gradient-silver b--purple"
     }}
       view <b>fakespot</b> score
     {{/dz-button}}
 
     {{#dz-button
       click=(route-action "hopToCamelCamelCamel" product)
-      class="mt1 white bg-gradient-primary bn"
+      class="mt1 purple bg-gradient-silver b--purple"
     }}
       view <b>camelcamelcamel</b> overview
     {{/dz-button}}
