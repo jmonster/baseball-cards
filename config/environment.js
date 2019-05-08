@@ -16,6 +16,10 @@ module.exports = function(environment) {
       // requestCredentials: 'same-origin', // other choices: 'include', 'omit'
     },
 
+    fastboot: {
+      hostWhitelist: ['dealzil.la', 'dealzilla-spa.herokuapp.com', '127.0.0.1', /^localhost:\d+$/]
+    },
+
     modulePrefix: 'dealzilla',
     environment,
     rootURL: '/',
