@@ -1,22 +1,18 @@
 import { computed } from '@ember/object';
 import Controller from '@ember/controller';
-import { alias }  from '@ember/object/computed';
+import { readOnly }  from '@ember/object/computed';
+import { inject as service} from '@ember/service';
 
 export default Controller.extend({
-  deals: alias('model'),
+  graph: service(),
+  deals: readOnly('graph.deals'),
 
   // dynamically change the layout of the main container
   justify: computed('currentRouteName', function () {
     return this.currentRouteName === 'app.swiper' ? 'justify-center' : 'justify-start';
   }),
 
-  thingsToFilterOn: computed(async function () {
-    return this.deals.map((deal) => deal.get('product'));
-
-    // the following is useful to combine multiple sources
-    // return RSVP.all([
-    //
-    // ])
-    // .then((arrays) => [].concat(...arrays.map((arr) => arr.toArray())));
+  thingsToFilterOn: computed('deals.[]', async function () {
+    return (await this.deals).map((deal) => deal.get('product'));
   })
 });

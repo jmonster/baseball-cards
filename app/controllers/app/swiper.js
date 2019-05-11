@@ -1,23 +1,28 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
-import { alias, equal, setDiff, union, filterBy } from '@ember/object/computed';
+import { readOnly, equal, setDiff, union, filterBy } from '@ember/object/computed';
 import { storageFor } from 'ember-local-storage';
+import { inject as service} from '@ember/service';
 
 export default Controller.extend({
+  graph: service(),
+
   likedDealIds: storageFor('deal-likes'),
   dislikedDealIds: storageFor('deal-dislikes'),
+
+  deals: readOnly('model'),
   seenDealIds: union('likedDealIds', 'dislikedDealIds'),
-  allDealIds: computed('model.[]', function() {
-    return this.model.map((d) => d.get('id'));
+  allDealIds: computed('deals.[]', function() {
+    return this.deals.map((d) => d.get('id'));
   }),
   unseenDealIds: setDiff('allDealIds', 'seenDealIds'),
-  unseenDeals: computed('unseenDealIds.[]', function() {
+  unseenDeals: computed('unseenDealIds.[]','allDealIds.[]', function() {
     const unseenIdSet = new Set(this.unseenDealIds.toArray());
-    return this.model.filter((d) => unseenIdSet.has(d.get('id')));
+    return this.deals.filter((d) => unseenIdSet.has(d.get('id')));
   }),
-  expiredDeals: filterBy('model', 'isExpired'),
+  expiredDeals: filterBy('deals', 'isExpired'),
   browseableDeals: setDiff('unseenDeals', 'expiredDeals'),
-  currentDeal: alias('browseableDeals.firstObject'),
+  currentDeal: readOnly('browseableDeals.firstObject'),
 
   detailIndex: 0,
   showCamelGraph: equal('detailIndex', 1),
@@ -49,7 +54,7 @@ export default Controller.extend({
     },
 
     reset() {
-      // this.set('allActiveDeals', this.model);
+      // this.set('allActiveDeals', this.deals);
       this.set('detailIndex', 0);
     }
   },
