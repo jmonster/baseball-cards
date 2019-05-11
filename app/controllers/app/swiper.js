@@ -6,11 +6,10 @@ import { inject as service} from '@ember/service';
 
 export default Controller.extend({
   graph: service(),
+  deals: readOnly('graph.deals'),
 
   likedDealIds: storageFor('deal-likes'),
   dislikedDealIds: storageFor('deal-dislikes'),
-
-  deals: readOnly('model'),
   seenDealIds: union('likedDealIds', 'dislikedDealIds'),
   allDealIds: computed('deals.[]', function() {
     return this.deals.map((d) => d.get('id'));

@@ -10,8 +10,9 @@
     "test": "tests"
   },
   "scripts": {
-    "deploy": "now",
-    "now-build": "ember build --environment=production",
+    "build": "ember build --environment=production",
+    "deploy": "netlify deploy --prod",
+    "lint": "yarn lint:hbs && yarn lint:js",
     "lint:hbs": "ember-template-lint app/templates",
     "lint:js": "eslint app config mirage tests",
     "start": "ember serve",

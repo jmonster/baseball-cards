@@ -13,6 +13,8 @@ export default Controller.extend({
   }),
 
   thingsToFilterOn: computed('deals.[]', async function () {
-    return (await this.deals).map((deal) => deal.get('product'));
+    if (this.graph.refreshDeals.isIdle) {
+      return this.deals.map((deal) => deal.get('product'));
+    }
   })
 });

@@ -37,11 +37,15 @@
       {{/each}}
     </div>
   {{else}}
-    <div class="jd-well mh2 mv3">
-      <span class="f2 mb2 lh-title">🧐</span>
-      <span class="f3 mw7 center lh-copy">No recent likes.</span>
-      <span class="db mt2">{{link-to "tap to browse deals" "app.swiper"}}</span>
-    </div>
+    {{#if graph.refreshDeals.isRunning}}
+      <span class="f3 db tc">🔄 Loading</span>
+    {{else}}
+      <div class="jd-well mh2 mv3">
+        <span class="f2 mb2 lh-title">🧐</span>
+        <span class="f3 mw7 center lh-copy">No recent likes.</span>
+        <span class="db mt2">{{link-to "tap to browse deals" "app.swiper"}}</span>
+      </div>
+    {{/if}}
   {{/if}}
 </div>
 
@@ -68,10 +72,14 @@
       {{/each}}
     </div>
   {{else}}
-    <div class="jd-well mh2 mv3">
-      <span class="f2 mb2 lh-title">🥴</span>
-      <span class="f3 mw7 center lh-copy">No recent dislikes.</span>
-    </div>
+    {{#if graph.refreshDeals.isRunning}}
+      <span class="f3 db tc">🔄 Loading</span>
+    {{else}}
+      <div class="jd-well mh2 mv3">
+        <span class="f2 mb2 lh-title">🥴</span>
+        <span class="f3 mw7 center lh-copy">No recent dislikes.</span>
+      </div>
+    {{/if}}
   {{/if}}
 </div>
 

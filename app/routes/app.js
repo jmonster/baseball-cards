@@ -10,24 +10,24 @@ export default Route.extend(RouteQueryManager, {
   likedDealIds: storageFor('deal-likes'),
   dislikedDealIds: storageFor('deal-dislikes'),
 
-  async afterModel() {
-    // this.graph.refreshDeals.perform();
-    // deals that have expired <= 3 days ago
-    // const { deals } = (await this.graph.deals);
-
-    // console.log('deals: ', (await this.graph.deals));
-    // cleanup our localstorage set of liked/disliked ids
-    // to remove anything not part of `deals`
-    // TODO move this logic to the deal record?
-    // ---- and do it anytime a deal becomes expired?
-
-    // const dealIds = new Set((await this.graph.deals).map((d) => d.id));
+  // this function assumes that the deals collection is populated
+  // and contains the entirety of active deals
+  //
+  // a better approach may be to track a list of expired deals
+  // with a cursor (expiredAt timestamp) tracking where the client last
+  // purged; downloads the list of expired deals that expired after that
+  async clearLocalLikedLikedDislikedCollections() {
+    // const deals = await this.graph.deals;
+    // const dealIds = new Set(deals.map((d) => d.get('id')));
 
     // const inactiveLikedDealIds = this.likedDealIds.filter((id) => !dealIds.has(id));
     // const inactiveDislikedDealIds = this.dislikedDealIds.filter((id) => !dealIds.has(id));
 
-    // debugger;
     // this.likedDealIds.removeObjects(inactiveLikedDealIds);
     // this.dislikedDealIds.removeObjects(inactiveDislikedDealIds);
+  },
+
+  async activate() {
+    this.clearLocalLikedLikedDislikedCollections();
   },
 });

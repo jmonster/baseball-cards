@@ -2,10 +2,12 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { filter, filterBy, setDiff } from '@ember/object/computed';
 import { storageFor } from 'ember-local-storage';
-
+import { inject as service } from '@ember/service';
 const THREE_DAYS = 3 * 8.64e+7;
 
 export default Component.extend({
+  graph: service(),
+
   likedDealIds: storageFor('deal-likes'),
   dislikedDealIds: storageFor('deal-dislikes'),
 
@@ -29,6 +31,7 @@ export default Component.extend({
   }),
 
   // exclude 3 day past expired deals
+  // TODO just query the DB now that we're not using Firebase
   staleDeals: filter('expiredDeals.[]', function(deal) {
     const now = Date.now();
     const delta = now - deal.expiredAt - THREE_DAYS;

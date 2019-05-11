@@ -1,7 +1,11 @@
-import { alias } from '@ember/object/computed';
+import { readOnly } from '@ember/object/computed';
 import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 
 export default Controller.extend({
   tagName: '',
-  product: alias('model')
+
+  graph: service(),
+  deals: readOnly('graph.deals'),
+  product: readOnly('model')
 });
