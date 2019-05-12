@@ -18,10 +18,9 @@ export default ObjectProxy.extend({
   savings: computed('price', 'product.msrp', function() {
     const price = this.get('price');
     const msrp = this.get('product.msrp');
-    const delta = price / msrp * 100;
-    const percentage = Math.round(delta);
-
-    return price > msrp ? -percentage : percentage;
+    const diff = msrp - price;
+    const delta = (diff / msrp) * 100;
+    return Math.round(delta);
   }),
 
   isExpired: computed(function() {
