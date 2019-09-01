@@ -1,6 +1,6 @@
 import Service from '@ember/service';
-// import Deal from 'dealzilla/models/deal';
-// import recentDealsQuery from 'dealzilla/gql/queries/recent-deals.graphql';
+// import Deal from 'tipdrop/models/deal';
+// import recentDealsQuery from 'tipdrop/gql/queries/recent-deals.graphql';
 import { inject as service} from '@ember/service';
 // import { task } from 'ember-concurrency';
 

@@ -9,7 +9,7 @@
   <div class="wikiwiki-search-results br1 br--bottom z-0 bg-white">
     <ul class="ph0 mv0 list">
       {{#each (await filteredResults) as |result|}}
-        {{#link-to "app.product" result class="bt bb b--silver f3 pv2 no-underline near-black flex items-center"}}
+        {{#link-to "app" result class="bt bb b--silver f3 pv2 no-underline near-black flex items-center"}}
           <div class="thumbnail-parent pa1 bg-white flex-none">
             <img
               class="thumbnail block"
@@ -55,7 +55,7 @@
       {{#unless hasSearchQuery}}
         <li class="truncate f2 flex items-center bt br1 b--silver">
           {{#link-to
-            "app.swiper"
+            "app"
             class="flex no-underline dark-purple ph3 pv4 w-100 truncate"
           }}
             <span class="pr2 emojay">🛍</span>
@@ -65,7 +65,7 @@
 
         <li class="truncate f2 flex bt br1 b--silver">
           {{#link-to
-            "app.deals"
+            "app"
             class="flex no-underline dark-purple ph3 pv4 w-100 truncate"
           }}
             <span class="pr2 emojay">🔖</span>

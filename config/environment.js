@@ -4,13 +4,13 @@ module.exports = function(environment) {
   let ENV = {
     apollo: {
       // apiURL: 'http://127.0.0.1:4000/graphql',
-      apiURL: 'https://dealzilla-api.herokuapp.com/graphql',
+      apiURL: 'https://tipdrop-api.herokuapp.com/graphql',
       // Optionally, set the credentials property of the Fetch Request interface
       // to control when a cookie is sent:
       // requestCredentials: 'same-origin', // other choices: 'include', 'omit'
     },
 
-    modulePrefix: 'dealzilla',
+    modulePrefix: 'tipdrop',
     environment,
     rootURL: '/',
     locationType: 'auto',

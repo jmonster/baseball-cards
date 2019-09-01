@@ -1,6 +1,6 @@
 import ObjectProxy from '@ember/object/proxy';
 import { computed } from '@ember/object';
-import ENV from 'dealzilla/config/environment';
+import ENV from 'tipdrop/config/environment';
 
 export default ObjectProxy.extend({
   init({ content: { msrp }}) {

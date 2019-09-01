@@ -44,7 +44,7 @@ export default Component.extend({
       // const matcher = this.matcher(query);
       this.items.then((items) => {
         const fuzzyResults = items.filter((product) => {
-          return product.get('title').toLowerCase().includes(query);
+          // return product.get('title').toLowerCase().includes(query);
         });
 
         this.set('filteredResults', fuzzyResults);
@@ -58,8 +58,7 @@ export default Component.extend({
   searchIsPending: false,
   notFoundGif: computed(function() {
     const notFoundGifs = [
-      '/assets/images/404/ren-stimpy.gif',
-      '/assets/images/404/aint-found-shit.gif'
+      '/assets/images/404/no-results.jpg'
     ];
 
     const randomIndex = Math.floor(Math.random() * notFoundGifs.length);

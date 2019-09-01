@@ -1,6 +1,6 @@
-# dealzilla
+# tipdrop
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/f14acceb-c3d5-4926-a234-c71d57146912/deploy-status)](https://app.netlify.com/sites/dealzilla/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f14acceb-c3d5-4926-a234-c71d57146912/deploy-status)](https://app.netlify.com/sites/tipdrop/deploys)
 
 ## Prerequisites
 
@@ -15,7 +15,7 @@ You will need the following things properly installed on your computer.
 ## Installation
 
 * `git clone <repository-url>` this repository
-* `cd dealzilla`
+* `cd tipdrop`
 * `yarn install`
 
 ## Running / Development
