@@ -1,10 +1,8 @@
 export default function(server) {
   server.createList(
-    'deal',
+    'product',
     5,
     'withImages',
-    'withTags',
-    'withReviews'
+    'withTags'
   );
-
 }

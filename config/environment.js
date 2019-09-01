@@ -2,12 +2,6 @@
 
 module.exports = function(environment) {
   let ENV = {
-    amazonAffliateTag: 'dealzilla0a-20',
-    'ember-local-storage': {
-      namespace: 'zil', // will use 'customNamespace'
-      // keyDelimiter: '/' // will use / as a delimiter - the default is :
-    },
-
     apollo: {
       // apiURL: 'http://127.0.0.1:4000/graphql',
       apiURL: 'https://dealzilla-api.herokuapp.com/graphql',
