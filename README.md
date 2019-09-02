@@ -1,6 +1,6 @@
 # tipdrop
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/f14acceb-c3d5-4926-a234-c71d57146912/deploy-status)](https://app.netlify.com/sites/tipdrop/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2d30c775-452c-4bd4-9d15-b3d0375d382d/deploy-status)](https://app.netlify.com/sites/tipdrop/deploys)
 
 ## Prerequisites
 
