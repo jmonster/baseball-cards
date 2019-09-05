@@ -7,8 +7,13 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('app', { path: '/' }, function(){
-
+  this.route('welcome');
+  this.route('app', { path: '/' }, function() {
+    this.route('bio');
+    this.route('lists');
+    this.route('products', function() {
+      this.route('details', { path: '/:id' });
+    });
   });
 });
 

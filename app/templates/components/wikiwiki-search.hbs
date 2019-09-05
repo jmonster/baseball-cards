@@ -9,16 +9,16 @@
   <div class="wikiwiki-search-results br1 br--bottom z-0 bg-white">
     <ul class="ph0 mv0 list">
       {{#each (await filteredResults) as |result|}}
-        {{#link-to "app" result class="bt bb b--silver f3 pv2 no-underline near-black flex items-center"}}
-          <div class="thumbnail-parent pa1 bg-white flex-none">
+        {{#link-to "app.products.details" result.id class="bt bb b--silver f3 pv2 no-underline near-black flex items-center"}}
+          <li class="thumbnail-parent pa1 bg-white flex-none">
             <img
               class="thumbnail block"
               src={{result.thumbnail}}
               alt="product thumbnail image"
             >
-          </div>
+          </li>
 
-          <span class="ph1">{{result.title}}</span>
+          <span class="ph1">{{result.name}}</span>
         {{/link-to}}
       {{else}}
         {{#if (and hasSearchQuery (not showNotFoundMessage))}}
@@ -43,35 +43,40 @@
       {{#if showNotFoundMessage}}
         <li class="bg-lightest-silver bt br1 b--silver f3">
           <div class="flex flex-column items-center justify-center">
-            <img
+            {{!-- <img
               src={{notFoundGif}}
               class="w-100"
               alt="wubalubadubdub"
-            >
+            > --}}
           </div>
         </li>
       {{/if}}
 
       {{#unless hasSearchQuery}}
-        <li class="truncate f2 flex items-center bt br1 b--silver">
-          {{#link-to
-            "app"
-            class="flex no-underline dark-purple ph3 pv4 w-100 truncate"
-          }}
-            <span class="pr2 emojay">🛍</span>
-            <span>browse deals</span>
-          {{/link-to}}
-        </li>
+        {{#link-to
+          "app.lists"
+          class="flex no-underline dark-purple ph3 pv4 w-100 h-100 truncate f2 bt br1 b--silver"
+        }}
+          <span class="pr2 emojay">🐠</span>
+          <span>lists</span>
+        {{/link-to}}
 
-        <li class="truncate f2 flex bt br1 b--silver">
-          {{#link-to
-            "app"
-            class="flex no-underline dark-purple ph3 pv4 w-100 truncate"
-          }}
-            <span class="pr2 emojay">🔖</span>
-            <span>view history</span>
-          {{/link-to}}
-        </li>
+        {{#link-to
+          "app.products"
+          class="flex no-underline dark-purple ph3 pv4 w-100 h-100 truncate f2 bt br1 b--silver"
+        }}
+
+          <span class="pr2 emojay">🛍</span>
+          <span>products</span>
+        {{/link-to}}
+
+        {{#link-to
+          "app.bio"
+          class="flex no-underline dark-purple ph3 pv4 w-100 truncate f2 bt br1 b--silver"
+        }}
+          <span class="pr2 emojay">👤</span>
+          <span>bio</span>
+        {{/link-to}}
       {{/unless}}
     </ul>
   </div>

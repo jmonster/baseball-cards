@@ -1,10 +1,7 @@
-{{thingsToFilterOn.length}}
 {{x-header
   searchableItems=thingsToFilterOn
   signOut=(route-action "signOut")
   signIn=(route-action "signIn")
 }}
 
-<div class="{{justify}} flex flex-column flex-auto">
-  {{outlet}}
-</div>
+{{outlet}}

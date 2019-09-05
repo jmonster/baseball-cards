@@ -44,7 +44,7 @@ export default Component.extend({
       // const matcher = this.matcher(query);
       this.items.then((items) => {
         const fuzzyResults = items.filter((product) => {
-          // return product.get('title').toLowerCase().includes(query);
+          return product.name.toLowerCase().includes(query);
         });
 
         this.set('filteredResults', fuzzyResults);
@@ -77,7 +77,7 @@ export default Component.extend({
         this.set('hasFocus', false);
         this.set('query', '');
         this.recomputeResults();
-      }, 100);
+      }, 200);
     },
 
     didFocusIn() {
