@@ -20,6 +20,10 @@ module.exports = function(environment) {
       }
     },
 
+    'ember-faker': {
+      enabled: true
+    },
+
     modulePrefix: 'tipdrop',
     environment,
     rootURL: '/',
