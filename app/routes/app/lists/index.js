@@ -1,14 +1,15 @@
 import Route from '@ember/routing/route'
 import { inject } from '@ember/service';
+import { hash }  from 'rsvp';
 
 export default Route.extend({
-  // session: inject(),
   store: inject(),
 
-  // title(tokens) {
-  //   return `⬐ ${tokens.join('|')}`;
-  // }
-  model({ id }) {
-    return this.store.find('list', id);
+  titleToken: 'Lists',
+
+  async model() {
+    return hash({
+      lists: this.store.findAll('list')
+    });
   }
 });

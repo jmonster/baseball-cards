@@ -13,9 +13,10 @@ module.exports = function(environment) {
     torii: {
       sessionServiceName: 'session',
       providers: {
-        'google-oauth2-bearer': {
+        'google-oauth2-bearer-v2': {
           apiKey: '852582851070-6n9ga26etdc9vjc9kmanes11vhpva26h.apps.googleusercontent.com',
-          redirectUri: 'http://localhost:4200/torii/redirect.html'
+          redirectUri: 'http://localhost:4200/torii/redirect.html',
+          scope: 'profile email'
         }
       }
     },

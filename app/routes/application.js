@@ -6,7 +6,7 @@ export default Route.extend({
   store: inject(),
 
   title(tokens) {
-    return `⬐ ${tokens.join('|')}`;
+    return `💡🛍 ${tokens.join('|')}`;
   },
 
   actions: {
