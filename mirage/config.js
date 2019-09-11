@@ -1,5 +1,5 @@
 export default function() {
-  // this.timing = 0;
+
   // These comments are here to help you get started. Feel free to delete them.
 
   /*
@@ -21,7 +21,6 @@ export default function() {
     this.put('/posts/:id'); // or this.patch
     this.del('/posts/:id');
 
-    http://www.ember-cli-mirage.com/docs/v0.3.x/shorthands/
+    https://www.ember-cli-mirage.com/docs/route-handlers/shorthands
   */
-
 }
