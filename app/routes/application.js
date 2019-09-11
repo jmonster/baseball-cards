@@ -3,6 +3,7 @@ import { inject } from '@ember/service';
 
 export default Route.extend({
   session: inject(),
+  store: inject(),
 
   title(tokens) {
     return `⬐ ${tokens.join('|')}`;
@@ -10,15 +11,17 @@ export default Route.extend({
 
   actions: {
     signIn(provider) {
-      this.get('session').open(provider).then(function() {
-        debugger;
-      }, function(error){
-        debugger;
+      this.get('session').open(provider).then(() => {
+        this.transitionTo('/');
       });
     },
 
     signOut() {
+      this.get('session').close();
+    },
 
+    accessDenied: function() {
+      this.transitionTo('welcome');
     },
 
     hopToAmazon(product) {

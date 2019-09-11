@@ -48,7 +48,8 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
 
-    const enabled = process.env.MIRAGE_ENABLED === 'true' ? true : false;
+    // const enabled = process.env.MIRAGE_ENABLED === 'true' ? true : false;
+    const enabled = true;
     ENV['ember-cli-mirage'] = { enabled };
   }
 
