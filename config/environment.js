@@ -21,7 +21,7 @@ module.exports = function(environment) {
         'github-oauth2': {
           apiKey: '7fc3e18034fe7de32974',
           apiSecret: 'd5314c777a90ba62d5a2805fdb53f622a13bf40a',
-          redirectUri: 'http://localhost:4200/torii/redirect.html'
+          redirectUri: 'https://ballers.netlify.com/torii/redirect.html'
         }
       }
     },
