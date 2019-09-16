@@ -4,4 +4,33 @@
   signIn=(route-action "signIn")
 }}
 
-{{outlet}}
+{{!-- {{outlet}} --}}
+  {{#tinder-card
+    cardDidDisappear=null
+    class="ma3"
+  }}
+    <div class="flex-column flex flex-none h-100">
+      {{tinder-card-image imageUrl="https://www.oldsportscards.com/wp-content/uploads/2016/09/1952-Topps-311-Mickey-Mantle-rookie-card.jpg"}}
+      {{!-- <div class="tinder-card-info">
+        <div class="flex flex-column ttu">
+          <div class="flex items-end mb2 justify-between mh1">
+            <span class="flex">
+              <span class="f1 fw6 mt1 near-black highlight-green ph1">
+                <span class="pr7">$</span>
+              </span>
+              <span class="f3 mt2 mh1 purple strikethrough">
+                <span class="light-gray pr7">$</span>
+              </span>
+            </span>
+            <span class="f5 fw6 mt1 white highlight-purple pa1 br1 tc flex-none">
+              <span class="pr7"></span>
+            </span>
+          </div>
+
+          <span class="f5 fw5 near-black">
+            ... ... ... ... ... ... ...... ... ... ... ... ... ...... ... ... ... ... ... ...... ... ... ... ... ... ...... ... ... ... ... ... ...... ... ... ... ... ... ...
+          </span>
+        </div>
+      </div> --}}
+    </div>
+  {{/tinder-card}}

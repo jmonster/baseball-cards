@@ -6,10 +6,10 @@
 }}
 
 {{#if componentIsActive}}
-  <div class="wikiwiki-search-results br1 br--bottom z-0 bg-white">
-    <ul class="ph0 mv0 list">
+  <div class="wikiwiki-search-results br1 br--bottom z-0 bg-transparent">
+    <ul class="ph0 mv0 list bg-yellow-faded">
       {{#each (await filteredResults) as |result|}}
-        {{#link-to "app.products.details" result.id class="bt bb b--silver f3 pv2 no-underline near-black flex items-center"}}
+        {{#link-to "app.products.details" result.id class="bt bb b--yellow f3 pv2 no-underline near-black flex items-center"}}
           <li class="thumbnail-parent pa1 bg-white flex-none">
             <img
               class="thumbnail block"
@@ -22,18 +22,18 @@
         {{/link-to}}
       {{else}}
         {{#if (and hasSearchQuery (not showNotFoundMessage))}}
-          <li class="bg-lightest-silver bt bb b--silver f3 flex">
-            <a href="#" class="no-underline dark-purple pv2 w-100 truncate ph2">
+          <li class="bg-lightest-silver bt bb b--yellow f3 flex">
+            <a href="#" class="no-underline pv2 w-100 truncate ph2">
               <div class="hk-stencil w-40 pv2"></div>
             </a>
           </li>
-          <li class="bg-lightest-silver bt bb b--silver f3 flex">
-            <a href="#" class="no-underline dark-purple pv2 w-100 truncate ph2">
+          <li class="bg-lightest-silver bt bb b--yellow f3 flex">
+            <a href="#" class="no-underline pv2 w-100 truncate ph2">
               <div class="hk-stencil w-60 pv2"></div>
             </a>
           </li>
-          <li class="bg-lightest-silver bt bb b--silver f3 flex">
-            <a href="#" class="no-underline dark-purple pv2 w-100 truncate ph2">
+          <li class="bg-lightest-silver bt bb b--yellow f3 flex">
+            <a href="#" class="no-underline pv2 w-100 truncate ph2">
               <div class="hk-stencil w-50 pv2"></div>
             </a>
           </li>
@@ -41,7 +41,7 @@
       {{/each}}
 
       {{#if showNotFoundMessage}}
-        <li class="bg-lightest-silver bt br1 b--silver f3">
+        <li class="bg-lightest-silver bt br1 b--yellow f3">
           <div class="flex flex-column items-center justify-center">
             {{!-- <img
               src={{notFoundGif}}
@@ -55,28 +55,29 @@
       {{#unless hasSearchQuery}}
         {{#link-to
           "app.lists"
-          class="flex no-underline dark-purple ph3 pv4 w-100 h-100 truncate f2 bt br1 b--silver"
+          class="flex items-center bg-transparent no-underline w-100 h-100 truncate f2 bt br1 b--yellow"
         }}
-          <span class="pr2 emojay">🐠</span>
-          <span>lists</span>
-        {{/link-to}}
-
-        {{#link-to
-          "app.products"
-          class="flex no-underline dark-purple ph3 pv4 w-100 h-100 truncate f2 bt br1 b--silver"
-        }}
-
-          <span class="pr2 emojay">🛍</span>
-          <span>products</span>
+          <span class="flex items-center pa3 f2">🐠</span>
+          <span>my collections</span>
         {{/link-to}}
 
         {{#link-to
           "app.bio"
-          class="flex no-underline dark-purple ph3 pv4 w-100 truncate f2 bt br1 b--silver"
+          class="flex items-center bg-transparent no-underline w-100 truncate f2 bt br1 b--yellow"
         }}
-          <span class="pr2 emojay">👤</span>
-          <span>bio</span>
+          <span class="flex items-center pa3 f2">🧳</span>
+          <span>trade cards</span>
         {{/link-to}}
+
+        <a
+          href="#"
+          class="flex items-center bg-transparent no-underline w-100 truncate f2 bt br1 b--yellow"
+          {{action (route-action "signOut")}}
+        >
+          <span class="flex items-center pa3 f2">🚪</span>
+          <span>logout</span>
+        </a>
+
       {{/unless}}
     </ul>
   </div>

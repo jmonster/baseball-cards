@@ -1,7 +1,24 @@
-<div class="{{justify}} flex flex-column flex-auto">
-  <a href="#" class="flex items-center ma1" {{action (route-action "signIn" "google")}}>
-    <div class="google-emoji"></div>
-    sign in via google
-  </a>
+<div class="{{justify}} flex flex-column flex-auto justify-center baseball-background">
+  <div class="bg-white-90 shadow-3 br1 ma4 pa4 flex flex-column brown">
+    <img alt="logo" src="/assets/baseball-glove.png" width="100px" class="self-center pv3">
+    <h1 class="tc">balls</h1>
+
+    <ul>
+      <li>Lorem ipsum dolor sit amet</li>
+      <li>Consectetur adipiscing elit</li>
+      <li>Cras et interdum nunc, non porttitor</li>
+    </ul>
+
+    <a href="#" class="black button no-underline f2 pa2 br1 bg-white mt3 dim ba b--gray flex items-center" {{action (route-action "signIn" "github-oauth2")}}>
+      <div class="github-logo mr3"></div>
+      <span>Login with Github</span>
+    </a>
+
+    <div class="mt4 flex justify-between">
+      <a>© 1974</a>
+      <a>like us on the facebook</a>
+    </div>
+  </div>
+
   {{outlet}}
 </div>

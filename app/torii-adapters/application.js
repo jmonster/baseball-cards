@@ -1,62 +1,42 @@
 import EmberObject from '@ember/object';
 import { inject } from '@ember/service';
 import { isEmpty }  from '@ember/utils';
-import fetch from 'fetch';
+// import fetch from 'fetch';
 
 export default EmberObject.extend({
   store: inject(),
   router: inject(),
 
   async fetch() {
-    let googleToken = localStorage.getItem('google-access-token');
+    let token = localStorage.getItem('access-token');
 
-    if (isEmpty(googleToken)) {
-      throw new Error('No google-access-token in storage');
+    if (isEmpty(token)) {
+      throw new Error('No access-token in storage');
     }
 
     const user = await this.store.queryRecord('user', {});
-    const { emailAddresses, names, photos } = await fetchPropertiesFromGoogle(googleToken);
-
-    user.setProperties({
-      accessToken: googleToken,
-      name: names.firstObject.displayName,
-      email: emailAddresses.firstObject.value,
-      avatar: photos.firstObject.url
-    });
-
     return { user };
   },
 
-  async open({ access_token }){
-    localStorage.setItem('google-access-token', access_token);
-
+  async open(){
     const user = await this.store.queryRecord('user', {});
-    const { emailAddresses, names, photos } = await fetchPropertiesFromGoogle(access_token);
 
-    user.accessToken = access_token;
     user.setProperties({
-      accessToken: access_token,
-      name: names.firstObject.displayName,
-      email: emailAddresses.firstObject.value,
-      avatar: photos.firstObject.url
+      accessToken: 'asdf-1234',
+      name: "Johnny Domino",
+      email: "jvdomino@gmail.com",
+      avatar: "https://avatars0.githubusercontent.com/u/368767?s=460&v=4"
     });
 
-    // user.save();
+    user.save();
+    localStorage.setItem('access-token', 'wubalubadubdub');
 
     return { user };
   },
 
   async close() {
-    localStorage.removeItem('google-access-token');
+    localStorage.removeItem('access-token');
     this.router.transitionTo('welcome');
   }
 });
 
-async function fetchPropertiesFromGoogle(access_token) {
-  const response = await fetch(
-    'https://people.googleapis.com/v1/people/me?personFields=emailAddresses,names,photos&key=AIzaSyChgD1fi2lvmc8GBnESkDXlCRlvNeDwYbc',
-    { headers: { 'Authorization': `Bearer ${access_token}` } }
-  );
-
-  return response.json();
-}
